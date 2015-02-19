@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import javax.swing.JTextField;
 import java.awt.Color;
+import javax.swing.JButton;
 
 
 public class Login extends JFrame implements Runnable {
@@ -26,6 +27,7 @@ public class Login extends JFrame implements Runnable {
 	private File file;
 	private BufferedImage image;
 	private JLabel lblNewLabel;
+	private JButton btnReg;
 	
 	public Login() {
 		
@@ -65,8 +67,17 @@ public class Login extends JFrame implements Runnable {
 		
 		lblNewLabel = new JLabel("<html>If you have an account please feel free </html>");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(420, 203, 169, 125);
+		lblNewLabel.setBounds(369, 203, 220, 88);
 		getContentPane().add(lblNewLabel);
+		
+		btnReg = new JButton("<html><u>register</u></html>");
+		btnReg.setForeground(Color.BLUE);
+		btnReg.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnReg.setOpaque(false);
+		btnReg.setContentAreaFilled(false);
+		btnReg.setBorderPainted(false);
+		btnReg.setBounds(388, 245, 77, 21);
+		getContentPane().add(btnReg);
 		
 	}
 
