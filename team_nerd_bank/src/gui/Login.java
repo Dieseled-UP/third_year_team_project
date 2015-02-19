@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JTextField;
+import java.awt.Color;
 
 
 public class Login extends JFrame implements Runnable {
@@ -24,10 +25,14 @@ public class Login extends JFrame implements Runnable {
 	private String path = "Assets/banklogo.jpg";
 	private File file;
 	private BufferedImage image;
+	private JLabel lblNewLabel;
 	
 	public Login() {
 		
+		setBackground(Color.WHITE);
+		
 		getContentPane().setLayout(null);
+		getContentPane().setBackground(Color.WHITE);
 		
 		lblTitle = new JLabel("NERD BANK");
 		lblTitle.setFont(new Font("Dialog", Font.BOLD, 31));
@@ -55,15 +60,20 @@ public class Login extends JFrame implements Runnable {
 		}
 		
 		lblimg = new JLabel(new ImageIcon(image));
-		lblimg.setBounds(10, 170, 154, 129);
+		lblimg.setBounds(10, 153, 226, 210);
 		getContentPane().add(lblimg);
+		
+		lblNewLabel = new JLabel("<html>If you have an account please feel free </html>");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(420, 203, 169, 125);
+		getContentPane().add(lblNewLabel);
 		
 	}
 
 	@Override
 	public void run() {
 
-		setSize(520, 300);
+		setSize(655, 400);
 		setResizable(false);
 		setTitle("Your Solution");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
