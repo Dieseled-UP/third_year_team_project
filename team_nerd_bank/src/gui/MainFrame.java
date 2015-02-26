@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
+
 import java.awt.CardLayout;
 
 
@@ -23,7 +24,8 @@ public class MainFrame extends JFrame implements Runnable {
 	private JButton btnDetails;
 	private JButton btnPayees;
 	private JButton btnLogout;
-	private JPanel panel_1;
+	private JPanel mainView;
+	private String[] views = new String[]{"Accounts", "Transfers", "Details", "Payees"};
 	
 	
 	public MainFrame() {
@@ -57,13 +59,13 @@ public class MainFrame extends JFrame implements Runnable {
 		
 		btnLogout = new JButton("Logout");
 		btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnLogout.setBounds(10, 242, 151, 42);
+		btnLogout.setBounds(10, 241, 151, 42);
 		getContentPane().add(btnLogout);
 		
-		panel_1 = new JPanel();
-		panel_1.setBounds(173, 93, 663, 445);
-		getContentPane().add(panel_1);
-		panel_1.setLayout(new CardLayout(0, 0));
+		mainView = new JPanel();
+		mainView.setBounds(173, 93, 663, 445);
+		getContentPane().add(mainView);
+		mainView.setLayout(new CardLayout(0, 0));
 	}
 
 
