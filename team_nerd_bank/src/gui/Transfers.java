@@ -146,11 +146,11 @@ public class Transfers extends JPanel {
 		lblTranInfo.setBounds(416, 11, 221, 126);
 		add(lblTranInfo);
 		
-		dataList = new JList<String>();
+		/*dataList = new JList<String>();
 		dataHolder.setViewportView(dataList);
 		dataList.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		dataList.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, null, null));
 
-		dataModel = new DefaultListModel<>();
+		dataModel = new DefaultListModel<>();*/
 	}
 }

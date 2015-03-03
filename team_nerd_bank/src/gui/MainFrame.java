@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 
@@ -7,12 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
-
-import java.awt.CardLayout;
-
-import javax.swing.JTextField;
-
-import connect.Connect_DB;
 
 
 /**
@@ -29,12 +24,14 @@ public class MainFrame extends JFrame implements Runnable {
 	private JButton btnPayees;
 	private JButton btnLogout;
 	private JPanel mainView;
-	private String[] views = new String[]{"Accounts", "Transfers", "Details", "Payees"};
+	private JPanel account, transfer, details, payees;
 	
 	
 	public MainFrame() {
 		
 		getContentPane().setLayout(null);
+		
+		transfer = new Transfers();
 		
 		panel = new JPanel();
 		panel.setBackground(Color.CYAN);
@@ -70,6 +67,15 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.setBounds(173, 93, 663, 445);
 		getContentPane().add(mainView);
 		mainView.setLayout(new CardLayout(0, 0));
+		
+		mainView.add(transfer, "trans");
+		
+		CardLayout cardLayout = (CardLayout) mainView.getLayout();
+		
+		btnTransfers.addActionListener(arg0 -> {
+			
+			cardLayout.show(mainView, "trans");
+		});
 	}
 
 
