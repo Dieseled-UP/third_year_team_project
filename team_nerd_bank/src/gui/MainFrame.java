@@ -30,7 +30,6 @@ public class MainFrame extends JFrame implements Runnable {
 	private JButton btnLogout;
 	private JPanel mainView;
 	private String[] views = new String[]{"Accounts", "Transfers", "Details", "Payees"};
-	private JTextField txtTest;
 	
 	
 	public MainFrame() {
@@ -71,12 +70,6 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.setBounds(173, 93, 663, 445);
 		getContentPane().add(mainView);
 		mainView.setLayout(new CardLayout(0, 0));
-		
-		txtTest = new JTextField();
-		txtTest.setBounds(49, 318, 86, 20);
-		getContentPane().add(txtTest);
-		txtTest.setColumns(10);
-		txtTest.setText(Connect_DB.dBExists());
 	}
 
 
