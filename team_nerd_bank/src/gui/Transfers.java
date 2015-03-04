@@ -16,6 +16,7 @@ import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.border.LineBorder;
 
 
 public class Transfers extends JPanel {
@@ -39,6 +40,7 @@ public class Transfers extends JPanel {
 	private JLabel lblTranInfo;
 	
 	public Transfers() {
+		setBorder(new LineBorder(new Color(255, 165, 0)));
 		
 		setLayout(null);
 		
@@ -63,7 +65,7 @@ public class Transfers extends JPanel {
 		add(lblValue);
 		
 		pnlPayee = new JPanel();
-		pnlPayee.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), null, new Color(128, 128, 128), null), "Pay", TitledBorder.LEADING, TitledBorder.TOP, new Font("ariel", Font.BOLD, 15), new Color(0, 0, 255)));
+		pnlPayee.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Pay", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
 		pnlPayee.setBounds(22, 137, 615, 140);
 		add(pnlPayee);
 		pnlPayee.setLayout(null);
@@ -92,7 +94,7 @@ public class Transfers extends JPanel {
 		
 		pnlDate = new JPanel();
 		pnlDate.setLayout(null);
-		pnlDate.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, new Color(64, 64, 64), null, new Color(128, 128, 128), null), "Date", TitledBorder.LEADING, TitledBorder.TOP, new Font("ariel", Font.BOLD, 15), new Color(0, 0, 255)));
+		pnlDate.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Date", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
 		pnlDate.setBounds(22, 307, 615, 87);
 		add(pnlDate);
 		

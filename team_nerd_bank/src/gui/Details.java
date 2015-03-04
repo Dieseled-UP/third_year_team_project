@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.border.LineBorder;
 
 public class Details extends JPanel {
 
@@ -32,6 +33,7 @@ public class Details extends JPanel {
 	private JLabel lblInfo;
 
 	public Details() {
+		setBorder(new LineBorder(new Color(255, 165, 0)));
 
 		setLayout(null);
 
