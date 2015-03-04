@@ -21,6 +21,9 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import connect.Connect_DB;
 
 /**
  * @author Team Nerd Banks L00099023 26 Feb 2015
@@ -44,6 +47,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private File file;
 	private BufferedImage image;
 	private JLabel lblMainName;
+	private JTextField txtTest;
 
 	public MainFrame() {
 
@@ -84,13 +88,13 @@ public class MainFrame extends JFrame implements Runnable {
 		}
 
 		lblLogo = new JLabel(new ImageIcon(image));
-		lblLogo.setBounds(10, 0, 70, 70);
+		lblLogo.setBounds(10, 0, 70, 69);
 		panel.add(lblLogo);
 
 		lblMainName = new JLabel("PMDA BANK");
 		lblMainName.setForeground(Color.WHITE);
 		lblMainName.setFont(new Font("Tahoma", Font.BOLD, 40));
-		lblMainName.setBounds(165, 11, 280, 48);
+		lblMainName.setBounds(165, 11, 259, 48);
 		panel.add(lblMainName);
 
 		btnSummary = new JButton("Summary");
@@ -174,6 +178,12 @@ public class MainFrame extends JFrame implements Runnable {
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
 		cardLayout.show(mainView, "summary");
+		
+		txtTest = new JTextField();
+		txtTest.setBounds(34, 349, 86, 20);
+		getContentPane().add(txtTest);
+		txtTest.setText(Connect_DB.dBExists());
+		txtTest.setColumns(10);
 
 		btnSummary.addActionListener(arg0 -> {
 
