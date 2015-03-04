@@ -32,6 +32,7 @@ public class MainFrame extends JFrame implements Runnable {
 		getContentPane().setLayout(null);
 		
 		transfer = new Transfers();
+		details = new Details();
 		
 		panel = new JPanel();
 		panel.setBackground(Color.CYAN);
@@ -69,12 +70,18 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.setLayout(new CardLayout(0, 0));
 		
 		mainView.add(transfer, "trans");
+		mainView.add(details, "details");
 		
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 		
 		btnTransfers.addActionListener(arg0 -> {
 			
 			cardLayout.show(mainView, "trans");
+		});
+		
+		btnDetails.addActionListener(arg0 -> {
+			
+			cardLayout.show(mainView, "details");
 		});
 	}
 

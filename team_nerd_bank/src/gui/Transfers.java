@@ -5,36 +5,22 @@
 */
 package gui;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-
-import java.awt.Component;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
 
-import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.border.TitledBorder;
 import javax.swing.border.BevelBorder;
-import javax.swing.JButton;
+import javax.swing.border.TitledBorder;
 
 
 public class Transfers extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	private static JList<String> dataList;
-	private static DefaultListModel<String> dataModel;
-	private JScrollPane dataHolder;
 	private JPanel pnlPayee;
 	private JComboBox cbxAccounts;
 	private JLabel lblFrom;
@@ -143,14 +129,7 @@ public class Transfers extends JPanel {
 		lblTranInfo = new JLabel("<html>Please choose an account and an amount you wish to transfer.  Then select who you want to transfer too, and finally choose the date on which you wish the transfer to go through on.</html>");
 		lblTranInfo.setForeground(Color.BLUE);
 		lblTranInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTranInfo.setBounds(416, 11, 221, 126);
+		lblTranInfo.setBounds(416, 35, 221, 102);
 		add(lblTranInfo);
-		
-		/*dataList = new JList<String>();
-		dataHolder.setViewportView(dataList);
-		dataList.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		dataList.setBorder(new BevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, null, null, null));
-
-		dataModel = new DefaultListModel<>();*/
 	}
 }
