@@ -2,7 +2,6 @@
  * 4 Mar 2015
  * team_nerd_bank
  * 00:10:12
- * package gui
  */
 package gui;
 
