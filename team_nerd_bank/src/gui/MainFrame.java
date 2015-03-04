@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.SwingConstants;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 
@@ -46,6 +47,18 @@ public class MainFrame extends JFrame implements Runnable {
 
 	public MainFrame() {
 
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+
 		getContentPane().setBackground(Color.WHITE);
 
 		getContentPane().setLayout(null);
@@ -60,7 +73,7 @@ public class MainFrame extends JFrame implements Runnable {
 		panel.setBounds(10, 11, 824, 70);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		file = new File(path);
 		try {
 
@@ -69,11 +82,11 @@ public class MainFrame extends JFrame implements Runnable {
 
 			e.printStackTrace();
 		}
-		
+
 		lblLogo = new JLabel(new ImageIcon(image));
 		lblLogo.setBounds(10, 0, 70, 70);
 		panel.add(lblLogo);
-		
+
 		lblMainName = new JLabel("PMDA BANK");
 		lblMainName.setForeground(Color.WHITE);
 		lblMainName.setFont(new Font("Tahoma", Font.BOLD, 40));
@@ -115,7 +128,7 @@ public class MainFrame extends JFrame implements Runnable {
 		btnDetails.setFocusPainted(false);
 		btnDetails.setBounds(10, 191, 151, 32);
 		getContentPane().add(btnDetails);
-		
+
 		btnSecurity = new JButton("Security");
 		btnSecurity.setForeground(new Color(0, 0, 139));
 		btnSecurity.setFont(new Font("Tahoma", Font.BOLD, 14));

@@ -14,6 +14,7 @@ import java.io.IOException;
 import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 
 public class Login extends JFrame implements Runnable {
@@ -36,19 +37,15 @@ public class Login extends JFrame implements Runnable {
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(Color.WHITE);
 		
-		lblTitle = new JLabel("NERD BANK");
-		lblTitle.setFont(new Font("Dialog", Font.BOLD, 31));
-		lblTitle.setBounds(219, 12, 214, 49);
-		getContentPane().add(lblTitle);
-		
 		lblAutoPin = new JLabel("<html>Please enter your auto generated pin this is your date of birth and the four digits provided e.g. ddmmyy0000</html>");
+		lblAutoPin.setForeground(Color.BLACK);
 		lblAutoPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAutoPin.setBounds(173, 89, 330, 66);
+		lblAutoPin.setBounds(173, 89, 330, 78);
 		getContentPane().add(lblAutoPin);
 		
 		txtAutoPin = new JTextField();
 		txtAutoPin.setFont(new Font("Dialog", Font.PLAIN, 14));
-		txtAutoPin.setBounds(305, 136, 175, 21);
+		txtAutoPin.setBounds(305, 136, 175, 26);
 		getContentPane().add(txtAutoPin);
 		txtAutoPin.setColumns(10);
 		
@@ -78,6 +75,18 @@ public class Login extends JFrame implements Runnable {
 		btnReg.setBorderPainted(false);
 		btnReg.setBounds(388, 245, 77, 21);
 		getContentPane().add(btnReg);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 139));
+		panel.setBounds(10, 11, 619, 67);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		lblTitle = new JLabel("PMDA BANK");
+		lblTitle.setBounds(199, 11, 214, 49);
+		panel.add(lblTitle);
+		lblTitle.setForeground(Color.WHITE);
+		lblTitle.setFont(new Font("Dialog", Font.BOLD, 31));
 		
 	}
 

@@ -51,11 +51,11 @@ public class Transfers extends JPanel {
 		add(lblFrom);
 		
 		cbxAccounts = new JComboBox();
-		cbxAccounts.setBounds(27, 77, 101, 20);
+		cbxAccounts.setBounds(27, 77, 101, 26);
 		add(cbxAccounts);
 		
 		sprMoney = new JSpinner();
-		sprMoney.setBounds(271, 77, 101, 20);
+		sprMoney.setBounds(271, 77, 101, 26);
 		add(sprMoney);
 		
 		lblValue = new JLabel("<html>Amount<br/>to Pay</html>");
@@ -77,7 +77,7 @@ public class Transfers extends JPanel {
 		pnlPayee.add(lblTo);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(20, 47, 246, 20);
+		comboBox.setBounds(20, 47, 246, 26);
 		pnlPayee.add(comboBox);
 		
 		lblOr = new JLabel("Or");
@@ -89,7 +89,7 @@ public class Transfers extends JPanel {
 		JButton btnAddPayee = new JButton("Add Someone New");
 		btnAddPayee.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAddPayee.setHorizontalAlignment(SwingConstants.LEADING);
-		btnAddPayee.setBounds(20, 103, 165, 23);
+		btnAddPayee.setBounds(20, 103, 165, 26);
 		pnlPayee.add(btnAddPayee);
 		
 		pnlDate = new JPanel();
@@ -99,15 +99,15 @@ public class Transfers extends JPanel {
 		add(pnlDate);
 		
 		spinner = new JSpinner();
-		spinner.setBounds(21, 44, 52, 20);
+		spinner.setBounds(21, 44, 52, 26);
 		pnlDate.add(spinner);
 		
 		spinner_1 = new JSpinner();
-		spinner_1.setBounds(120, 44, 67, 20);
+		spinner_1.setBounds(120, 44, 67, 26);
 		pnlDate.add(spinner_1);
 		
 		spinner_2 = new JSpinner();
-		spinner_2.setBounds(228, 44, 89, 20);
+		spinner_2.setBounds(228, 44, 89, 26);
 		pnlDate.add(spinner_2);
 		
 		lblDay = new JLabel("Day");
