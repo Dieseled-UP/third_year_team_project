@@ -28,7 +28,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private JButton btnPayees;
 	private JButton btnLogout;
 	private JPanel mainView;
-	private JPanel account, transfer, details, payees;
+	private JPanel summary, account, transfer, details, payees;
 	private JButton btnSummary;
 	private JPanel panel_3;
 	
@@ -38,6 +38,7 @@ public class MainFrame extends JFrame implements Runnable {
 		
 		getContentPane().setLayout(null);
 		
+		summary = new Summary();
 		transfer = new Transfers();
 		details = new Details();
 		
@@ -94,16 +95,6 @@ public class MainFrame extends JFrame implements Runnable {
 		btnLogout.setBounds(10, 319, 151, 42);
 		getContentPane().add(btnLogout);
 		
-		mainView = new JPanel();
-		mainView.setBounds(173, 93, 663, 445);
-		getContentPane().add(mainView);
-		mainView.setLayout(new CardLayout(0, 0));
-		
-		mainView.add(transfer, "trans");
-		mainView.add(details, "details");
-		
-		CardLayout cardLayout = (CardLayout) mainView.getLayout();
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.WHITE);
 		panel_1.setBounds(10, 81, 151, 42);
@@ -120,9 +111,28 @@ public class MainFrame extends JFrame implements Runnable {
 		panel_3.setBounds(10, 561, 824, 39);
 		getContentPane().add(panel_3);
 		
+		mainView = new JPanel();
+		mainView.setBounds(173, 93, 663, 445);
+		getContentPane().add(mainView);
+		mainView.setLayout(new CardLayout(0, 0));
+		
+		mainView.add(transfer, "trans");
+		mainView.add(details, "details");
+		mainView.add(summary, "summary");
+		
+		CardLayout cardLayout = (CardLayout) mainView.getLayout();
+		
+		cardLayout.show(mainView, "summary");
+		
+		btnSummary.addActionListener(arg0 -> {
+			
+			cardLayout.show(mainView, "summary");
+		});
+		
 		btnTransfers.addActionListener(arg0 -> {
 			
 			cardLayout.show(mainView, "trans");
+			btnTransfers.setBackground(new Color(166, 166, 166));
 		});
 		
 		btnDetails.addActionListener(arg0 -> {
