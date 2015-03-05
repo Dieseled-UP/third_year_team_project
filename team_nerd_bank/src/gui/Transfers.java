@@ -39,6 +39,7 @@ public class Transfers extends JPanel {
 	private JLabel lblNewLabel_2;
 	private JLabel lblTranInfo;
 	private JLabel lblTran;
+	private JButton btnOK;
 	
 	public Transfers() {
 		setBorder(new LineBorder(new Color(255, 165, 0)));
@@ -57,7 +58,7 @@ public class Transfers extends JPanel {
 		
 		pnlPayee = new JPanel();
 		pnlPayee.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Pay", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
-		pnlPayee.setBounds(24, 156, 615, 140);
+		pnlPayee.setBounds(24, 143, 615, 140);
 		add(pnlPayee);
 		pnlPayee.setLayout(null);
 		
@@ -95,7 +96,7 @@ public class Transfers extends JPanel {
 		pnlDate = new JPanel();
 		pnlDate.setLayout(null);
 		pnlDate.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Date", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
-		pnlDate.setBounds(24, 328, 615, 87);
+		pnlDate.setBounds(24, 294, 615, 87);
 		add(pnlDate);
 		
 		spinner = new JSpinner();
@@ -139,5 +140,11 @@ public class Transfers extends JPanel {
 		lblTran.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblTran.setBounds(36, 26, 101, 25);
 		add(lblTran);
+		
+		btnOK = new JButton("OK");
+		btnOK.setForeground(Color.BLUE);
+		btnOK.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnOK.setBounds(500, 400, 89, 26);
+		add(btnOK);
 	}
 }
