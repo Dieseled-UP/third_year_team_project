@@ -10,6 +10,7 @@ import javax.swing.WindowConstants;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 
 /**
@@ -29,48 +30,68 @@ public class Account extends JPanel {
 	private JLabel lblBalance;
 	private JButton btnAdd;
 	private JButton btnDelete;
+	private JLabel lblSelectAccount;
 	
 	public Account() {
 		setLayout(null);
 		
 		comboBox = new JComboBox(words);
-		comboBox.setBounds(70, 30, 80, 20);
+		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		comboBox.setForeground(Color.BLUE);
+		comboBox.setBounds(295, 134, 80, 20);
 		add(comboBox);
 		
-		lblNewLabel = new JLabel("Account No.");
-		lblNewLabel.setBounds(33, 80, 67, 25);
+		lblNewLabel = new JLabel("Account No:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setForeground(Color.BLUE);
+		lblNewLabel.setBounds(52, 91, 89, 25);
 		add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(110, 82, 101, 20);
+		textField.setForeground(Color.BLUE);
+		textField.setBounds(52, 116, 159, 20);
 		add(textField);
 		textField.setColumns(10);
 		
-		lblType = new JLabel("Type");
-		lblType.setBounds(33, 133, 46, 14);
+		lblType = new JLabel("Account Type:");
+		lblType.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblType.setForeground(Color.BLUE);
+		lblType.setBounds(52, 158, 101, 17);
 		add(lblType);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(110, 130, 101, 20);
+		textField_1.setBounds(52, 182, 159, 20);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
-		lblBalance = new JLabel("Balance");
-		lblBalance.setBounds(33, 185, 46, 14);
+		lblBalance = new JLabel("Balance:");
+		lblBalance.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblBalance.setForeground(Color.BLUE);
+		lblBalance.setBounds(53, 245, 65, 14);
 		add(lblBalance);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(110, 180, 101, 20);
+		textField_2.setBounds(52, 270, 159, 20);
 		add(textField_2);
 		textField_2.setColumns(10);
 		
 		btnAdd = new JButton("Add");
-		btnAdd.setBounds(52, 266, 89, 23);
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAdd.setForeground(Color.BLUE);
+		btnAdd.setBounds(122, 350, 89, 23);
 		add(btnAdd);
 		
 		btnDelete = new JButton("Delete");
-		btnDelete.setBounds(303, 266, 89, 23);
+		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnDelete.setForeground(Color.BLUE);
+		btnDelete.setBounds(358, 350, 89, 23);
 		add(btnDelete);
+		
+		lblSelectAccount = new JLabel("Select Account:");
+		lblSelectAccount.setForeground(Color.BLUE);
+		lblSelectAccount.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblSelectAccount.setBounds(295, 96, 101, 14);
+		add(lblSelectAccount);
 		
 		
 		
