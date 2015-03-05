@@ -69,6 +69,7 @@ public class MainFrame extends JFrame implements Runnable {
 		getContentPane().setLayout(null);
 
 		summary = new Summary();
+		account = new Account();
 		transfer = new Transfers();
 		details = new Details();
 
@@ -187,6 +188,7 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.add(transfer, "trans");
 		mainView.add(details, "details");
 		mainView.add(summary, "summary");
+		mainView.add(account, "account");
 
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
@@ -195,6 +197,15 @@ public class MainFrame extends JFrame implements Runnable {
 		btnSummary.addActionListener(arg0 -> {
 
 			cardLayout.show(mainView, "summary");
+			btnAccounts.setBackground(new Color(201, 216, 239));
+			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnDetails.setBackground(new Color(201, 216, 239));
+		});
+		
+		btnAccounts.addActionListener(arg0 -> {
+			
+			cardLayout.show(mainView, "account");
+			btnAccounts.setBackground(new Color(166, 166, 166));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
 		});
@@ -203,6 +214,7 @@ public class MainFrame extends JFrame implements Runnable {
 
 			cardLayout.show(mainView, "trans");
 			btnTransfers.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
 		});
 
@@ -210,6 +222,7 @@ public class MainFrame extends JFrame implements Runnable {
 
 			cardLayout.show(mainView, "details");
 			btnDetails.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 		});
 	}

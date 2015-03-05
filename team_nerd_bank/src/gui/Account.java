@@ -35,7 +35,7 @@ public class Account extends JPanel {
 		comboBox = new JComboBox(words);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox.setForeground(Color.BLUE);
-		comboBox.setBounds(295, 134, 80, 20);
+		comboBox.setBounds(295, 134, 80, 26);
 		add(comboBox);
 		
 		lblNewLabel = new JLabel("Account No:");
@@ -45,8 +45,9 @@ public class Account extends JPanel {
 		add(lblNewLabel);
 		
 		textField = new JTextField();
+		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textField.setForeground(Color.BLUE);
-		textField.setBounds(52, 116, 159, 20);
+		textField.setBounds(52, 116, 159, 26);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -57,7 +58,8 @@ public class Account extends JPanel {
 		add(lblType);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(52, 182, 159, 20);
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textField_1.setBounds(52, 182, 159, 26);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -68,20 +70,21 @@ public class Account extends JPanel {
 		add(lblBalance);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(52, 270, 159, 20);
+		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		textField_2.setBounds(52, 270, 159, 26);
 		add(textField_2);
 		textField_2.setColumns(10);
 		
 		btnAdd = new JButton("Add");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAdd.setForeground(Color.BLUE);
-		btnAdd.setBounds(122, 350, 89, 23);
+		btnAdd.setBounds(122, 350, 89, 26);
 		add(btnAdd);
 		
 		btnDelete = new JButton("Delete");
 		btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnDelete.setForeground(Color.BLUE);
-		btnDelete.setBounds(358, 350, 89, 23);
+		btnDelete.setBounds(358, 350, 89, 26);
 		add(btnDelete);
 		
 		lblSelectAccount = new JLabel("Select Account:");
