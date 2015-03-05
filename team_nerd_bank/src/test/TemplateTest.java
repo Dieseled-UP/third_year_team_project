@@ -1,6 +1,6 @@
 package test;
 
-import gui.Account;
+import gui.MainFrame;
 
 import javax.swing.SwingUtilities;
 
@@ -11,7 +11,7 @@ public class TemplateTest {
 
 		java.awt.EventQueue.invokeLater(() -> {
 
-			Account frame = new Account();
+			MainFrame frame = new MainFrame();
 			SwingUtilities.invokeLater(frame);
 			
 		});
