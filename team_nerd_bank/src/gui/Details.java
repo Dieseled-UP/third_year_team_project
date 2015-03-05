@@ -44,7 +44,7 @@ public class Details extends JPanel {
 
 		txtName = new JTextField();
 		txtName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtName.setBounds(63, 84, 179, 20);
+		txtName.setBounds(63, 84, 179, 26);
 		add(txtName);
 		txtName.setColumns(10);
 		
@@ -56,7 +56,7 @@ public class Details extends JPanel {
 		
 		txtSurname = new JTextField();
 		txtSurname.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtSurname.setBounds(63, 140, 179, 20);
+		txtSurname.setBounds(63, 140, 179, 26);
 		add(txtSurname);
 		txtSurname.setColumns(10);
 		
@@ -68,7 +68,7 @@ public class Details extends JPanel {
 		
 		txtAddLine = new JTextField();
 		txtAddLine.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtAddLine.setBounds(63, 196, 232, 20);
+		txtAddLine.setBounds(63, 196, 232, 26);
 		add(txtAddLine);
 		txtAddLine.setColumns(10);
 		
@@ -80,7 +80,7 @@ public class Details extends JPanel {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textField.setBounds(63, 253, 232, 20);
+		textField.setBounds(63, 253, 232, 26);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -93,29 +93,29 @@ public class Details extends JPanel {
 		cbxCounty = new JComboBox();
 		cbxCounty.setForeground(new Color(0, 0, 0));
 		cbxCounty.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		cbxCounty.setBounds(380, 253, 161, 20);
+		cbxCounty.setBounds(380, 253, 161, 26);
 		add(cbxCounty);
 		
 		lblTelPhone = new JLabel("Tel. Phone:");
 		lblTelPhone.setForeground(Color.BLUE);
 		lblTelPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTelPhone.setBounds(63, 284, 71, 14);
+		lblTelPhone.setBounds(63, 312, 71, 14);
 		add(lblTelPhone);
 		
 		txtTelPhone = new JTextField();
 		txtTelPhone.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtTelPhone.setBounds(63, 314, 161, 20);
+		txtTelPhone.setBounds(62, 337, 161, 26);
 		add(txtTelPhone);
 		txtTelPhone.setColumns(10);
 		
 		lblMobile = new JLabel("Mobile:");
 		lblMobile.setForeground(Color.BLUE);
 		lblMobile.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblMobile.setBounds(274, 286, 46, 14);
+		lblMobile.setBounds(274, 312, 46, 14);
 		add(lblMobile);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(274, 314, 168, 20);
+		textField_1.setBounds(274, 337, 168, 26);
 		add(textField_1);
 		textField_1.setColumns(10);
 		
