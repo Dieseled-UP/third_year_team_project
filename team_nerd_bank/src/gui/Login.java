@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -38,6 +39,7 @@ public class Login extends JFrame implements Runnable {
 	private String path2 = "Assets/logo2.svg.png";
 	private File file2;
 	private BufferedImage image2;
+	private JButton btnNext;
 	
 	public Login() {
 		
@@ -89,6 +91,7 @@ public class Login extends JFrame implements Runnable {
 		
 		btnReg = new JButton("<html><u>register</u></html>");
 		btnReg.setForeground(Color.RED);
+		btnReg.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnReg.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnReg.setOpaque(false);
 		btnReg.setContentAreaFilled(false);
@@ -120,6 +123,13 @@ public class Login extends JFrame implements Runnable {
 		lblLogo = new JLabel(new ImageIcon(image2));
 		lblLogo.setBounds(10, -1, 70, 70);
 		panel.add(lblLogo);
+		
+		btnNext = new JButton("Next");
+		btnNext.setBackground(new Color(201, 216, 239));
+		btnNext.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNext.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnNext.setBounds(513, 135, 89, 26);
+		getContentPane().add(btnNext);
 		
 		btnReg.addActionListener(arg0 -> {
 			

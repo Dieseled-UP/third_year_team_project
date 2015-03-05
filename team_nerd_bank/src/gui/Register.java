@@ -6,21 +6,26 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 
+
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
+
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -276,14 +281,32 @@ public class Register extends JFrame implements Runnable {
 		getContentPane().add(lblConfirm);
 		
 		btnOK = new JButton("OK");
+		btnOK.setBackground(new Color(201, 216, 239));
 		btnOK.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnOK.setBounds(130, 660, 89, 26);
 		getContentPane().add(btnOK);
 		
 		btnCancel = new JButton("CANCEL");
+		btnCancel.setBackground(new Color(201, 216, 239));
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancel.setBounds(340, 660, 89, 26);
 		getContentPane().add(btnCancel);
+		
+		btnOK.addActionListener(arg0 -> {
+			
+			java.awt.EventQueue.invokeLater(() -> {
+
+				Login frame = new Login();
+				SwingUtilities.invokeLater(frame);
+				
+			});
+		});
+		
+		btnCancel.addActionListener(arg0 -> {
+			
+			JOptionPane.showMessageDialog(null, "Please re-enter your account number if you still have problems\n please contact"
+					+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
+		});
 
 	}
 
