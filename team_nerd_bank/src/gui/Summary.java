@@ -60,7 +60,7 @@ public class Summary extends JPanel {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(255, 165, 0)));
-		panel.setBounds(22, 93, 615, 299);
+		panel.setBounds(24, 93, 615, 299);
 		add(panel);
 		panel.setLayout(null);
 		

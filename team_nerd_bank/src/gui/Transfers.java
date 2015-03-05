@@ -38,6 +38,7 @@ public class Transfers extends JPanel {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblTranInfo;
+	private JLabel lblTran;
 	
 	public Transfers() {
 		setBorder(new LineBorder(new Color(255, 165, 0)));
@@ -47,26 +48,16 @@ public class Transfers extends JPanel {
 		lblFrom = new JLabel("<html><span style=\"font-size: 11\">From<br/> </span>Current Account</html>");
 		lblFrom.setForeground(Color.BLUE);
 		lblFrom.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFrom.setBounds(27, 42, 115, 31);
+		lblFrom.setBounds(239, 48, 115, 31);
 		add(lblFrom);
 		
 		cbxAccounts = new JComboBox();
-		cbxAccounts.setBounds(27, 77, 101, 26);
+		cbxAccounts.setBounds(239, 90, 101, 26);
 		add(cbxAccounts);
-		
-		sprMoney = new JSpinner();
-		sprMoney.setBounds(271, 77, 101, 26);
-		add(sprMoney);
-		
-		lblValue = new JLabel("<html>Amount<br/>to Pay</html>");
-		lblValue.setForeground(Color.BLUE);
-		lblValue.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblValue.setBounds(271, 41, 63, 31);
-		add(lblValue);
 		
 		pnlPayee = new JPanel();
 		pnlPayee.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Pay", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
-		pnlPayee.setBounds(22, 137, 615, 140);
+		pnlPayee.setBounds(24, 156, 615, 140);
 		add(pnlPayee);
 		pnlPayee.setLayout(null);
 		
@@ -91,10 +82,20 @@ public class Transfers extends JPanel {
 		btnAddPayee.setBounds(20, 103, 155, 26);
 		pnlPayee.add(btnAddPayee);
 		
+		lblValue = new JLabel("<html>Amount<br/>to Pay</html>");
+		lblValue.setBounds(318, 25, 63, 31);
+		pnlPayee.add(lblValue);
+		lblValue.setForeground(Color.BLUE);
+		lblValue.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		sprMoney = new JSpinner();
+		sprMoney.setBounds(391, 30, 101, 26);
+		pnlPayee.add(sprMoney);
+		
 		pnlDate = new JPanel();
 		pnlDate.setLayout(null);
 		pnlDate.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Date", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
-		pnlDate.setBounds(22, 307, 615, 87);
+		pnlDate.setBounds(24, 328, 615, 87);
 		add(pnlDate);
 		
 		spinner = new JSpinner();
@@ -132,5 +133,11 @@ public class Transfers extends JPanel {
 		lblTranInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblTranInfo.setBounds(416, 35, 221, 102);
 		add(lblTranInfo);
+		
+		lblTran = new JLabel("Transfers");
+		lblTran.setForeground(Color.BLUE);
+		lblTran.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblTran.setBounds(36, 26, 101, 25);
+		add(lblTran);
 	}
 }
