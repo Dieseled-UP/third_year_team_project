@@ -88,8 +88,7 @@ public class Transfers extends JPanel {
 		
 		JButton btnAddPayee = new JButton("Add Someone New");
 		btnAddPayee.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAddPayee.setHorizontalAlignment(SwingConstants.LEADING);
-		btnAddPayee.setBounds(20, 103, 165, 26);
+		btnAddPayee.setBounds(20, 103, 155, 26);
 		pnlPayee.add(btnAddPayee);
 		
 		pnlDate = new JPanel();

@@ -5,12 +5,20 @@
  */
 package gui;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.JTable;
 
 public class Summary extends JPanel {
 	
@@ -24,6 +32,11 @@ public class Summary extends JPanel {
 	private JLabel lblSort;
 	private JLabel lblBalance;
 	private JLabel lblAvail;
+	private JTable table;
+	private JLabel lblImage;
+	private String path = "Assets/euroSym.png";
+	private File file;
+	private BufferedImage image;
 
 	public Summary() {
 
@@ -60,8 +73,21 @@ public class Summary extends JPanel {
 		lblPAccount = new JLabel("Personal Accounts");
 		lblPAccount.setForeground(Color.BLUE);
 		lblPAccount.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblPAccount.setBounds(90, 11, 127, 22);
+		lblPAccount.setBounds(75, 9, 127, 22);
 		panel_1.add(lblPAccount);
+		
+		file = new File(path);
+		try {
+
+			image = ImageIO.read(file);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+		
+		lblImage = new JLabel(new ImageIcon(image));
+		lblImage.setBounds(10, 0, 46, 44);
+		panel_1.add(lblImage);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new MatteBorder(0, 1, 0, 1, (Color) new Color(255, 165, 0)));
@@ -94,5 +120,10 @@ public class Summary extends JPanel {
 		lblAvail.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblAvail.setBounds(528, 11, 63, 14);
 		panel_2.add(lblAvail);
+		
+		table = new JTable();
+		table.setBorder(new MatteBorder(0, 1, 0, 1, (Color) new Color(255, 165, 0)));
+		table.setBounds(0, 78, 615, 210);
+		panel.add(table);
 	}
 }

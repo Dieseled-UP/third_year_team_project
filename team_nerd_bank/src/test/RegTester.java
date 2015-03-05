@@ -1,17 +1,22 @@
+/*
+ * 4 Mar 2015
+* team_nerd_bank
+* 23:39:13
+*/
 package test;
 
-import gui.MainFrame;
+import gui.Register;
 
 import javax.swing.SwingUtilities;
 
 
-public class TemplateTest {
+public class RegTester {
 
 	public static void main(String[] args) {
-		
+
 		java.awt.EventQueue.invokeLater(() -> {
 
-			MainFrame frame = new MainFrame();
+			Register frame = new Register();
 			SwingUtilities.invokeLater(frame);
 			
 		});

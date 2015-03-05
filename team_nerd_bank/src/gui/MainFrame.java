@@ -47,7 +47,8 @@ public class MainFrame extends JFrame implements Runnable {
 	private File file;
 	private BufferedImage image;
 	private JLabel lblMainName;
-	private JTextField txtTest;
+	private JLabel lblWelcome;
+	private JLabel lblName;
 
 	public MainFrame() {
 
@@ -74,7 +75,7 @@ public class MainFrame extends JFrame implements Runnable {
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 139), 1, true));
 		panel.setBackground(new Color(0, 0, 139));
-		panel.setBounds(10, 11, 824, 70);
+		panel.setBounds(10, 10, 824, 69);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
@@ -88,14 +89,26 @@ public class MainFrame extends JFrame implements Runnable {
 		}
 
 		lblLogo = new JLabel(new ImageIcon(image));
-		lblLogo.setBounds(10, 0, 70, 69);
+		lblLogo.setBounds(10, -1, 70, 70);
 		panel.add(lblLogo);
 
 		lblMainName = new JLabel("PMDA BANK");
 		lblMainName.setForeground(Color.WHITE);
-		lblMainName.setFont(new Font("Tahoma", Font.BOLD, 40));
-		lblMainName.setBounds(165, 11, 259, 48);
+		lblMainName.setFont(new Font("Serif", Font.BOLD, 40));
+		lblMainName.setBounds(181, 11, 259, 48);
 		panel.add(lblMainName);
+		
+		lblWelcome = new JLabel("Welcome");
+		lblWelcome.setForeground(Color.WHITE);
+		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblWelcome.setBounds(540, 47, 70, 14);
+		panel.add(lblWelcome);
+		
+		lblName = new JLabel("");
+		lblName.setForeground(Color.WHITE);
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblName.setBounds(620, 48, 118, 14);
+		panel.add(lblName);
 
 		btnSummary = new JButton("Summary");
 		btnSummary.setForeground(new Color(0, 0, 139));
@@ -178,12 +191,6 @@ public class MainFrame extends JFrame implements Runnable {
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
 		cardLayout.show(mainView, "summary");
-		
-		txtTest = new JTextField();
-		txtTest.setBounds(34, 349, 86, 20);
-		getContentPane().add(txtTest);
-		txtTest.setText(Connect_DB.dBExists());
-		txtTest.setColumns(10);
 
 		btnSummary.addActionListener(arg0 -> {
 
