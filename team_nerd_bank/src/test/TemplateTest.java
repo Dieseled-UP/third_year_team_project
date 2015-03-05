@@ -9,12 +9,12 @@ public class TemplateTest {
 
 	public static void main(String[] args) {
 
-//		java.awt.EventQueue.invokeLater(() -> {
-//
-//			Account frame = new Account();
-//			SwingUtilities.invokeLater(frame);
-//			
-//		});
+		java.awt.EventQueue.invokeLater(() -> {
+
+			Account frame = new Account();
+			SwingUtilities.invokeLater(frame);
+			
+		});
 	}
 
 }
