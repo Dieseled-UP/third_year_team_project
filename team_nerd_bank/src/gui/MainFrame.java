@@ -73,6 +73,7 @@ public class MainFrame extends JFrame implements Runnable {
 		transfer = new Transfers();
 		details = new Details();
 		security = new Security();
+		payees = new Payees();
 
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 139), 1, true));
@@ -99,13 +100,13 @@ public class MainFrame extends JFrame implements Runnable {
 		lblMainName.setFont(new Font("Serif", Font.BOLD, 40));
 		lblMainName.setBounds(181, 11, 259, 48);
 		panel.add(lblMainName);
-		
+
 		lblWelcome = new JLabel("Welcome");
 		lblWelcome.setForeground(Color.WHITE);
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblWelcome.setBounds(540, 47, 70, 14);
 		panel.add(lblWelcome);
-		
+
 		lblName = new JLabel("");
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -191,6 +192,7 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.add(summary, "summary");
 		mainView.add(account, "account");
 		mainView.add(security, "security");
+		mainView.add(payees, "payee");
 
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
@@ -202,15 +204,17 @@ public class MainFrame extends JFrame implements Runnable {
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
-		
+
 		btnAccounts.addActionListener(arg0 -> {
-			
+
 			cardLayout.show(mainView, "account");
 			btnAccounts.setBackground(new Color(166, 166, 166));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
 
@@ -220,6 +224,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnTransfers.setBackground(new Color(166, 166, 166));
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
 
@@ -229,16 +234,28 @@ public class MainFrame extends JFrame implements Runnable {
 			btnDetails.setBackground(new Color(166, 166, 166));
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
-		
+
 		btnSecurity.addActionListener(arg0 -> {
-			
+
 			cardLayout.show(mainView, "security");
 			btnSecurity.setBackground(new Color(166, 166, 166));
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(166, 166, 166));
+		});
+
+		btnPayees.addActionListener(arg0 -> {
+
+			cardLayout.show(mainView, "payee");
+			btnPayees.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
+			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnDetails.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
 	}
 
