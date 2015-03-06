@@ -166,7 +166,7 @@ public class UserLogin extends JFrame implements Runnable {
 		btnLogin = new JButton("LOGIN");
 		btnLogin.setForeground(Color.BLUE);
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLogin.setBounds(502, 699, 89, 26);
+		btnLogin.setBounds(501, 652, 89, 26);
 		getContentPane().add(btnLogin);
 		
 		btnForgot = new JButton("<html><strong style=\"color: #FFA500\">==></strong> Forgot your PIN or Password?</html>");
@@ -182,7 +182,7 @@ public class UserLogin extends JFrame implements Runnable {
 	@Override
 	public void run() {
 
-		setSize(680, 815);
+		setSize(680, 742);
 		setResizable(false);
 		setTitle("Your Login");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
