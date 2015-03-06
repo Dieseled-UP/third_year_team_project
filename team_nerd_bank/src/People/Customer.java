@@ -15,8 +15,8 @@ public class Customer {
 	private Date dob;
 	private String address;
 	private String email;
-	private int telPhone;
-	private int mobile;
+	private String telPhone;
+	private String mobile;
 	
 	/**
 	 * Default constructor
@@ -34,11 +34,12 @@ public class Customer {
 	 * @param telPhone
 	 * @param mobile
 	 */
-	public Customer(String name, String surname, Date dob, String email, int telPhone, int mobile) {
+	public Customer(String name, String surname, Date dob, String address, String email, String telPhone, String mobile) {
 		
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
+		this.address = address;
 		this.email = email;
 		this.telPhone = telPhone;
 		this.mobile = mobile;
@@ -138,7 +139,7 @@ public class Customer {
 	 * Method to get customer tel-Phone number
 	 * @return telPhone
 	 */
-	public int getTelPhone() {
+	public String getTelPhone() {
 	
 		return telPhone;
 	}
@@ -147,7 +148,7 @@ public class Customer {
 	 * Method to set customer tel-Phone number
 	 * @param telPhone
 	 */
-	public void setTelPhone(int telPhone) {
+	public void setTelPhone(String telPhone) {
 	
 		this.telPhone = telPhone;
 	}
@@ -156,7 +157,7 @@ public class Customer {
 	 * Method to get customer mobile number
 	 * @return mobile
 	 */
-	public int getMobile() {
+	public String getMobile() {
 	
 		return mobile;
 	}
@@ -165,7 +166,7 @@ public class Customer {
 	 * Method to set customer mobile number
 	 * @param mobile
 	 */
-	public void setMobile(int mobile) {
+	public void setMobile(String mobile) {
 	
 		this.mobile = mobile;
 	}
