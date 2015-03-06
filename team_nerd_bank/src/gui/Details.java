@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
+import javax.swing.JButton;
 
 public class Details extends JPanel {
 
@@ -30,6 +31,7 @@ public class Details extends JPanel {
 	private JLabel lblMobile;
 	private JTextField textField_1;
 	private JLabel lblInfo;
+	private JButton btnOK;
 
 	public Details() {
 		setBorder(new LineBorder(new Color(255, 165, 0)));
@@ -124,5 +126,11 @@ public class Details extends JPanel {
 		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblInfo.setBounds(416, 35, 221, 85);
 		add(lblInfo);
+		
+		btnOK = new JButton("OK");
+		btnOK.setForeground(Color.BLUE);
+		btnOK.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnOK.setBounds(500, 400, 89, 26);
+		add(btnOK);
 	}
 }

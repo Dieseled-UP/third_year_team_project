@@ -45,46 +45,46 @@ public class Security extends JPanel {
 		pnlChange.setLayout(null);
 		
 				lblConfirmPin = new JLabel("Please confirm old PIN");
-				lblConfirmPin.setBounds(59, 34, 143, 23);
+				lblConfirmPin.setBounds(40, 21, 143, 23);
 				pnlChange.add(lblConfirmPin);
 				lblConfirmPin.setForeground(Color.BLUE);
 				lblConfirmPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				
 				txtOldPin = new JTextField();
-				txtOldPin.setBounds(59, 57, 86, 26);
+				txtOldPin.setBounds(40, 55, 86, 26);
 				pnlChange.add(txtOldPin);
 				txtOldPin.setColumns(10);
 				
 				lblNewPin = new JLabel("Enter new PIN");
-				lblNewPin.setBounds(59, 94, 111, 14);
+				lblNewPin.setBounds(40, 99, 111, 14);
 				pnlChange.add(lblNewPin);
 				lblNewPin.setForeground(Color.BLUE);
 				lblNewPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				
 				txtNewPin = new JTextField();
-				txtNewPin.setBounds(59, 116, 86, 26);
+				txtNewPin.setBounds(40, 124, 86, 26);
 				pnlChange.add(txtNewPin);
 				txtNewPin.setColumns(10);
 				
 				lblNewPass = new JLabel("New Password");
-				lblNewPass.setBounds(255, 38, 100, 14);
+				lblNewPass.setBounds(264, 25, 100, 14);
 				pnlChange.add(lblNewPass);
 				lblNewPass.setForeground(Color.BLUE);
 				lblNewPass.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				
 				pasNew = new JPasswordField();
-				pasNew.setBounds(374, 33, 157, 26);
+				pasNew.setBounds(264, 54, 157, 26);
 				pnlChange.add(pasNew);
 				pasNew.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				
 				lblConfirm = new JLabel("Confirm Password");
-				lblConfirm.setBounds(255, 90, 118, 22);
+				lblConfirm.setBounds(264, 95, 118, 22);
 				pnlChange.add(lblConfirm);
 				lblConfirm.setForeground(Color.BLUE);
 				lblConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				
 				pasConfirm = new JPasswordField();
-				pasConfirm.setBounds(374, 89, 157, 26);
+				pasConfirm.setBounds(264, 123, 157, 26);
 				pnlChange.add(pasConfirm);
 				pasConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
 				
