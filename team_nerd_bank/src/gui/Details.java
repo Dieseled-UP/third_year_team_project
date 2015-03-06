@@ -7,8 +7,11 @@ package gui;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Color;
+
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
@@ -129,6 +132,8 @@ public class Details extends JPanel {
 		
 		btnOK = new JButton("OK");
 		btnOK.setForeground(Color.BLUE);
+		btnOK.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnOK.setBackground(new Color(201, 216, 239));
 		btnOK.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnOK.setBounds(500, 400, 89, 26);
 		add(btnOK);

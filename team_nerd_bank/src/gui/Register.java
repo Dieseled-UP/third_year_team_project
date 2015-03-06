@@ -358,9 +358,9 @@ public class Register extends JFrame implements Runnable {
 
 				code.append(String.valueOf(nums[i]));
 			}
-			
-			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString() + 
-					".\nPlease take note of this code and keep in a safe place.");
+
+			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString()
+					+ ".\nPlease take note of this code and keep in a safe place.");
 
 			java.awt.EventQueue.invokeLater(() -> {
 

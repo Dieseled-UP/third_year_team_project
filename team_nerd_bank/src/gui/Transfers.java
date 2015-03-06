@@ -6,6 +6,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -40,6 +41,7 @@ public class Transfers extends JPanel {
 	private JLabel lblTranInfo;
 	private JLabel lblTran;
 	private JButton btnOK;
+	private JButton btnAddPayee;
 	
 	public Transfers() {
 		setBorder(new LineBorder(new Color(255, 165, 0)));
@@ -78,8 +80,10 @@ public class Transfers extends JPanel {
 		lblOr.setBounds(10, 78, 46, 14);
 		pnlPayee.add(lblOr);
 		
-		JButton btnAddPayee = new JButton("Add Someone New");
+		btnAddPayee = new JButton("Add Someone New");
 		btnAddPayee.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAddPayee.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnAddPayee.setBackground(new Color(201, 216, 239));
 		btnAddPayee.setBounds(20, 103, 155, 26);
 		pnlPayee.add(btnAddPayee);
 		
@@ -144,6 +148,8 @@ public class Transfers extends JPanel {
 		btnOK = new JButton("OK");
 		btnOK.setForeground(Color.BLUE);
 		btnOK.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnOK.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnOK.setBackground(new Color(201, 216, 239));
 		btnOK.setBounds(500, 400, 89, 26);
 		add(btnOK);
 	}

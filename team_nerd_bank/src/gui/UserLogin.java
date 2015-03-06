@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import java.awt.Color;
 
@@ -18,6 +19,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
@@ -44,6 +46,7 @@ public class UserLogin extends JFrame implements Runnable {
 	private JTextField textField_2;
 	private JLabel lblInfoOne;
 	private JButton btnLogin;
+	private JButton btnForgot;
 
 	public UserLogin() {
 		getContentPane().setBackground(Color.WHITE);
@@ -163,12 +166,27 @@ public class UserLogin extends JFrame implements Runnable {
 		btnLogin = new JButton("LOGIN");
 		btnLogin.setForeground(Color.BLUE);
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLogin.setBounds(500, 700, 89, 26);
+		btnLogin.setBounds(502, 699, 89, 26);
 		getContentPane().add(btnLogin);
+		
+		btnForgot = new JButton("<html><strong style=\"color: #FFA500\">==></strong> Forgot your PIN or Password?</html>");
+		btnForgot.setForeground(Color.BLUE);
+		btnForgot.setOpaque(false);
+		btnForgot.setContentAreaFilled(false);
+		btnForgot.setBorderPainted(false);
+		btnForgot.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnForgot.setBounds(55, 649, 256, 32);
+		getContentPane().add(btnForgot);
 	}
 
 	@Override
 	public void run() {
 
+		setSize(680, 815);
+		setResizable(false);
+		setTitle("Your Login");
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 }
