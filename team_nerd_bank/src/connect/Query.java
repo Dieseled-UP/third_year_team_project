@@ -5,8 +5,11 @@
 */
 package connect;
 
+import java.util.ArrayList;
+
 
 public class Query {
 
-	
+	private static String sql = null;
+	private static ArrayList<Member> list = new ArrayList<>();
 }
