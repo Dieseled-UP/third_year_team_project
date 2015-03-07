@@ -49,6 +49,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private JLabel lblMainName;
 	private JLabel lblWelcome;
 	private JLabel lblName;
+	private JButton btnStatements;
 
 	public MainFrame() {
 
@@ -173,7 +174,7 @@ public class MainFrame extends JFrame implements Runnable {
 		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnLogout.setFocusPainted(false);
-		btnLogout.setBounds(10, 290, 151, 32);
+		btnLogout.setBounds(10, 323, 151, 32);
 		getContentPane().add(btnLogout);
 
 		panel_3 = new JPanel();
@@ -197,6 +198,14 @@ public class MainFrame extends JFrame implements Runnable {
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
 		cardLayout.show(mainView, "summary");
+		
+		btnStatements = new JButton("Statements");
+		btnStatements.setForeground(new Color(0, 0, 139));
+		btnStatements.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnStatements.setFocusPainted(false);
+		btnStatements.setBackground(new Color(201, 216, 239));
+		btnStatements.setBounds(10, 290, 151, 32);
+		getContentPane().add(btnStatements);
 
 		btnSummary.addActionListener(arg0 -> {
 
@@ -245,7 +254,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
-			btnPayees.setBackground(new Color(166, 166, 166));
+			btnPayees.setBackground(new Color(201, 216, 239));
 		});
 
 		btnPayees.addActionListener(arg0 -> {
