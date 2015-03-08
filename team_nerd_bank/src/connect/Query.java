@@ -10,7 +10,10 @@ import java.sql.SQLException;
 //import java.util.ArrayList;
 
 
-import People.Customer;
+
+
+import people.Customer;
+import net.proteanit.sql.DbUtils;
 
 public class Query {
 
@@ -78,5 +81,24 @@ public class Query {
 		
 		return account;
 	}
+	
+	/*public static return_type name() {
+		
+		sql = "select CONCAT(First_Name,', ', Last_Name) as Name, Account_No as \"Account No\", Reference from Payee";
+		ResultSet result;
+		
+		try {
+			result = Connect_DB.pStatement(sql).executeQuery();
+			
+			while (result.next()) {
+				
+			}
+			
+			// Close the connection
+			Connect_DB.finish();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}*/
 
 }

@@ -34,7 +34,7 @@ public class Summary extends JPanel {
 	private JLabel lblAvail;
 	private JTable table;
 	private JLabel lblImage;
-	private String path = "Assets/euroSym.png";
+	private String path = "Assets/mmEuroSign.gif";
 	private File file;
 	private BufferedImage image;
 
@@ -88,6 +88,11 @@ public class Summary extends JPanel {
 		lblImage = new JLabel(new ImageIcon(image));
 		lblImage.setBounds(10, 0, 46, 44);
 		panel_1.add(lblImage);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel_3.setBounds(0, 42, 615, 1);
+		panel_1.add(panel_3);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new MatteBorder(0, 1, 0, 1, (Color) new Color(255, 165, 0)));
