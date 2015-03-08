@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -24,7 +23,7 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
-import People.Customer;
+import people.Customer;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -349,7 +348,7 @@ public class Register extends JFrame implements Runnable {
 
 			for (int i = 0; i < nums.length - 1; i++) {
 
-				nums[1] = rand.nextInt(4);
+				nums[1] = rand.nextInt()* 4;
 			}
 
 			code.append(birth[2]).append(birth[1]).append(birth[0]);
@@ -373,10 +372,7 @@ public class Register extends JFrame implements Runnable {
 		btnCancel
 				.addActionListener(arg0 -> {
 
-					JOptionPane
-							.showMessageDialog(
-									null,
-									"Please re-enter your account number if you still have problems\n please contact"
+					JOptionPane.showMessageDialog(null, "Please re-enter your account number if you still have problems\n please contact"
 											+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
 				});
 

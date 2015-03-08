@@ -36,7 +36,6 @@ public class Payees extends JPanel {
 	private JLabel lblLname;
 	private JLabel lblAccountNo;
 	private JLabel lblIbanNo;
-	private JLabel lblInfo;
 	private JLabel lblSortCode;
 	private JButton btnRemove;
 	private JLabel label;
@@ -44,7 +43,6 @@ public class Payees extends JPanel {
 	private JLabel lblReference;
 	private static JTable table;
 	private JScrollPane scrollPane;
-	private Connection conn = null;
 
 	public Payees() {
 
@@ -99,17 +97,10 @@ public class Payees extends JPanel {
 		txtIbanNo.setBounds(214, 390, 179, 32);
 		add(txtIbanNo);
 
-		lblInfo = new JLabel(
-				"<html>Please fill required details.  Please be aware that the details will be confirmed within <u>seven</u> days .</html>");
-		lblInfo.setForeground(Color.BLUE);
-		lblInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblInfo.setBounds(465, 206, 188, 83);
-		add(lblInfo);
-
 		btnAdd = new JButton("Add ");
 		btnAdd.setHorizontalAlignment(SwingConstants.LEADING);
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAdd.setBounds(10, 262, 61, 26);
+		btnAdd.setBounds(10, 263, 61, 26);
 		add(btnAdd);
 
 		txtSortCode = new JTextField();
@@ -172,16 +163,6 @@ public class Payees extends JPanel {
 
 	public static void populateTable() {
 
-		java.sql.Connection conn = Connect_DB.getConnection();
-		try {
-
-			String query = "select CONCAT(First_Name,', ', Last_Name) as Name, Account_No as \"Account No\", Reference from Payee";
-			java.sql.PreparedStatement statement = conn.prepareStatement(query);
-			ResultSet rs = statement.executeQuery();
-			table.setModel(DbUtils.resultSetToTableModel(rs));
-			conn.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		table.setModel(DbUtils.resultSetToTableModel(rs));
 	}
 }

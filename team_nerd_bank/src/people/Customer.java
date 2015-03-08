@@ -3,7 +3,7 @@
 * team_nerd_bank
 * 00:33:13
 */
-package People;
+package people;
 
 import java.sql.Date;
 
