@@ -47,6 +47,10 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblInfoOne;
 	private JButton btnLogin;
 	private JButton btnForgot;
+	private JPanel panel_5;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
 
 	public UserLogin() {
 		getContentPane().setBackground(Color.WHITE);
@@ -55,7 +59,7 @@ public class UserLogin extends JFrame implements Runnable {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 139));
-		panel.setBounds(10, 10, 654, 69);
+		panel.setBounds(10, 10, 603, 69);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -79,94 +83,198 @@ public class UserLogin extends JFrame implements Runnable {
 		
 		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Your PIN", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
-		panel_1.setBounds(190, 130, 290, 203);
+		panel_1.setBounds(120, 130, 380, 203);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(62, 83, 223, 26);
+		panel_1.add(panel_3);
+		panel_3.setLayout(null);
+		
 		lblPinOne = new JLabel("Enter the");
+		lblPinOne.setBounds(0, 4, 64, 14);
+		panel_3.add(lblPinOne);
 		lblPinOne.setForeground(Color.BLUE);
 		lblPinOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinOne.setBounds(34, 89, 64, 14);
-		panel_1.add(lblPinOne);
-		
-		lblPinTwo = new JLabel("Enter the");
-		lblPinTwo.setForeground(Color.BLUE);
-		lblPinTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinTwo.setBounds(34, 126, 64, 14);
-		panel_1.add(lblPinTwo);
-		
-		lblPinThree = new JLabel("Enter the");
-		lblPinThree.setForeground(Color.BLUE);
-		lblPinThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinThree.setBounds(34, 164, 64, 14);
-		panel_1.add(lblPinThree);
 		
 		lblPinOneText = new JLabel("third");
+		lblPinOneText.setBounds(62, 4, 46, 14);
+		panel_3.add(lblPinOneText);
 		lblPinOneText.setForeground(Color.BLUE);
 		lblPinOneText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinOneText.setBounds(98, 89, 46, 14);
-		panel_1.add(lblPinOneText);
-		
-		lblPinTwoText = new JLabel("first");
-		lblPinTwoText.setForeground(Color.BLUE);
-		lblPinTwoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinTwoText.setBounds(98, 126, 46, 14);
-		panel_1.add(lblPinTwoText);
-		
-		lblPinThreeText = new JLabel("second");
-		lblPinThreeText.setForeground(Color.BLUE);
-		lblPinThreeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinThreeText.setBounds(98, 164, 46, 14);
-		panel_1.add(lblPinThreeText);
 		
 		textField = new JTextField();
-		textField.setBounds(217, 85, 40, 26);
-		panel_1.add(textField);
+		textField.setBounds(183, 0, 40, 26);
+		panel_3.add(textField);
 		textField.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(217, 122, 40, 26);
-		panel_1.add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(217, 160, 40, 26);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
-		
 		JLabel lblPinOneNum = new JLabel("number");
+		lblPinOneNum.setBounds(113, 4, 53, 14);
+		panel_3.add(lblPinOneNum);
 		lblPinOneNum.setForeground(Color.BLUE);
 		lblPinOneNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinOneNum.setBounds(147, 89, 53, 14);
-		panel_1.add(lblPinOneNum);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBounds(62, 120, 223, 26);
+		panel_1.add(panel_4);
+		panel_4.setLayout(null);
+		
+		lblPinTwo = new JLabel("Enter the");
+		lblPinTwo.setBounds(0, 4, 64, 14);
+		panel_4.add(lblPinTwo);
+		lblPinTwo.setForeground(Color.BLUE);
+		lblPinTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		lblPinTwoText = new JLabel("first");
+		lblPinTwoText.setBounds(64, 4, 46, 14);
+		panel_4.add(lblPinTwoText);
+		lblPinTwoText.setForeground(Color.BLUE);
+		lblPinTwoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(183, 0, 40, 26);
+		panel_4.add(textField_1);
+		textField_1.setColumns(10);
 		
 		JLabel lblPinTwoNum = new JLabel("number");
+		lblPinTwoNum.setBounds(113, 4, 53, 14);
+		panel_4.add(lblPinTwoNum);
 		lblPinTwoNum.setForeground(Color.BLUE);
 		lblPinTwoNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinTwoNum.setBounds(147, 126, 53, 14);
-		panel_1.add(lblPinTwoNum);
+		
+		panel_5 = new JPanel();
+		panel_5.setBounds(62, 159, 223, 26);
+		panel_1.add(panel_5);
+		panel_5.setLayout(null);
+		
+		lblPinThree = new JLabel("Enter the");
+		lblPinThree.setBounds(0, 4, 64, 14);
+		panel_5.add(lblPinThree);
+		lblPinThree.setForeground(Color.BLUE);
+		lblPinThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		lblPinThreeText = new JLabel("second");
+		lblPinThreeText.setBounds(64, 4, 46, 14);
+		panel_5.add(lblPinThreeText);
+		lblPinThreeText.setForeground(Color.BLUE);
+		lblPinThreeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(183, 0, 40, 26);
+		panel_5.add(textField_2);
+		textField_2.setColumns(10);
 		
 		JLabel lblPinThreeNum = new JLabel("number");
+		lblPinThreeNum.setBounds(113, 4, 53, 14);
+		panel_5.add(lblPinThreeNum);
 		lblPinThreeNum.setForeground(Color.BLUE);
 		lblPinThreeNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPinThreeNum.setBounds(147, 164, 53, 14);
-		panel_1.add(lblPinThreeNum);
 		
 		lblInfoOne = new JLabel("Enter the following numbers from your PIN");
 		lblInfoOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblInfoOne.setBounds(10, 35, 270, 22);
+		lblInfoOne.setBounds(37, 35, 270, 22);
 		panel_1.add(lblInfoOne);
 		
 		panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Your Password", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
-		panel_2.setBounds(190, 366, 290, 257);
+		panel_2.setBounds(120, 366, 380, 209);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
+		
+		JLabel lblEnterTheFollowing = new JLabel("Enter the following characters from your Password");
+		lblEnterTheFollowing.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEnterTheFollowing.setBounds(37, 34, 324, 22);
+		panel_2.add(lblEnterTheFollowing);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setLayout(null);
+		panel_6.setBounds(62, 81, 223, 26);
+		panel_2.add(panel_6);
+		
+		JLabel label = new JLabel("Enter the");
+		label.setForeground(Color.BLUE);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label.setBounds(0, 4, 64, 14);
+		panel_6.add(label);
+		
+		JLabel label_1 = new JLabel("third");
+		label_1.setForeground(Color.BLUE);
+		label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_1.setBounds(62, 4, 46, 14);
+		panel_6.add(label_1);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(183, 0, 40, 26);
+		panel_6.add(textField_3);
+		
+		JLabel label_2 = new JLabel("number");
+		label_2.setForeground(Color.BLUE);
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_2.setBounds(113, 4, 53, 14);
+		panel_6.add(label_2);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setLayout(null);
+		panel_7.setBounds(62, 118, 223, 26);
+		panel_2.add(panel_7);
+		
+		JLabel label_3 = new JLabel("Enter the");
+		label_3.setForeground(Color.BLUE);
+		label_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_3.setBounds(0, 4, 64, 14);
+		panel_7.add(label_3);
+		
+		JLabel label_4 = new JLabel("third");
+		label_4.setForeground(Color.BLUE);
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_4.setBounds(62, 4, 46, 14);
+		panel_7.add(label_4);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(183, 0, 40, 26);
+		panel_7.add(textField_4);
+		
+		JLabel label_5 = new JLabel("number");
+		label_5.setForeground(Color.BLUE);
+		label_5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_5.setBounds(113, 4, 53, 14);
+		panel_7.add(label_5);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setLayout(null);
+		panel_8.setBounds(62, 155, 223, 26);
+		panel_2.add(panel_8);
+		
+		JLabel label_6 = new JLabel("Enter the");
+		label_6.setForeground(Color.BLUE);
+		label_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_6.setBounds(0, 4, 64, 14);
+		panel_8.add(label_6);
+		
+		JLabel label_7 = new JLabel("third");
+		label_7.setForeground(Color.BLUE);
+		label_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_7.setBounds(62, 4, 46, 14);
+		panel_8.add(label_7);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(183, 0, 40, 26);
+		panel_8.add(textField_5);
+		
+		JLabel label_8 = new JLabel("number");
+		label_8.setForeground(Color.BLUE);
+		label_8.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_8.setBounds(113, 4, 53, 14);
+		panel_8.add(label_8);
 		
 		btnLogin = new JButton("LOGIN");
 		btnLogin.setForeground(Color.BLUE);
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLogin.setBounds(501, 652, 89, 26);
+		btnLogin.setBounds(408, 616, 89, 26);
 		getContentPane().add(btnLogin);
 		
 		btnForgot = new JButton("<html><strong style=\"color: #FFA500\">==></strong> Forgot your PIN or Password?</html>");
@@ -175,14 +283,14 @@ public class UserLogin extends JFrame implements Runnable {
 		btnForgot.setContentAreaFilled(false);
 		btnForgot.setBorderPainted(false);
 		btnForgot.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnForgot.setBounds(55, 649, 256, 32);
+		btnForgot.setBounds(55, 613, 256, 32);
 		getContentPane().add(btnForgot);
 	}
 
 	@Override
 	public void run() {
 
-		setSize(680, 742);
+		setSize(631, 700);
 		setResizable(false);
 		setTitle("Your Login");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
