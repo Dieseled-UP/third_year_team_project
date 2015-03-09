@@ -1,8 +1,8 @@
 /*
  * 3 Mar 2015
-* team_nerd_bank
-* 18:40:39
-*/
+ * team_nerd_bank
+ * 18:40:39
+ */
 package connect;
 
 import java.sql.Connection;
@@ -14,9 +14,9 @@ public class Connect_DB {
 
 	// declare variables
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	private static final String DB_CONNECTION = "jdbc:mysql://52.16.93.55/the_bank";
-	private static final String DB_USER = "root";
-	private static final String DB_PASSWORD = "";
+	private static final String DB_CONNECTION = "jdbc:mysql://52.16.53.121/the_bank";
+	private static final String DB_USER = "admin";
+	private static final String DB_PASSWORD = "password";
 	private static Connection con = null;
 	private static PreparedStatement statement = null;
 
@@ -73,7 +73,17 @@ public class Connect_DB {
 			return statement;
 		}
 	}
-	
+
+	/**
+	 * Method to close the connection
+	 * 
+	 * @throws SQLException
+	 */
+	public static void finish() throws SQLException {
+
+		con.close();
+	}
+
 	/**
 	 * Method to check that the jdbc driver is connected
 	 * 
@@ -88,7 +98,7 @@ public class Connect_DB {
 			result = false;
 
 		} else {
-			
+
 			result = true;
 		}
 

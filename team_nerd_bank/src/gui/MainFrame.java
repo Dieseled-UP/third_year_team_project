@@ -40,7 +40,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private JButton btnPayees;
 	private JButton btnLogout;
 	private JPanel mainView;
-	private JPanel summary, account, transfer, details, payees;
+	private JPanel summary, account, transfer, details, security, payees;
 	private JPanel panel_3;
 	private JLabel lblLogo;
 	private String path = "Assets/logo2.svg.png";
@@ -49,6 +49,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private JLabel lblMainName;
 	private JLabel lblWelcome;
 	private JLabel lblName;
+	private JButton btnStatements;
 
 	public MainFrame() {
 
@@ -69,8 +70,11 @@ public class MainFrame extends JFrame implements Runnable {
 		getContentPane().setLayout(null);
 
 		summary = new Summary();
+		account = new Account();
 		transfer = new Transfers();
 		details = new Details();
+		security = new Security();
+		payees = new Payees();
 
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 139), 1, true));
@@ -97,13 +101,13 @@ public class MainFrame extends JFrame implements Runnable {
 		lblMainName.setFont(new Font("Serif", Font.BOLD, 40));
 		lblMainName.setBounds(181, 11, 259, 48);
 		panel.add(lblMainName);
-		
+
 		lblWelcome = new JLabel("Welcome");
 		lblWelcome.setForeground(Color.WHITE);
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblWelcome.setBounds(540, 47, 70, 14);
 		panel.add(lblWelcome);
-		
+
 		lblName = new JLabel("");
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -170,7 +174,7 @@ public class MainFrame extends JFrame implements Runnable {
 		btnLogout.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnLogout.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnLogout.setFocusPainted(false);
-		btnLogout.setBounds(10, 290, 151, 32);
+		btnLogout.setBounds(10, 323, 151, 32);
 		getContentPane().add(btnLogout);
 
 		panel_3 = new JPanel();
@@ -187,30 +191,80 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.add(transfer, "trans");
 		mainView.add(details, "details");
 		mainView.add(summary, "summary");
+		mainView.add(account, "account");
+		mainView.add(security, "security");
+		mainView.add(payees, "payee");
 
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
 		cardLayout.show(mainView, "summary");
+		
+		btnStatements = new JButton("Statements");
+		btnStatements.setForeground(new Color(0, 0, 139));
+		btnStatements.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnStatements.setFocusPainted(false);
+		btnStatements.setBackground(new Color(201, 216, 239));
+		btnStatements.setBounds(10, 290, 151, 32);
+		getContentPane().add(btnStatements);
 
 		btnSummary.addActionListener(arg0 -> {
 
 			cardLayout.show(mainView, "summary");
+			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
+		});
+
+		btnAccounts.addActionListener(arg0 -> {
+
+			cardLayout.show(mainView, "account");
+			btnAccounts.setBackground(new Color(166, 166, 166));
+			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
 
 		btnTransfers.addActionListener(arg0 -> {
 
 			cardLayout.show(mainView, "trans");
 			btnTransfers.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
 
 		btnDetails.addActionListener(arg0 -> {
 
 			cardLayout.show(mainView, "details");
 			btnDetails.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
+		});
+
+		btnSecurity.addActionListener(arg0 -> {
+
+			cardLayout.show(mainView, "security");
+			btnSecurity.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
+			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnDetails.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
+		});
+
+		btnPayees.addActionListener(arg0 -> {
+
+			cardLayout.show(mainView, "payee");
+			btnPayees.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
+			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnDetails.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
 		});
 	}
 
