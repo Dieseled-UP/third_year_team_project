@@ -12,6 +12,8 @@ import java.sql.SQLException;
 
 
 
+import java.util.ArrayList;
+
 import people.Customer;
 import net.proteanit.sql.DbUtils;
 
@@ -107,6 +109,8 @@ public class Query {
 		}
 		return false;
 	}
+	
+	
 	
 	/*public static return_type name() {
 		

@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import java.awt.Color;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import javax.swing.Icon;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -41,6 +43,19 @@ public class UserPinPass extends JFrame implements Runnable {
 	private JTextField textField_3;
 
 	public UserPinPass() {
+		
+		try {
+			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (Exception e) {
+			// If Nimbus is not available, you can set the GUI to another look
+			// and feel.
+		}
+		
 		getContentPane().setLayout(null);
 
 		pnlHeader_1 = new JPanel();
@@ -64,7 +79,7 @@ public class UserPinPass extends JFrame implements Runnable {
 			e.printStackTrace();
 		}
 
-		JLabel lblLogo = new JLabel(new ImageIcon(image));
+		lblLogo = new JLabel(new ImageIcon(image));
 		lblLogo.setBounds(10, -1, 70, 70);
 		pnlHeader_1.add(lblLogo);
 		

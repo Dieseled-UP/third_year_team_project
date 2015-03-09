@@ -20,6 +20,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.TitledBorder;
@@ -43,19 +44,35 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblPinOneText;
 	private JLabel lblPinTwoText;
 	private JLabel lblPinThreeText;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtPinOne;
+	private JTextField txtPinTwo;
+	private JTextField txtPinThree;
 	private JLabel lblInfoOne;
 	private JButton btnLogin;
 	private JButton btnForgot;
 	private JPanel panel_5;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtPassOne;
+	private JTextField txtPassTwo;
+	private JTextField txtPassThree;
 	private String[] numbers = new String[]{"1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th",
-			"13th", "14th", "15th", "16th"
-	};
+			"13th", "14th", "15th", "16th"};
+	private Random rand = new Random();
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JPanel panel_6;
+	private JPanel panel_7;
+	private JPanel panel_8;
+	private JLabel lblPinOneNum;
+	private JLabel lblPinTwoNum;
+	private JLabel lblPinThreeNum;
+	private JLabel label;
+	private JLabel lblPassOne;
+	private JLabel label_2;
+	private JLabel lblPassTwo;
+	private JLabel lblCharacter_1;
+	private JLabel label_4;
+	private JLabel lblPassThree;
+	private JLabel lblCharacter_2;
 
 	public UserLogin() {
 
@@ -107,7 +124,7 @@ public class UserLogin extends JFrame implements Runnable {
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 
-		JPanel panel_3 = new JPanel();
+		panel_3 = new JPanel();
 		panel_3.setBounds(62, 83, 223, 26);
 		panel_1.add(panel_3);
 		panel_3.setLayout(null);
@@ -124,18 +141,18 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinOneText.setForeground(Color.BLUE);
 		lblPinOneText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textField = new JTextField();
-		textField.setBounds(183, 0, 40, 26);
-		panel_3.add(textField);
-		textField.setColumns(10);
+		txtPinOne = new JTextField();
+		txtPinOne.setBounds(183, 0, 40, 26);
+		panel_3.add(txtPinOne);
+		txtPinOne.setColumns(10);
 
-		JLabel lblPinOneNum = new JLabel("number");
+		lblPinOneNum = new JLabel("number");
 		lblPinOneNum.setBounds(113, 4, 53, 14);
 		panel_3.add(lblPinOneNum);
 		lblPinOneNum.setForeground(Color.BLUE);
 		lblPinOneNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		JPanel panel_4 = new JPanel();
+		panel_4 = new JPanel();
 		panel_4.setBounds(62, 120, 223, 26);
 		panel_1.add(panel_4);
 		panel_4.setLayout(null);
@@ -152,12 +169,12 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinTwoText.setForeground(Color.BLUE);
 		lblPinTwoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(183, 0, 40, 26);
-		panel_4.add(textField_1);
-		textField_1.setColumns(10);
+		txtPinTwo = new JTextField();
+		txtPinTwo.setBounds(183, 0, 40, 26);
+		panel_4.add(txtPinTwo);
+		txtPinTwo.setColumns(10);
 
-		JLabel lblPinTwoNum = new JLabel("number");
+		lblPinTwoNum = new JLabel("number");
 		lblPinTwoNum.setBounds(113, 4, 53, 14);
 		panel_4.add(lblPinTwoNum);
 		lblPinTwoNum.setForeground(Color.BLUE);
@@ -180,12 +197,12 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinThreeText.setForeground(Color.BLUE);
 		lblPinThreeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(183, 0, 40, 26);
-		panel_5.add(textField_2);
-		textField_2.setColumns(10);
+		txtPinThree = new JTextField();
+		txtPinThree.setBounds(183, 0, 40, 26);
+		panel_5.add(txtPinThree);
+		txtPinThree.setColumns(10);
 
-		JLabel lblPinThreeNum = new JLabel("number");
+		lblPinThreeNum = new JLabel("number");
 		lblPinThreeNum.setBounds(113, 4, 53, 14);
 		panel_5.add(lblPinThreeNum);
 		lblPinThreeNum.setForeground(Color.BLUE);
@@ -210,27 +227,27 @@ public class UserLogin extends JFrame implements Runnable {
 		lblEnterTheFollowing.setBounds(37, 34, 324, 22);
 		panel_2.add(lblEnterTheFollowing);
 
-		JPanel panel_6 = new JPanel();
+		panel_6 = new JPanel();
 		panel_6.setLayout(null);
 		panel_6.setBounds(62, 81, 223, 26);
 		panel_2.add(panel_6);
 
-		JLabel label = new JLabel("Enter the");
+		label = new JLabel("Enter the");
 		label.setForeground(Color.BLUE);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		label.setBounds(10, 4, 59, 14);
 		panel_6.add(label);
 
-		JLabel label_1 = new JLabel("third");
-		label_1.setForeground(Color.BLUE);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_1.setBounds(75, 4, 28, 14);
-		panel_6.add(label_1);
+		lblPassOne = new JLabel("third");
+		lblPassOne.setForeground(Color.BLUE);
+		lblPassOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassOne.setBounds(75, 4, 28, 14);
+		panel_6.add(lblPassOne);
 
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(183, 0, 40, 26);
-		panel_6.add(textField_3);
+		txtPassOne = new JTextField();
+		txtPassOne.setColumns(10);
+		txtPassOne.setBounds(183, 0, 40, 26);
+		panel_6.add(txtPassOne);
 
 		JLabel lblCharacter = new JLabel("character");
 		lblCharacter.setForeground(Color.BLUE);
@@ -238,57 +255,57 @@ public class UserLogin extends JFrame implements Runnable {
 		lblCharacter.setBounds(113, 4, 64, 14);
 		panel_6.add(lblCharacter);
 
-		JPanel panel_7 = new JPanel();
+		panel_7 = new JPanel();
 		panel_7.setLayout(null);
 		panel_7.setBounds(62, 118, 223, 26);
 		panel_2.add(panel_7);
 
-		JLabel label_3 = new JLabel("Enter the");
-		label_3.setForeground(Color.BLUE);
-		label_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_3.setBounds(10, 4, 57, 14);
-		panel_7.add(label_3);
+		label_2 = new JLabel("Enter the");
+		label_2.setForeground(Color.BLUE);
+		label_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_2.setBounds(10, 4, 57, 14);
+		panel_7.add(label_2);
 
-		JLabel label_4 = new JLabel("third");
-		label_4.setForeground(Color.BLUE);
-		label_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_4.setBounds(75, 4, 28, 14);
-		panel_7.add(label_4);
+		lblPassTwo = new JLabel("third");
+		lblPassTwo.setForeground(Color.BLUE);
+		lblPassTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassTwo.setBounds(75, 4, 28, 14);
+		panel_7.add(lblPassTwo);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(183, 0, 40, 26);
-		panel_7.add(textField_4);
+		txtPassTwo = new JTextField();
+		txtPassTwo.setColumns(10);
+		txtPassTwo.setBounds(183, 0, 40, 26);
+		panel_7.add(txtPassTwo);
 
-		JLabel lblCharacter_1 = new JLabel("character");
+		lblCharacter_1 = new JLabel("character");
 		lblCharacter_1.setForeground(Color.BLUE);
 		lblCharacter_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCharacter_1.setBounds(113, 4, 64, 14);
 		panel_7.add(lblCharacter_1);
 
-		JPanel panel_8 = new JPanel();
+		panel_8 = new JPanel();
 		panel_8.setLayout(null);
 		panel_8.setBounds(62, 155, 223, 26);
 		panel_2.add(panel_8);
 
-		JLabel label_6 = new JLabel("Enter the");
-		label_6.setForeground(Color.BLUE);
-		label_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_6.setBounds(10, 4, 57, 14);
-		panel_8.add(label_6);
+		label_4 = new JLabel("Enter the");
+		label_4.setForeground(Color.BLUE);
+		label_4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		label_4.setBounds(10, 4, 57, 14);
+		panel_8.add(label_4);
 
-		JLabel label_7 = new JLabel("third");
-		label_7.setForeground(Color.BLUE);
-		label_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		label_7.setBounds(75, 4, 28, 14);
-		panel_8.add(label_7);
+		lblPassThree = new JLabel("third");
+		lblPassThree.setForeground(Color.BLUE);
+		lblPassThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassThree.setBounds(75, 4, 28, 14);
+		panel_8.add(lblPassThree);
 
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(183, 0, 40, 26);
-		panel_8.add(textField_5);
+		txtPassThree = new JTextField();
+		txtPassThree.setColumns(10);
+		txtPassThree.setBounds(183, 0, 40, 26);
+		panel_8.add(txtPassThree);
 
-		JLabel lblCharacter_2 = new JLabel("character");
+		lblCharacter_2 = new JLabel("character");
 		lblCharacter_2.setForeground(Color.BLUE);
 		lblCharacter_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCharacter_2.setBounds(113, 4, 64, 14);
@@ -312,6 +329,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		btnLogin.addActionListener(arg0 -> {
 
+			
 		});
 	}
 
