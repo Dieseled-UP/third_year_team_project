@@ -10,7 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.util.ArrayList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import people.Customer;
+import people.Member;
 
 public class Query {
 
@@ -119,26 +123,26 @@ public class Query {
 		return false;
 	}
 
-	/*
-	 * public static ArrayList<Member> getLogin() {
-	 * 
-	 * sql = "SELECT" }
-	 */
-	/*
-	 * public static return_type name() {
-	 * 
-	 * sql =
-	 * "select CONCAT(First_Name,', ', Last_Name) as Name, Account_No as \"Account No\", Reference from Payee"
-	 * ; ResultSet result;
-	 * 
-	 * try { result = Connect_DB.pStatement(sql).executeQuery();
-	 * 
-	 * while (result.next()) {
-	 * 
-	 * }
-	 * 
-	 * // Close the connection Connect_DB.finish(); } catch (Exception e) {
-	 * e.printStackTrace(); } }
-	 */
+	public static HashMap<Integer, String> getLogin(int pin, String pass) {
+
+		HashMap<Integer, String> temp = new HashMap<>();
+		
+		try {
+			
+			sql = "SELECT user_ID, password FROM the_bank.Member WHERE user_ID = ? AND password = ?";
+			statement = Connect_DB.pStatement(sql);
+			statement.setInt(1, pin);
+			statement.setString(2, pass);
+			
+			result = statement.executeQuery();
+			
+			temp.put(result.getInt(2), result.getString(3));
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return temp;
+	}
 
 }
