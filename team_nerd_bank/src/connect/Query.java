@@ -19,6 +19,7 @@ public class Query {
 
 	private static String sql = null;
 	private static Customer cust;
+	private static ResultSet result;
 //	private static ArrayList<Customer> list = new ArrayList<>();
 
 	/**
@@ -32,7 +33,6 @@ public class Query {
 				+ " ON Account.customer_ID = Customer.customer_ID"
 				+ " WHERE Account.account_num = '" + number + "';";
 
-		ResultSet result;
 		try {
 
 			result = Connect_DB.pStatement(sql).executeQuery();
@@ -53,6 +53,11 @@ public class Query {
 		return cust;
 	}
 	
+	/**
+	 * Method to query the database and return the user sort code and account number
+	 * @param number
+	 * @return
+	 */
 	public static String[] getAccount(int number) {
 
 		String[] account = new String[2];
@@ -60,7 +65,6 @@ public class Query {
 		sql = "SELECT * FROM the_bank.Account"
 				+ " WHERE Account.account_num = '" + number + "';";
 		
-		ResultSet result;
 		try {
 
 			result = Connect_DB.pStatement(sql).executeQuery();
@@ -80,6 +84,28 @@ public class Query {
 		}
 		
 		return account;
+	}
+	
+	public static boolean getAutoID(int number) {
+
+		sql = "SELECT auto_id FROM the_bank.Member"
+				+ " WHERE Member.auto_id = '" + number + "';";
+		
+		try {
+			
+			result = Connect_DB.pStatement(sql).executeQuery();
+			
+			while (result.next()) {
+				
+				if (result.getInt(1) == number) {
+					
+					return true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	/*public static return_type name() {
