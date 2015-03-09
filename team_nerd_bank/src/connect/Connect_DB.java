@@ -64,9 +64,9 @@ public class Connect_DB {
 
 		try {
 
-			PreparedStatement statement = (PreparedStatement) getConnection().prepareStatement(
-					statementIn);
+			statement = (PreparedStatement) getConnection().prepareStatement(statementIn);
 			return statement;
+			
 		} catch (SQLException e) {
 
 			System.out.println("Please check SQL syntax");

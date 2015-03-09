@@ -5,43 +5,46 @@
  */
 package connect;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 //import java.util.ArrayList;
 
-
-
-
-import java.util.ArrayList;
-
 import people.Customer;
-import net.proteanit.sql.DbUtils;
 
 public class Query {
 
 	private static String sql = null;
 	private static Customer cust;
 	private static ResultSet result;
-//	private static ArrayList<Customer> list = new ArrayList<>();
+	private static PreparedStatement statement;
+
+	// private static ArrayList<Customer> list = new ArrayList<>();
 
 	/**
-	 * Method to query the database and bring back customer details based on account number
+	 * Method to query the database and bring back customer details based on
+	 * account number
+	 * 
 	 * @param number
 	 * @return cust
 	 */
 	public static Customer getDetails(int number) {
 
-		sql = "SELECT * FROM the_bank.Customer" + " INNER JOIN Account"
-				+ " ON Account.customer_ID = Customer.customer_ID"
-				+ " WHERE Account.account_num = '" + number + "';";
-
 		try {
 
-			result = Connect_DB.pStatement(sql).executeQuery();
+			sql = "SELECT * FROM the_bank.Customer" + " INNER JOIN Account"
+					+ " ON Account.customer_ID = Customer.customer_ID"
+					+ " WHERE Account.account_num = ?";
+			statement = Connect_DB.pStatement(sql);
+			statement.setInt(1, number);
+
+			result = statement.executeQuery();
 
 			while (result.next()) {
-				
-				cust = new Customer(result.getString(2), result.getString(3), result.getDate(4), result.getString(5), result.getString(6), result.getString(7), result.getString(8));
+
+				cust = new Customer(result.getString(2), result.getString(3), result.getDate(4),
+						result.getString(5), result.getString(6), result.getString(7),
+						result.getString(8));
 			}
 
 			// Close the connection
@@ -54,9 +57,11 @@ public class Query {
 
 		return cust;
 	}
-	
+
 	/**
-	 * Method to query the database and return the user sort code and account number
+	 * Method to query the database and return the user sort code and account
+	 * number
+	 * 
 	 * @param number
 	 * @return
 	 */
@@ -64,15 +69,16 @@ public class Query {
 
 		String[] account = new String[2];
 
-		sql = "SELECT * FROM the_bank.Account"
-				+ " WHERE Account.account_num = '" + number + "';";
-		
 		try {
 
-			result = Connect_DB.pStatement(sql).executeQuery();
+			sql = "SELECT * FROM the_bank.Account" + " WHERE Account.account_num = ?";
+			statement = Connect_DB.pStatement(sql);
+			statement.setInt(1, number);
+
+			result = statement.executeQuery();
 
 			while (result.next()) {
-				
+
 				account[0] = String.valueOf(result.getInt(1));
 				account[1] = result.getString(2);
 			}
@@ -84,51 +90,55 @@ public class Query {
 
 			e.printStackTrace();
 		}
-		
+
 		return account;
 	}
-	
+
 	public static boolean getAutoID(int number) {
 
-		sql = "SELECT auto_id FROM the_bank.Member"
-				+ " WHERE Member.auto_id = '" + number + "';";
-		
 		try {
-			
-			result = Connect_DB.pStatement(sql).executeQuery();
-			
+
+			sql = "SELECT auto_id FROM the_bank.Member WHERE Member.auto_id = ?";
+			statement = Connect_DB.pStatement(sql);
+			statement.setInt(1, number);
+
+			result = statement.executeQuery();
+
 			while (result.next()) {
-				
+
 				if (result.getInt(1) == number) {
-					
+
 					return true;
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
 		}
 		return false;
 	}
-	
-	
-	
-	/*public static return_type name() {
-		
-		sql = "select CONCAT(First_Name,', ', Last_Name) as Name, Account_No as \"Account No\", Reference from Payee";
-		ResultSet result;
-		
-		try {
-			result = Connect_DB.pStatement(sql).executeQuery();
-			
-			while (result.next()) {
-				
-			}
-			
-			// Close the connection
-			Connect_DB.finish();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
+
+	/*
+	 * public static ArrayList<Member> getLogin() {
+	 * 
+	 * sql = "SELECT" }
+	 */
+	/*
+	 * public static return_type name() {
+	 * 
+	 * sql =
+	 * "select CONCAT(First_Name,', ', Last_Name) as Name, Account_No as \"Account No\", Reference from Payee"
+	 * ; ResultSet result;
+	 * 
+	 * try { result = Connect_DB.pStatement(sql).executeQuery();
+	 * 
+	 * while (result.next()) {
+	 * 
+	 * }
+	 * 
+	 * // Close the connection Connect_DB.finish(); } catch (Exception e) {
+	 * e.printStackTrace(); } }
+	 */
 
 }
