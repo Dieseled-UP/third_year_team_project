@@ -5,7 +5,14 @@
 */
 package gui;
 
+import javax.swing.JPanel;
 
-public class UserPinPass {
 
+public class UserPinPass extends JPanel {
+	public UserPinPass() {
+	}
+
+	private static final long serialVersionUID = 1L;
+
+	
 }
