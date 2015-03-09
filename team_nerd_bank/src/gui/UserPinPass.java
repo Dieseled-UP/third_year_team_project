@@ -22,6 +22,7 @@ import java.io.IOException;
 
 import javax.swing.Icon;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class UserPinPass extends JFrame implements Runnable {
 
@@ -118,6 +119,19 @@ public class UserPinPass extends JFrame implements Runnable {
 		textField_3.setBounds(149, 44, 86, 20);
 		panel_1.add(textField_3);
 		textField_3.setColumns(10);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBounds(100, 324, 395, 50);
+		getContentPane().add(panel_2);
+		panel_2.setLayout(null);
+		
+		JButton btnNewButton = new JButton("OK");
+		btnNewButton.setBounds(59, 11, 89, 23);
+		panel_2.add(btnNewButton);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(221, 11, 89, 23);
+		panel_2.add(btnCancel);
 
 	}
 
