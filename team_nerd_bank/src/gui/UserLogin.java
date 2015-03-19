@@ -73,6 +73,8 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel label_4;
 	private JLabel lblPassThree;
 	private JLabel lblCharacter_2;
+	private JLabel lblCharacter;
+	private JPanel panel;
 
 	public UserLogin() {
 
@@ -92,7 +94,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		getContentPane().setLayout(null);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 139));
 		panel.setBounds(10, 10, 603, 69);
 		getContentPane().add(panel);
@@ -249,7 +251,7 @@ public class UserLogin extends JFrame implements Runnable {
 		txtPassOne.setBounds(183, 0, 40, 26);
 		panel_6.add(txtPassOne);
 
-		JLabel lblCharacter = new JLabel("character");
+		lblCharacter = new JLabel("character");
 		lblCharacter.setForeground(Color.BLUE);
 		lblCharacter.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblCharacter.setBounds(113, 4, 64, 14);
@@ -331,6 +333,11 @@ public class UserLogin extends JFrame implements Runnable {
 
 			
 		});
+	}
+	
+	public void randomPinPass() {
+		
+		
 	}
 
 	@Override
