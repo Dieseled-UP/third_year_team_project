@@ -54,8 +54,10 @@ public class UserLogin extends JFrame implements Runnable {
 	private JTextField txtPassOne;
 	private JTextField txtPassTwo;
 	private JTextField txtPassThree;
-	private String[] numbers = new String[]{"1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th",
-			"13th", "14th", "15th", "16th"};
+	private String[] pinNumbers = new String[] { "1st", "2nd", "3rd", "4th" };
+	private String[] passNumbers = new String[] { "1st", "2nd", "3rd", "4th",
+			"5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th",
+			"14th", "15th", "16th" };
 	private Random rand = new Random();
 	private JPanel panel_3;
 	private JPanel panel_4;
@@ -75,6 +77,7 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblCharacter_2;
 	private JLabel lblCharacter;
 	private JPanel panel;
+	private JLabel lblEnterTheFollowing;
 
 	public UserLogin() {
 
@@ -119,9 +122,10 @@ public class UserLogin extends JFrame implements Runnable {
 		panel.add(lblMainName);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true),
-				"Your PIN", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD,
-						14), new Color(0, 0, 139)));
+		panel_1.setBorder(new TitledBorder(new LineBorder(
+				new Color(255, 165, 0), 1, true), "Your PIN",
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma",
+						Font.BOLD, 14), new Color(0, 0, 139)));
 		panel_1.setBounds(120, 130, 380, 203);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -138,7 +142,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblPinOneText = new JLabel("third");
-		lblPinOneText.setBounds(75, 4, 28, 14);
+		lblPinOneText.setBounds(80, 4, 28, 14);
 		panel_3.add(lblPinOneText);
 		lblPinOneText.setForeground(Color.BLUE);
 		lblPinOneText.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -166,7 +170,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblPinTwoText = new JLabel("first");
-		lblPinTwoText.setBounds(74, 4, 29, 14);
+		lblPinTwoText.setBounds(80, 4, 29, 14);
 		panel_4.add(lblPinTwoText);
 		lblPinTwoText.setForeground(Color.BLUE);
 		lblPinTwoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -194,7 +198,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
 		lblPinThreeText = new JLabel("second");
-		lblPinThreeText.setBounds(80, 4, 23, 14);
+		lblPinThreeText.setBounds(80, 4, 29, 14);
 		panel_5.add(lblPinThreeText);
 		lblPinThreeText.setForeground(Color.BLUE);
 		lblPinThreeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -209,6 +213,8 @@ public class UserLogin extends JFrame implements Runnable {
 		panel_5.add(lblPinThreeNum);
 		lblPinThreeNum.setForeground(Color.BLUE);
 		lblPinThreeNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		randomPinLabel();
 
 		lblInfoOne = new JLabel("Enter the following numbers from your PIN");
 		lblInfoOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -216,14 +222,15 @@ public class UserLogin extends JFrame implements Runnable {
 		panel_1.add(lblInfoOne);
 
 		panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true),
-				"Your Password", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma",
+		panel_2.setBorder(new TitledBorder(new LineBorder(
+				new Color(255, 165, 0), 1, true), "Your Password",
+				TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma",
 						Font.BOLD, 14), new Color(0, 0, 139)));
 		panel_2.setBounds(120, 366, 380, 209);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 
-		JLabel lblEnterTheFollowing = new JLabel(
+		lblEnterTheFollowing = new JLabel(
 				"Enter the following characters from your Password");
 		lblEnterTheFollowing.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEnterTheFollowing.setBounds(37, 34, 324, 22);
@@ -331,13 +338,47 @@ public class UserLogin extends JFrame implements Runnable {
 
 		btnLogin.addActionListener(arg0 -> {
 
-			
 		});
 	}
-	
-	public void randomPinPass() {
+
+	/**
+	 * Method to set the labels for the pin
+	 */
+	public void randomPinLabel() {
+
+		// Create variables for label tags
+		String one = null;
+		String two = null;
+		String three = null;
+
+		// Generate a variable for each label 
+		if (one == null) {
+			// Set text for first label using a random String from the Array
+			one = pinNumbers[rand.nextInt(pinNumbers.length)];
+		}
+		if (two == null) {
+			// Set text for second label using a random String from the Array
+			two = pinNumbers[rand.nextInt(pinNumbers.length)];
+
+			// Check that the text has not already been used
+			while (two == one) {
+				two = pinNumbers[rand.nextInt(pinNumbers.length)];
+			}
+		}
+		if (three == null) {
+			// Set text for third label using a random String from the Array
+			three = pinNumbers[rand.nextInt(pinNumbers.length)];
+
+			// Check that the text has not already been used
+			while (three == one || three == two) {
+				three = pinNumbers[rand.nextInt(pinNumbers.length)];
+			}
+		}
 		
-		
+		// Set the text
+		lblPinOneText.setText(one);
+		lblPinTwoText.setText(two);
+		lblPinThreeText.setText(three);
 	}
 
 	@Override
