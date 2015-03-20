@@ -380,6 +380,46 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinTwoText.setText(two);
 		lblPinThreeText.setText(three);
 	}
+	
+	/**
+	 * Method to set the labels for the pin
+	 */
+	public void randomPassLabel() {
+
+		// Create variables for label tags
+		String one = null;
+		String two = null;
+		String three = null;
+
+		// Generate a variable for each label 
+		if (one == null) {
+			// Set text for first label using a random String from the Array
+			one = passNumbers[rand.nextInt(passNumbers.length)];
+		}
+		if (two == null) {
+			// Set text for second label using a random String from the Array
+			two = passNumbers[rand.nextInt(passNumbers.length)];
+
+			// Check that the text has not already been used
+			while (two == one) {
+				two = passNumbers[rand.nextInt(passNumbers.length)];
+			}
+		}
+		if (three == null) {
+			// Set text for third label using a random String from the Array
+			three = passNumbers[rand.nextInt(passNumbers.length)];
+
+			// Check that the text has not already been used
+			while (three == one || three == two) {
+				three = passNumbers[rand.nextInt(passNumbers.length)];
+			}
+		}
+		
+		// Set the text
+		lblPinOneText.setText(one);
+		lblPinTwoText.setText(two);
+		lblPinThreeText.setText(three);
+	}
 
 	@Override
 	public void run() {
