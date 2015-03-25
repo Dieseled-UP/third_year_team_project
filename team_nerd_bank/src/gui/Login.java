@@ -32,6 +32,8 @@ public class Login extends JFrame implements Runnable {
 	private JLabel lblAutoPin;
 	private JLabel lblTitle;
 	private JLabel lblimg;
+	private String length;
+	private int autoNumber;
 	private String path = "Assets/banklogo.jpg";
 	private File file;
 	private BufferedImage image;
@@ -43,6 +45,7 @@ public class Login extends JFrame implements Runnable {
 	private BufferedImage image2;
 	private JButton btnNext;
 	private boolean correct = false;
+	private JPanel panel;
 
 	public Login() {
 
@@ -104,7 +107,7 @@ public class Login extends JFrame implements Runnable {
 		btnReg.setBounds(422, 253, 70, 21);
 		getContentPane().add(btnReg);
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 139));
 		panel.setBounds(10, 11, 619, 69);
 		getContentPane().add(panel);
@@ -139,11 +142,11 @@ public class Login extends JFrame implements Runnable {
 		btnNext.addActionListener(arg0 -> {
 
 			// Get the user input
-			String length = txtAutoPin.getText();
+			length = txtAutoPin.getText();
 			// Split the string to check the count is correct return message if
 			// number is to small or large
 			String[] count = length.split("");
-			int autoNumber = 0;
+			autoNumber = 0;
 
 			// Parse the input to an int return message if there is a problem
 			try {
@@ -178,7 +181,7 @@ public class Login extends JFrame implements Runnable {
 						// Open the UserPinPass frame
 						java.awt.EventQueue.invokeLater(() -> {
 
-							UserLogin frame = new UserLogin();
+							UserLogin frame = new UserLogin(autoNumber);
 							SwingUtilities.invokeLater(frame);
 
 						});

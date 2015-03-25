@@ -20,6 +20,8 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -27,6 +29,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import connect.Query;
 
 public class UserLogin extends JFrame implements Runnable {
 
@@ -78,9 +82,12 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblCharacter;
 	private JPanel panel;
 	private JLabel lblEnterTheFollowing;
+	private int pin;
+	private ArrayList<String> temp;
 
-	public UserLogin() {
+	public UserLogin(int pin) {
 
+		this.pin = pin;
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -385,40 +392,54 @@ public class UserLogin extends JFrame implements Runnable {
 	 * Method to set the labels for the pin
 	 */
 	public void randomPassLabel() {
+		
+		getloginDetails();
 
 		// Create variables for label tags
 		String one = null;
 		String two = null;
 		String three = null;
+		
+		String[] size = new String[temp.get(1).length()];
+		
+		for (int i = 0; i < size.length-1; i++) {
+			
+			size[i] = passNumbers[i];
+		}
 
 		// Generate a variable for each label 
 		if (one == null) {
 			// Set text for first label using a random String from the Array
-			one = passNumbers[rand.nextInt(passNumbers.length)];
+			one = size[rand.nextInt(size.length)];
 		}
 		if (two == null) {
 			// Set text for second label using a random String from the Array
-			two = passNumbers[rand.nextInt(passNumbers.length)];
+			two = size[rand.nextInt(size.length)];
 
 			// Check that the text has not already been used
 			while (two == one) {
-				two = passNumbers[rand.nextInt(passNumbers.length)];
+				two = size[rand.nextInt(size.length)];
 			}
 		}
 		if (three == null) {
 			// Set text for third label using a random String from the Array
-			three = passNumbers[rand.nextInt(passNumbers.length)];
+			three = size[rand.nextInt(size.length)];
 
 			// Check that the text has not already been used
 			while (three == one || three == two) {
-				three = passNumbers[rand.nextInt(passNumbers.length)];
+				three = size[rand.nextInt(size.length)];
 			}
 		}
 		
 		// Set the text
-		lblPinOneText.setText(one);
-		lblPinTwoText.setText(two);
-		lblPinThreeText.setText(three);
+		lblPassOne.setText(one);
+		lblPassTwo.setText(two);
+		lblPassThree.setText(three);
+	}
+	
+	public void getloginDetails() {
+		
+		temp = Query.getLogin(pin);
 	}
 
 	@Override

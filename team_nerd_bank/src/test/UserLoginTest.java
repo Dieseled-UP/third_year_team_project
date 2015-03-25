@@ -16,7 +16,7 @@ public class UserLoginTest {
 
 		java.awt.EventQueue.invokeLater(() -> {
 
-			UserLogin frame = new UserLogin();
+			UserLogin frame = new UserLogin(703809876);
 			SwingUtilities.invokeLater(frame);
 			
 		});

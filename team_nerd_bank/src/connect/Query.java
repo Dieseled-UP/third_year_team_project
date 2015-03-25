@@ -123,20 +123,20 @@ public class Query {
 		return false;
 	}
 
-	public static HashMap<Integer, String> getLogin(int pin, String pass) {
+	public static ArrayList<String> getLogin(int num) {
 
-		HashMap<Integer, String> temp = new HashMap<>();
+		ArrayList<String> temp = new ArrayList<>();
 		
 		try {
 			
-			sql = "SELECT user_ID, password FROM the_bank.Member WHERE user_ID = ? AND password = ?";
+			sql = "SELECT user_ID, password FROM the_bank.Member WHERE auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
-			statement.setInt(1, pin);
-			statement.setString(2, pass);
+			statement.setInt(1, num);
 			
 			result = statement.executeQuery();
 			
-			temp.put(result.getInt(2), result.getString(3));
+			temp.add(String.valueOf(result.getInt(2)));
+			temp.add(result.getString(3));
 			
 		} catch (SQLException e) {
 			
