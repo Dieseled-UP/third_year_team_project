@@ -1,119 +1,67 @@
-/*11 Mar 2015
-team_nerd_bank
-09:41:56
-*/
 package security;
 
-import java.security.InvalidKeyException;
-	import java.security.NoSuchAlgorithmException;
-	 
-	import javax.crypto.Cipher;
-	import javax.crypto.KeyGenerator;
-	import javax.crypto.NoSuchPaddingException;
-	import javax.crypto.SecretKey;
-	 
-	import com.sun.mail.util.BASE64DecoderStream;
-	import com.sun.mail.util.BASE64EncoderStream;
-	 
-	public class AES {
-	 
-	    private static Cipher ecipher;
-	    private static Cipher dcipher;
-	 
-	    private static SecretKey key;
-	 
-	    public static void main(String[] args) {
-	 
-	        try {
-	 
-	            // generate secret key using DES algorithm
-	            key = KeyGenerator.getInstance("DES").generateKey();
-	 
-	            ecipher = Cipher.getInstance("DES");
-	            dcipher = Cipher.getInstance("DES");
-	 
-	            // initialize the ciphers with the given key
-	 
-	  ecipher.init(Cipher.ENCRYPT_MODE, key);
-	 
-	  dcipher.init(Cipher.DECRYPT_MODE, key);
-	 
-	  String encrypted = encrypt("This is a classified message!");
-	 
-	  String decrypted = decrypt(encrypted);
-	 
-	  System.out.println("Decrypted: " + decrypted);
-	 
-	        }
-	        catch (NoSuchAlgorithmException e) {
-	            System.out.println("No Such Algorithm:" + e.getMessage());
-	            return;
-	        }
-	        catch (NoSuchPaddingException e) {
-	            System.out.println("No Such Padding:" + e.getMessage());
-	            return;
-	        }
-	        catch (InvalidKeyException e) {
-	            System.out.println("Invalid Key:" + e.getMessage());
-	            return;
-	        }
-	 
-	    }
-	 
-	    public static String encrypt(String str) {
-	 
-	  try {
-	 
-	    // encode the string into a sequence of bytes using the named charset
-	 
-	    // storing the result into a new byte array.
-	 
-	    byte[] utf8 = str.getBytes("UTF8");
-	 
-	byte[] enc = ecipher.doFinal(utf8);
-	 
-	// encode to base64
-	 
-	enc = BASE64EncoderStream.encode(enc);
-	 
-	return new String(enc);
-	 
-  }
-	 
-	  catch (Exception e) {
-	 
-	    e.printStackTrace();
-	 
-	  }
-	 
-	  return null;
-	 
-	    }
-	 
-	    public static String decrypt(String str) {
-	 
-	  try {
-	 
-	    // decode with base64 to get bytes
-	 
-	byte[] dec = BASE64DecoderStream.decode(str.getBytes());
-	 
-	byte[] utf8 = dcipher.doFinal(dec);
-	 
-	// create new string based on the specified charset
-	 
-	return new String(utf8, "UTF8");
-	 
-	  }
-	 
-	  catch (Exception e) {
-	 
-	    e.printStackTrace();
-	 
-	  }
-	 
-	  return null;
-	 
-	    }
-	 
+import javax.crypto.Cipher;
+
+import java.security.spec.KeySpec;
+
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.crypto.SecretKeyFactory;
+
+import java.security.AlgorithmParameters;
+
+import javax.crypto.spec.IvParameterSpec;
+
+import java.util.concurrent.AbstractExecutorService;
+
+public class AES {
+	Cipher dcipher;
+
+	private byte[] salt = new String("TheBestSaltEver").getBytes();
+	private int iterationCount = 1024;
+	private int keyStrength = 128;
+	private SecretKey key;
+	private byte[] iv;
+	private byte[] decryptedData;
+	private byte[] utf8;
+
+	void Encryption(String passPhrase) throws Exception {
+		SecretKeyFactory factory = SecretKeyFactory
+				.getInstance("PBKDF2WithHmacSHA1");
+
+		KeySpec spec = new PBEKeySpec(passPhrase.toCharArray(), salt,
+				iterationCount, keyStrength);
+		SecretKey tmp = factory.generateSecret(spec);
+		key = new SecretKeySpec(tmp.getEncoded(), "AES");
+		dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 	}
+
+	public String encrypt(String data) throws Exception {
+		dcipher.init(Cipher.ENCRYPT_MODE, key);
+		AlgorithmParameters params = dcipher.getParameters();
+		iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+		byte[] utf8EncryptedData = dcipher.doFinal(data.getBytes());
+		String base64EncryptedData = new sun.misc.BASE64Encoder()
+				.encodeBuffer(utf8EncryptedData);
+
+		System.out.println("IV "
+				+ new sun.misc.BASE64Encoder().encodeBuffer(iv));
+		System.out.println("Encrypted Data " + base64EncryptedData);
+		return base64EncryptedData;
+	}
+
+	public String decrypt(String base64EncryptedData) throws Exception {
+		dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+		decryptedData = new sun.misc.BASE64Decoder()
+				.decodeBuffer(base64EncryptedData);
+		utf8 = dcipher.doFinal(decryptedData);
+		return new String(utf8, "UTF8");
+	}
+	
+	public static void getPinPass(String pinIn, String passIn)
+	{
+		
+	}
+
+}
