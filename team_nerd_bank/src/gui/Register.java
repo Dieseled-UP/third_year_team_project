@@ -398,15 +398,17 @@ public class Register extends JFrame implements Runnable {
 			int[] nums = new int[4];
 			String[] birth = String.valueOf(temp.getDob()).split("-");
 			StringBuilder code = new StringBuilder();
+			
+			char[] endYear = birth[0].toCharArray();
 
-			for (int i = 0; i < nums.length - 1; i++) {
+			for (int i = 0; i < nums.length; i++) {
 
 				nums[i] = rand.nextInt(4);
 			}
 
-			code.append(birth[2]).append(birth[1]).append(birth[0]);
+			code.append(birth[2]).append(birth[1]).append(endYear[2]).append(endYear[3]);
 
-			for (int i = 0; i < nums.length - 1; i++) {
+			for (int i = 0; i < nums.length; i++) {
 
 				code.append(String.valueOf(nums[i]));
 			}

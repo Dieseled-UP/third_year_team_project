@@ -37,11 +37,9 @@ public class AES {
 	}
 
 	public AES() throws Exception {
-		SecretKeyFactory factory = SecretKeyFactory
-				.getInstance("PBKDF2WithHmacSHA1");
+		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
-		KeySpec spec = new PBEKeySpec(MAGIC.toCharArray(), SALT,
-				iterationCount, keyStrength);
+		KeySpec spec = new PBEKeySpec(MAGIC.toCharArray(), SALT, iterationCount, keyStrength);
 		SecretKey tmp = factory.generateSecret(spec);
 		key = new SecretKeySpec(tmp.getEncoded(), "AES");
 		dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
@@ -52,8 +50,7 @@ public class AES {
 		AlgorithmParameters params = dcipher.getParameters();
 		iv = params.getParameterSpec(IvParameterSpec.class).getIV();
 		byte[] utf8EncryptedData = dcipher.doFinal(data.getBytes());
-		String base64EncryptedData = new sun.misc.BASE64Encoder()
-				.encodeBuffer(utf8EncryptedData);
+		String base64EncryptedData = new sun.misc.BASE64Encoder().encodeBuffer(utf8EncryptedData);
 
 		// System.out.println("IV "
 		// + new sun.misc.BASE64Encoder().encodeBuffer(iv));
@@ -63,8 +60,7 @@ public class AES {
 
 	public static String decrypt(String base64EncryptedData) throws Exception {
 		dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
-		decryptedData = new sun.misc.BASE64Decoder()
-				.decodeBuffer(base64EncryptedData);
+		decryptedData = new sun.misc.BASE64Decoder().decodeBuffer(base64EncryptedData);
 		utf8 = dcipher.doFinal(decryptedData);
 		return new String(utf8, "UTF8");
 	}
@@ -72,9 +68,11 @@ public class AES {
 	public static void encryptPinPass(String pinIn, String passIn, int num) {
 		try {
 
-			encryptedList.add(encrypt(pinIn));
-			encryptedList.add(encrypt(passIn));
-			
+			String pinString = encrypt(pinIn);
+			String passString = encrypt(passIn);
+			encryptedList.add(pinString);
+			encryptedList.add(passString);
+
 			Query.setPinPass(encryptedList, num);
 
 		} catch (Exception e) {

@@ -211,6 +211,8 @@ public class UserPinPass extends JFrame implements Runnable {
 
 				// Send data to AES class to encrypt
 				AES.encryptPinPass(pinB.toString(), passB.toString(), num);
+				
+				this.dispose();
 
 				java.awt.EventQueue.invokeLater(() -> {
 
