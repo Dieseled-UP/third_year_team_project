@@ -1,5 +1,8 @@
 package security;
 
+import gui.Details;
+import gui.Login;
+
 import javax.crypto.Cipher;
 
 import java.security.spec.KeySpec;
@@ -16,9 +19,16 @@ import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
 
 import com.sun.istack.internal.FinalArrayList;
 
+import connect.Query;
+
+import java.util.ArrayList;
 import java.util.concurrent.AbstractExecutorService;
 
 public class AES {
+	
+	private static int pin = Integer.parseInt(Login.gitAutoPin());
+	private static ArrayList<String> details = Query.getLogin(pin);
+	private static ArrayList<String> uncryptedArrayList = new ArrayList<>();
 	
 	private static Cipher dcipher;
 	private final byte[] SALT = new String("TheBestSaltEver").getBytes();
@@ -26,8 +36,8 @@ public class AES {
 	private int keyStrength = 128;
 	private static SecretKey key;
 	private static byte[] iv;
-	private byte[] decryptedData;
-	private byte[] utf8;
+	private static byte[] decryptedData;
+	private static byte[] utf8;
 	private final String MAGIC = new String("ABCDEFGHIJKL");
 	
 	public AES() throws Exception {
@@ -55,7 +65,7 @@ public class AES {
 		return base64EncryptedData;
 	}
 
-	public String decrypt(String base64EncryptedData) throws Exception {
+	public static String decrypt(String base64EncryptedData) throws Exception {
 		dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 		decryptedData = new sun.misc.BASE64Decoder()
 				.decodeBuffer(base64EncryptedData);
@@ -80,6 +90,20 @@ public class AES {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public static ArrayList<String> decryptedPinPass() {
+		
+		try {
+			
+			uncryptedArrayList.add(decrypt(details.get(0)));
+			uncryptedArrayList.add(decrypt(details.get(1)));
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return uncryptedArrayList;
 	}
 	
 	public String getKey()

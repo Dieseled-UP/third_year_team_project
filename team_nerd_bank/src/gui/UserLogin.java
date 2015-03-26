@@ -30,6 +30,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import security.AES;
 import connect.Query;
 
 public class UserLogin extends JFrame implements Runnable {
@@ -439,7 +440,7 @@ public class UserLogin extends JFrame implements Runnable {
 	
 	public void getloginDetails() {
 		
-		temp = Query.getLogin(pin);
+		temp = AES.decryptedPinPass();
 	}
 
 	@Override
