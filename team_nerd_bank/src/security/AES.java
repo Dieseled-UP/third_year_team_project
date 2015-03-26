@@ -1,28 +1,19 @@
 package security;
 
-import gui.Details;
 import gui.Login;
 
-import javax.crypto.Cipher;
-
-import java.security.spec.KeySpec;
-
-import javax.crypto.spec.PBEKeySpec;
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
-import javax.crypto.SecretKeyFactory;
-
 import java.security.AlgorithmParameters;
+import java.security.spec.KeySpec;
+import java.util.ArrayList;
 
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
-
-import com.sun.istack.internal.FinalArrayList;
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 
 import connect.Query;
-
-import java.util.ArrayList;
-import java.util.concurrent.AbstractExecutorService;
 
 public class AES {
 	

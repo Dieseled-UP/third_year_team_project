@@ -5,33 +5,28 @@
  */
 package gui;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-
 import java.awt.Color;
-
-import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.JTextField;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 import security.AES;
-import connect.Query;
 
 public class UserLogin extends JFrame implements Runnable {
 
@@ -83,12 +78,10 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblCharacter;
 	private JPanel panel;
 	private JLabel lblEnterTheFollowing;
-	private int pin;
 	private ArrayList<String> temp;
 
-	public UserLogin(int pin) {
+	public UserLogin() {
 
-		this.pin = pin;
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {

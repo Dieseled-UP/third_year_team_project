@@ -181,7 +181,7 @@ public class Login extends JFrame implements Runnable {
 						// Open the UserPinPass frame
 						java.awt.EventQueue.invokeLater(() -> {
 
-							UserLogin frame = new UserLogin(autoNumber);
+							UserLogin frame = new UserLogin();
 							SwingUtilities.invokeLater(frame);
 
 						});
