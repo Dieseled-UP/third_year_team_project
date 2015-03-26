@@ -390,6 +390,8 @@ public class Register extends JFrame implements Runnable {
 				SwingUtilities.invokeLater(frame);
 
 			});
+			
+			this.dispose();
 		});
 
 		btnCancel.addActionListener(arg0 -> {
@@ -400,8 +402,14 @@ public class Register extends JFrame implements Runnable {
 											+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
 				});
 
-		Login frame = new Login();
-		SwingUtilities.invokeLater(frame);
+		java.awt.EventQueue.invokeLater(() -> {
+
+			Login frame = new Login();
+			SwingUtilities.invokeLater(frame);
+			
+		});
+		
+		this.dispose();
 	}
 
 	@Override
