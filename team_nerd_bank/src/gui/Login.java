@@ -9,20 +9,26 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
 import javax.swing.JTextField;
 
+
 import java.awt.Color;
+
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+
+import security.AES;
 import connect.Query;
 
 public class Login extends JFrame implements Runnable {
@@ -176,6 +182,7 @@ public class Login extends JFrame implements Runnable {
 					if (correct) {
 
 						txtAutoPin.setText("");
+						AES.getAutoPin(txtAutoPin.getText());
 						this.dispose();
 
 						// Open the UserPinPass frame
@@ -209,11 +216,6 @@ public class Login extends JFrame implements Runnable {
 			});
 		});
 
-	}
-	
-	public static String gitAutoPin() {
-		
-		return txtAutoPin.getText();
 	}
 
 	@Override

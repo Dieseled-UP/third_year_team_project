@@ -1,7 +1,5 @@
 package security;
 
-import gui.Login;
-
 import java.security.AlgorithmParameters;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
@@ -16,11 +14,11 @@ import javax.crypto.spec.SecretKeySpec;
 import connect.Query;
 
 public class AES {
-	
-	private static int pin = Integer.parseInt(Login.gitAutoPin());
-	private static ArrayList<String> details = Query.getLogin(pin);
+
+	private static int pin;
+	private static ArrayList<String> details;
 	private static ArrayList<String> uncryptedArrayList = new ArrayList<>();
-	
+
 	private static Cipher dcipher;
 	private final byte[] SALT = new String("TheBestSaltEver").getBytes();
 	private int iterationCount = 1024;
@@ -30,7 +28,13 @@ public class AES {
 	private static byte[] decryptedData;
 	private static byte[] utf8;
 	private final String MAGIC = new String("ABCDEFGHIJKL");
-	
+
+	public static void getAutoPin(String item) {
+
+		pin = Integer.parseInt(item);
+		details = Query.getLogin(pin);
+	}
+
 	public AES() throws Exception {
 		SecretKeyFactory factory = SecretKeyFactory
 				.getInstance("PBKDF2WithHmacSHA1");
@@ -50,9 +54,9 @@ public class AES {
 		String base64EncryptedData = new sun.misc.BASE64Encoder()
 				.encodeBuffer(utf8EncryptedData);
 
-	//	System.out.println("IV "
-		//		+ new sun.misc.BASE64Encoder().encodeBuffer(iv));
-	//	System.out.println("Encrypted Data " + base64EncryptedData);
+		// System.out.println("IV "
+		// + new sun.misc.BASE64Encoder().encodeBuffer(iv));
+		// System.out.println("Encrypted Data " + base64EncryptedData);
 		return base64EncryptedData;
 	}
 
@@ -63,42 +67,40 @@ public class AES {
 		utf8 = dcipher.doFinal(decryptedData);
 		return new String(utf8, "UTF8");
 	}
-	
-	public static void encryptPinPass(String pinIn, String passIn)
-	{
+
+	public static void encryptPinPass(String pinIn, String passIn) {
 		try {
-			
-			 String encryptedPin = encrypt(pinIn);
-			 String encryptedPass = encrypt(passIn);
-			 
-			 System.out.println("pin: " + pinIn);
-			 System.out.println("encrypted pin: " + encryptedPin);
-			 System.out.println("pass: " + passIn);
-			 System.out.println("encrypted pass: " + encryptedPass);
+
+			String encryptedPin = encrypt(pinIn);
+			String encryptedPass = encrypt(passIn);
+
+			System.out.println("pin: " + pinIn);
+			System.out.println("encrypted pin: " + encryptedPin);
+			System.out.println("pass: " + passIn);
+			System.out.println("encrypted pass: " + encryptedPass);
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static ArrayList<String> decryptedPinPass() {
-		
+
 		try {
-			
+
 			uncryptedArrayList.add(decrypt(details.get(0)));
 			uncryptedArrayList.add(decrypt(details.get(1)));
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 		return uncryptedArrayList;
 	}
-	
-	public String getKey()
-	{
+
+	public String getKey() {
 		return MAGIC;
 	}
 }
