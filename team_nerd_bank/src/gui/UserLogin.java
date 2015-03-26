@@ -55,9 +55,8 @@ public class UserLogin extends JFrame implements Runnable {
 	private JTextField txtPassTwo;
 	private JTextField txtPassThree;
 	private String[] pinNumbers = new String[] { "1st", "2nd", "3rd", "4th" };
-	private String[] passNumbers = new String[] { "1st", "2nd", "3rd", "4th",
-			"5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th", "13th",
-			"14th", "15th", "16th" };
+	private String[] passNumbers = new String[] { "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th",
+			"13th", "14th", "15th", "16th" };
 	private Random rand = new Random();
 	private JPanel panel_3;
 	private JPanel panel_4;
@@ -84,7 +83,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		// Get the decrypted data from the AES class
 		getloginDetails();
-		
+
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
@@ -126,10 +125,8 @@ public class UserLogin extends JFrame implements Runnable {
 		panel.add(lblMainName);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(new LineBorder(
-				new Color(255, 165, 0), 1, true), "Your PIN",
-				TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma",
-						Font.BOLD, 14), new Color(0, 0, 139)));
+		panel_1.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Your PIN", TitledBorder.LEADING,
+				TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
 		panel_1.setBounds(120, 130, 380, 203);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -217,7 +214,7 @@ public class UserLogin extends JFrame implements Runnable {
 		panel_5.add(lblPinThreeNum);
 		lblPinThreeNum.setForeground(Color.BLUE);
 		lblPinThreeNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
+
 		randomPinLabel();
 
 		lblInfoOne = new JLabel("Enter the following numbers from your PIN");
@@ -226,16 +223,13 @@ public class UserLogin extends JFrame implements Runnable {
 		panel_1.add(lblInfoOne);
 
 		panel_2 = new JPanel();
-		panel_2.setBorder(new TitledBorder(new LineBorder(
-				new Color(255, 165, 0), 1, true), "Your Password",
-				TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma",
-						Font.BOLD, 14), new Color(0, 0, 139)));
+		panel_2.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Your Password", TitledBorder.LEADING,
+				TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), new Color(0, 0, 139)));
 		panel_2.setBounds(120, 366, 380, 209);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 
-		lblEnterTheFollowing = new JLabel(
-				"Enter the following characters from your Password");
+		lblEnterTheFollowing = new JLabel("Enter the following characters from your Password");
 		lblEnterTheFollowing.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEnterTheFollowing.setBounds(37, 34, 324, 22);
 		panel_2.add(lblEnterTheFollowing);
@@ -330,8 +324,7 @@ public class UserLogin extends JFrame implements Runnable {
 		btnLogin.setBounds(408, 616, 89, 26);
 		getContentPane().add(btnLogin);
 
-		btnForgot = new JButton(
-				"<html><strong style=\"color: #FFA500\">==></strong> Forgot your PIN or Password?</html>");
+		btnForgot = new JButton("<html><strong style=\"color: #FFA500\">==></strong> Forgot your PIN or Password?</html>");
 		btnForgot.setForeground(Color.BLUE);
 		btnForgot.setOpaque(false);
 		btnForgot.setContentAreaFilled(false);
@@ -355,7 +348,7 @@ public class UserLogin extends JFrame implements Runnable {
 		String two = null;
 		String three = null;
 
-		// Generate a variable for each label 
+		// Generate a variable for each label
 		if (one == null) {
 			// Set text for first label using a random String from the Array
 			one = pinNumbers[rand.nextInt(pinNumbers.length)];
@@ -378,33 +371,33 @@ public class UserLogin extends JFrame implements Runnable {
 				three = pinNumbers[rand.nextInt(pinNumbers.length)];
 			}
 		}
-		
+
 		// Set the text
 		lblPinOneText.setText(one);
 		lblPinTwoText.setText(two);
 		lblPinThreeText.setText(three);
 	}
-	
+
 	/**
 	 * Method to set the labels for the pin
 	 */
 	public void randomPassLabel() {
-		
+
 		getloginDetails();
 
 		// Create variables for label tags
 		String one = null;
 		String two = null;
 		String three = null;
-		
+
 		String[] size = new String[temp.get(1).length()];
-		
-		for (int i = 0; i < size.length-1; i++) {
-			
+
+		for (int i = 0; i < size.length - 1; i++) {
+
 			size[i] = passNumbers[i];
 		}
 
-		// Generate a variable for each label 
+		// Generate a variable for each label
 		if (one == null) {
 			// Set text for first label using a random String from the Array
 			one = size[rand.nextInt(size.length)];
@@ -427,15 +420,15 @@ public class UserLogin extends JFrame implements Runnable {
 				three = size[rand.nextInt(size.length)];
 			}
 		}
-		
+
 		// Set the text
 		lblPassOne.setText(one);
 		lblPassTwo.setText(two);
 		lblPassThree.setText(three);
 	}
-	
+
 	public void getloginDetails() {
-		
+
 		temp = AES.decryptedPinPass();
 	}
 

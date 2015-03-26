@@ -9,24 +9,19 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-
 import javax.swing.JTextField;
 
-
 import java.awt.Color;
-
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.UIManager.LookAndFeelInfo;
-
 
 import security.AES;
 import connect.Query;
@@ -96,8 +91,7 @@ public class Login extends JFrame implements Runnable {
 		lblimg.setBounds(10, 153, 226, 210);
 		getContentPane().add(lblimg);
 
-		lblNewLabel = new JLabel(
-				"<html>If you have an account and wish to use this service please feel free to</html>");
+		lblNewLabel = new JLabel("<html>If you have an account and wish to use this service please feel free to</html>");
 		lblNewLabel.setForeground(Color.BLUE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel.setBounds(369, 203, 198, 88);
@@ -175,7 +169,8 @@ public class Login extends JFrame implements Runnable {
 					txtAutoPin.setText("");
 				} else {
 
-					// Pass the number to the query to check that the autopin exists
+					// Pass the number to the query to check that the autopin
+					// exists
 					correct = Query.getAutoID(autoNumber);
 
 					// If the autopin is a match let the user continue
@@ -194,9 +189,8 @@ public class Login extends JFrame implements Runnable {
 						});
 					} else {
 
-						JOptionPane.showMessageDialog(null,
-								"Sorry this pin is incorrect please try again"
-										+ "\nor contact our customer help desk");
+						JOptionPane.showMessageDialog(null, "Sorry this pin is incorrect please try again"
+								+ "\nor contact our customer help desk");
 						txtAutoPin.setText("");
 					}
 				}

@@ -33,6 +33,8 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import security.AES;
+
 public class UserPinPass extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
@@ -55,9 +57,10 @@ public class UserPinPass extends JFrame implements Runnable {
 	private JLabel label;
 	private JPanel panel_2;
 	private JLabel lblPassword;
+	private static int num;
 
 	public UserPinPass() {
-		
+
 		getContentPane().setBackground(Color.WHITE);
 
 		try {
@@ -100,9 +103,8 @@ public class UserPinPass extends JFrame implements Runnable {
 		pnlHeader.add(lblLogo);
 
 		panel = new JPanel();
-		panel.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0),
-				1, true), "Create Pin", TitledBorder.LEADING, TitledBorder.TOP,
-				new Font("Tahoma", Font.BOLD, 14), Color.BLUE));
+		panel.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Create Pin", TitledBorder.LEADING,
+				TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), Color.BLUE));
 		panel.setBounds(100, 116, 456, 88);
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -133,10 +135,8 @@ public class UserPinPass extends JFrame implements Runnable {
 		txtRePin.setColumns(4);
 
 		panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(new LineBorder(
-				new Color(255, 165, 0), 1, true), "Create Password",
-				TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma",
-						Font.BOLD, 14), Color.BLUE));
+		panel_1.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Create Password", TitledBorder.LEADING,
+				TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), Color.BLUE));
 		panel_1.setBounds(100, 215, 456, 88);
 		getContentPane().add(panel_1);
 		panel_1.setLayout(null);
@@ -188,15 +188,30 @@ public class UserPinPass extends JFrame implements Runnable {
 		btnOK.addActionListener(arg0 -> {
 
 			// Check that the user has filled out all fields
-			if (txtRePin.getPassword().length == 0
-					&& txtRePassword.getPassword().length == 0) {
+			if (txtRePin.getPassword().length == 0 && txtRePassword.getPassword().length == 0) {
 
-				JOptionPane.showMessageDialog(null,
-						"Please fill out all sections before proceeding");
+				JOptionPane.showMessageDialog(null, "Please fill out all sections before proceeding");
 			} else {
 
-				
-				
+				// Create StringBuilders to convert pin and password fields into strings
+				StringBuilder pinB = new StringBuilder();
+				StringBuilder passB = new StringBuilder();
+
+				// Append pin characters
+				for (int i = 0; i < txtPin.getPassword().length; i++) {
+
+					pinB.append(txtPin.getPassword()[i]);
+				}
+
+				// Append password characters
+				for (int i = 0; i < txtPassword.getPassword().length; i++) {
+
+					passB.append(txtPassword.getPassword()[i]);
+				}
+
+				// Send data to AES class to encrypt
+				AES.encryptPinPass(pinB.toString(), passB.toString(), num);
+
 				java.awt.EventQueue.invokeLater(() -> {
 
 					Login frame = new Login();
@@ -232,8 +247,7 @@ public class UserPinPass extends JFrame implements Runnable {
 			} else {
 
 				// Instruct user that the pin numbers don't match
-				JOptionPane.showMessageDialog(null,
-						"Sorry the fields don't match");
+				JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
 
 				// Reset input field
 				txtRePin.setText(null);
@@ -262,8 +276,7 @@ public class UserPinPass extends JFrame implements Runnable {
 			} else {
 
 				// Instruct user that the passwords don't match
-				JOptionPane.showMessageDialog(null,
-						"Sorry the fields don't match");
+				JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
 
 				// Reset input field
 				txtRePassword.setText(null);
@@ -286,8 +299,7 @@ public class UserPinPass extends JFrame implements Runnable {
 			this.limit = limit;
 		}
 
-		public void insertString(int offset, String str, AttributeSet attr)
-				throws BadLocationException {
+		public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
 			if (str == null)
 				return;
 
@@ -310,8 +322,7 @@ public class UserPinPass extends JFrame implements Runnable {
 			this.limit = limit;
 		}
 
-		public void insertString(int offset, String str, AttributeSet attr)
-				throws BadLocationException {
+		public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
 			if (str == null)
 				return;
 
@@ -319,6 +330,11 @@ public class UserPinPass extends JFrame implements Runnable {
 				super.insertString(offset, str, attr);
 			}
 		}
+	}
+
+	public static void getID(int id) {
+
+		num = id;
 	}
 
 	@Override

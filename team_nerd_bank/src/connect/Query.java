@@ -94,7 +94,33 @@ public class Query {
 
 		return account;
 	}
+	
+	/**
+	 * Method to add new member details to the database
+	 * @param list
+	 * @param id
+	 */
+	public static void setPinPass(ArrayList<String> list, int id) {
+		
+		try {
+			
+			sql = "INSERT INTO the_bank.Member VALUES (?, ?, ?, ?)";
+			statement = Connect_DB.pStatement(sql);
+			statement.setString(1, list.get(0));
+			statement.setString(2, list.get(1));
+			statement.setString(3, list.get(2));
+			statement.setInt(4, id);
+			
+			result = statement.executeQuery();
+		} catch (Exception e) {
+		}
+	}
 
+	/**
+	 * Method to query the database to return the auto generated pin
+	 * @param number
+	 * @return boolean
+	 */
 	public static boolean getAutoID(int number) {
 
 		try {
@@ -120,6 +146,11 @@ public class Query {
 		return false;
 	}
 
+	/**
+	 * Method to query the database and return the user pin and password
+	 * @param num
+	 * @return ArrayList temp
+	 */
 	public static ArrayList<String> getLogin(int num) {
 
 		ArrayList<String> temp = new ArrayList<>();
@@ -134,7 +165,7 @@ public class Query {
 			result = statement.executeQuery();
 			result.next();
 			
-			temp.add(String.valueOf(result.getInt("pin")));
+			temp.add(result.getString("pin"));
 			temp.add(result.getString("password"));
 			
 		} catch (SQLException e) {

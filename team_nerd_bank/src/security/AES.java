@@ -17,6 +17,7 @@ public class AES {
 
 	private static int pin;
 	private static ArrayList<String> details;
+	private static ArrayList<String> encryptedList = new ArrayList<>();
 	private static ArrayList<String> uncryptedArrayList = new ArrayList<>();
 
 	private static Cipher dcipher;
@@ -68,16 +69,13 @@ public class AES {
 		return new String(utf8, "UTF8");
 	}
 
-	public static void encryptPinPass(String pinIn, String passIn) {
+	public static void encryptPinPass(String pinIn, String passIn, int num) {
 		try {
 
-			String encryptedPin = encrypt(pinIn);
-			String encryptedPass = encrypt(passIn);
-
-			System.out.println("pin: " + pinIn);
-			System.out.println("encrypted pin: " + encryptedPin);
-			System.out.println("pass: " + passIn);
-			System.out.println("encrypted pass: " + encryptedPass);
+			encryptedList.add(encrypt(pinIn));
+			encryptedList.add(encrypt(passIn));
+			
+			Query.setPinPass(encryptedList, num);
 
 		} catch (Exception e) {
 
