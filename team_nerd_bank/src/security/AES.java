@@ -12,32 +12,36 @@ import javax.crypto.SecretKeyFactory;
 import java.security.AlgorithmParameters;
 
 import javax.crypto.spec.IvParameterSpec;
+import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
+
+import com.sun.istack.internal.FinalArrayList;
 
 import java.util.concurrent.AbstractExecutorService;
 
 public class AES {
-	Cipher dcipher;
-
-	private byte[] salt = new String("TheBestSaltEver").getBytes();
+	
+	private static Cipher dcipher;
+	private final byte[] SALT = new String("TheBestSaltEver").getBytes();
 	private int iterationCount = 1024;
 	private int keyStrength = 128;
-	private SecretKey key;
-	private byte[] iv;
+	private static SecretKey key;
+	private static byte[] iv;
 	private byte[] decryptedData;
 	private byte[] utf8;
-
-	void Encryption(String passPhrase) throws Exception {
+	private final String MAGIC = new String("ABCDEFGHIJKL");
+	
+	public AES() throws Exception {
 		SecretKeyFactory factory = SecretKeyFactory
 				.getInstance("PBKDF2WithHmacSHA1");
 
-		KeySpec spec = new PBEKeySpec(passPhrase.toCharArray(), salt,
+		KeySpec spec = new PBEKeySpec(MAGIC.toCharArray(), SALT,
 				iterationCount, keyStrength);
 		SecretKey tmp = factory.generateSecret(spec);
 		key = new SecretKeySpec(tmp.getEncoded(), "AES");
 		dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 	}
 
-	public String encrypt(String data) throws Exception {
+	public static String encrypt(String data) throws Exception {
 		dcipher.init(Cipher.ENCRYPT_MODE, key);
 		AlgorithmParameters params = dcipher.getParameters();
 		iv = params.getParameterSpec(IvParameterSpec.class).getIV();
@@ -45,9 +49,9 @@ public class AES {
 		String base64EncryptedData = new sun.misc.BASE64Encoder()
 				.encodeBuffer(utf8EncryptedData);
 
-		System.out.println("IV "
-				+ new sun.misc.BASE64Encoder().encodeBuffer(iv));
-		System.out.println("Encrypted Data " + base64EncryptedData);
+	//	System.out.println("IV "
+		//		+ new sun.misc.BASE64Encoder().encodeBuffer(iv));
+	//	System.out.println("Encrypted Data " + base64EncryptedData);
 		return base64EncryptedData;
 	}
 
@@ -59,9 +63,27 @@ public class AES {
 		return new String(utf8, "UTF8");
 	}
 	
-	public static void getPinPass(String pinIn, String passIn)
+	public static void encryptPinPass(String pinIn, String passIn)
 	{
+		try {
+			
+			 String encryptedPin = encrypt(pinIn);
+			 String encryptedPass = encrypt(passIn);
+			 
+			 System.out.println("pin: " + pinIn);
+			 System.out.println("encrypted pin: " + encryptedPin);
+			 System.out.println("pass: " + passIn);
+			 System.out.println("encrypted pass: " + encryptedPass);
+
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
 		
 	}
-
+	
+	public String getKey()
+	{
+		return MAGIC;
+	}
 }

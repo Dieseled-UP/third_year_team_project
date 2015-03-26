@@ -133,10 +133,12 @@ public class Query {
 			statement = Connect_DB.pStatement(sql);
 			statement.setInt(1, num);
 			
-			result = statement.executeQuery();
 			
-			temp.add(String.valueOf(result.getInt(2)));
-			temp.add(result.getString(3));
+			result = statement.executeQuery();
+			result.next();
+			
+			temp.add(String.valueOf(result.getInt("pin")));
+			temp.add(result.getString("password"));
 			
 		} catch (SQLException e) {
 			
