@@ -29,6 +29,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 public class UserPinPass extends JFrame implements Runnable {
 
@@ -117,14 +120,16 @@ public class UserPinPass extends JFrame implements Runnable {
 
 		txtPin = new JPasswordField();
 		txtPin.setBounds(211, 14, 86, 26);
+		txtPin.setDocument(new PinLimit(4));
 		panel.add(txtPin);
-		txtPin.setColumns(16);
+		txtPin.setColumns(4);
 
 		txtRePin = new JPasswordField();
 		txtRePin.setBounds(211, 51, 86, 26);
 		txtRePin.setInputVerifier(new verificationPin());
+		txtRePin.setDocument(new PinLimit(4));
 		panel.add(txtRePin);
-		txtRePin.setColumns(16);
+		txtRePin.setColumns(4);
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(new LineBorder(
@@ -149,14 +154,16 @@ public class UserPinPass extends JFrame implements Runnable {
 
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(218, 18, 160, 26);
+		txtPassword.setDocument(new PassLimit(16));
 		panel_1.add(txtPassword);
 		txtPassword.setColumns(16);
 
 		txtRePassword = new JPasswordField();
 		txtRePassword.setBounds(218, 51, 160, 26);
+		txtRePassword.setDocument(new PassLimit(16));
 		txtRePassword.setInputVerifier(new verificationPass());
 		panel_1.add(txtRePassword);
-		txtRePassword.setColumns(10);
+		txtRePassword.setColumns(16);
 
 		panel_2 = new JPanel();
 		panel_2.setBounds(139, 314, 395, 50);
@@ -191,7 +198,7 @@ public class UserPinPass extends JFrame implements Runnable {
 
 					Login frame = new Login();
 					SwingUtilities.invokeLater(frame);
-					
+
 				});
 			}
 		});
@@ -211,8 +218,10 @@ public class UserPinPass extends JFrame implements Runnable {
 		@Override
 		public boolean verify(JComponent input) {
 
+			// Get the second pin
 			JPasswordField tField = (JPasswordField) input;
 
+			// Check that the two arrays are the same
 			if (Arrays.equals(tField.getPassword(), txtPin.getPassword())) {
 
 				return true;
@@ -223,6 +232,7 @@ public class UserPinPass extends JFrame implements Runnable {
 				JOptionPane.showMessageDialog(null,
 						"Sorry the fields don't match");
 
+				// Reset input field
 				txtRePin.setText(null);
 				tField.setText(null);
 				return false;
@@ -230,26 +240,80 @@ public class UserPinPass extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Check that the to passwords entered match
+	 */
 	class verificationPass extends InputVerifier {
 
 		@Override
 		public boolean verify(JComponent input) {
 
+			// Get the second password
 			JPasswordField tField = (JPasswordField) input;
 
+			// Check that the two arrays are the same
 			if (Arrays.equals(tField.getPassword(), txtPassword.getPassword())) {
 
 				return true;
 
 			} else {
 
-				// Instruct user that the pin numbers don't match
+				// Instruct user that the passwords don't match
 				JOptionPane.showMessageDialog(null,
 						"Sorry the fields don't match");
 
+				// Reset input field
 				txtRePassword.setText(null);
 				tField.setText(null);
 				return false;
+			}
+		}
+	}
+
+	/**
+	 * Add a limiter to the input field that only allows the user to input the
+	 * specified number of characters
+	 */
+	@SuppressWarnings("serial")
+	class PinLimit extends PlainDocument {
+		private int limit;
+
+		PinLimit(int limit) {
+			super();
+			this.limit = limit;
+		}
+
+		public void insertString(int offset, String str, AttributeSet attr)
+				throws BadLocationException {
+			if (str == null)
+				return;
+
+			if ((getLength() + str.length()) <= limit) {
+				super.insertString(offset, str, attr);
+			}
+		}
+	}
+
+	/**
+	 * Add a limiter to the input field that only allows the user to input the
+	 * specified number of characters
+	 */
+	@SuppressWarnings("serial")
+	class PassLimit extends PlainDocument {
+		private int limit;
+
+		PassLimit(int limit) {
+			super();
+			this.limit = limit;
+		}
+
+		public void insertString(int offset, String str, AttributeSet attr)
+				throws BadLocationException {
+			if (str == null)
+				return;
+
+			if ((getLength() + str.length()) <= limit) {
+				super.insertString(offset, str, attr);
 			}
 		}
 	}

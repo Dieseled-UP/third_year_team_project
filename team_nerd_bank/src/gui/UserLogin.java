@@ -82,6 +82,9 @@ public class UserLogin extends JFrame implements Runnable {
 
 	public UserLogin() {
 
+		// Get the decrypted data from the AES class
+		getloginDetails();
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {
