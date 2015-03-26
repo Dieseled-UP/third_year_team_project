@@ -57,6 +57,7 @@ public class UserPinPass extends JFrame implements Runnable {
 	private JLabel lblPassword;
 
 	public UserPinPass() {
+		
 		getContentPane().setBackground(Color.WHITE);
 
 		try {
@@ -194,6 +195,8 @@ public class UserPinPass extends JFrame implements Runnable {
 						"Please fill out all sections before proceeding");
 			} else {
 
+				
+				
 				java.awt.EventQueue.invokeLater(() -> {
 
 					Login frame = new Login();

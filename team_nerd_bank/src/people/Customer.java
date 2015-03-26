@@ -10,6 +10,7 @@ import java.sql.Date;
 
 public class Customer {
 	
+	private int id;
 	private String name;
 	private String surname;
 	private Date dob;
@@ -34,8 +35,9 @@ public class Customer {
 	 * @param telPhone
 	 * @param mobile
 	 */
-	public Customer(String name, String surname, Date dob, String address, String email, String telPhone, String mobile) {
+	public Customer(int id, String name, String surname, Date dob, String address, String email, String telPhone, String mobile) {
 		
+		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.dob = dob;
@@ -43,6 +45,15 @@ public class Customer {
 		this.email = email;
 		this.telPhone = telPhone;
 		this.mobile = mobile;
+	}
+
+	/**
+	 * Method to get customer id
+	 * @return id
+	 */
+	public int getId() {
+		
+		return id;
 	}
 
 	/**
@@ -176,9 +187,7 @@ public class Customer {
 	 */
 	@Override
 	public String toString() {
-
-		return "Customer [name=" + name + ", surname=" + surname + ", dob=" + dob + ", address="
-				+ address + ", email=" + email + ", telPhone=" + telPhone + ", mobile=" + mobile
-				+ "]";
+		return "Customer [id=" + id + ", name=" + name + ", surname=" + surname + ", dob=" + dob + ", address=" + address + ", email="
+				+ email + ", telPhone=" + telPhone + ", mobile=" + mobile + "]";
 	}
 }

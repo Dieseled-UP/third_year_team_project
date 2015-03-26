@@ -43,7 +43,7 @@ public class Query {
 
 			while (result.next()) {
 
-				cust = new Customer(result.getString(2), result.getString(3), result.getDate(4),
+				cust = new Customer(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4),
 						result.getString(5), result.getString(6), result.getString(7),
 						result.getString(8));
 			}

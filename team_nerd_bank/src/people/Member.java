@@ -31,10 +31,10 @@ public class Member extends Customer {
 	 * @param telPhone
 	 * @param mobile
 	 */
-	public Member(String name, String surname, Date dob, String address, String email,
+	public Member(int id, String name, String surname, Date dob, String address, String email,
 			String telPhone, String mobile) {
 
-		super(name, surname, dob, address, email, telPhone, mobile);
+		super(id, name, surname, dob, address, email, telPhone, mobile);
 	}
 
 	
