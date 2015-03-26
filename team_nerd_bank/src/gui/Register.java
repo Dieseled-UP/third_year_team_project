@@ -336,18 +336,42 @@ public class Register extends JFrame implements Runnable {
 			// Split the address to fill in the correct fields
 			String[] add = temp.getAddress().split(" ");
 			StringBuilder dress = new StringBuilder();
-			for (int i = 0; i < add.length - 2; i++) {
+			
+			if (add.length < 3) {
+				
+				for (int i = 0; i < add.length - 1; i++) {
 
-				dress.append(add[i]).append(" ");
+					dress.append(add[i]);
 
+				}
+			} else {
+
+				for (int i = 0; i < add.length - 2; i++) {
+
+					dress.append(add[i]).append(" ");
+
+				}
 			}
+			
+			// Name of house/street
 			String street = dress.toString();
+			
+			System.out.println(street.length());
+			// Get substring from street
+			String split = street.substring(street.length()-6, street.length());
+			
+			System.out.println(split);
 
+			// Replace the end of street with asterix 
+			String newStreet = street.replaceAll("[split]", "*");
+			
+			System.out.println(newStreet);
+			
 			// Fill in the registration form
 			txtName.setText(temp.getName());
 			txtSurname.setText(temp.getSurname());
 			txtDob.setText(String.valueOf(temp.getDob()));
-			txtStreet.setText(street);
+			txtStreet.setText(newStreet);
 			txtTown.setText(add[add.length - 2]);
 			txtCounty.setText(add[add.length - 1]);
 			txtTelPhone.setText(temp.getTelPhone());
@@ -400,14 +424,14 @@ public class Register extends JFrame implements Runnable {
 									null,
 									"Please re-enter your account number if you still have problems\n please contact"
 											+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
+					
+					java.awt.EventQueue.invokeLater(() -> {
+
+						Login frame = new Login();
+						SwingUtilities.invokeLater(frame);
+						
+					});
 				});
-
-		java.awt.EventQueue.invokeLater(() -> {
-
-			Login frame = new Login();
-			SwingUtilities.invokeLater(frame);
-			
-		});
 		
 		this.dispose();
 	}
@@ -415,7 +439,7 @@ public class Register extends JFrame implements Runnable {
 	@Override
 	public void run() {
 
-		setSize(559, 740);
+		setSize(550, 740);
 		setResizable(false);
 		setTitle("Your Registration");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

@@ -129,7 +129,7 @@ public class Query {
 		
 		try {
 			
-			sql = "SELECT user_ID, password FROM the_bank.Member WHERE auto_ID = ?";
+			sql = "SELECT pin, password FROM the_bank.Member WHERE auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 			statement.setInt(1, num);
 			

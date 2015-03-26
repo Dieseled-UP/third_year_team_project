@@ -189,9 +189,9 @@ public class UserPinPass extends JFrame implements Runnable {
 
 				java.awt.EventQueue.invokeLater(() -> {
 
-					MainFrame frame = new MainFrame();
+					Login frame = new Login();
 					SwingUtilities.invokeLater(frame);
-
+					
 				});
 			}
 		});

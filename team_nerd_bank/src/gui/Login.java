@@ -28,7 +28,7 @@ import connect.Query;
 public class Login extends JFrame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private JTextField txtAutoPin;
+	private static JTextField txtAutoPin;
 	private JLabel lblAutoPin;
 	private JLabel lblTitle;
 	private JLabel lblimg;
@@ -209,6 +209,11 @@ public class Login extends JFrame implements Runnable {
 			});
 		});
 
+	}
+	
+	public static String gitAutoPin() {
+		
+		return txtAutoPin.getText();
 	}
 
 	@Override
