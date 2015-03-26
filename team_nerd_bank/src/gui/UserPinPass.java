@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import java.awt.Color;
+import java.awt.Cursor;
 
 import javax.swing.JLabel;
 
@@ -37,12 +38,22 @@ public class UserPinPass extends JFrame implements Runnable {
 	private File file;
 	private BufferedImage image;
 	private JPanel pnlHeader_1;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtPin;
+	private JTextField txtRePin;
+	private JTextField txtPassword;
+	private JTextField txtRePassword;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JLabel lblEnterPin;
+	private JLabel lblRenterPin;
+	private JButton btnOK;
+	private JButton btnCancel;
+	private JLabel lblRePassword;
+	private JLabel label;
+	private JPanel panel_2;
 
 	public UserPinPass() {
+		getContentPane().setBackground(Color.WHITE);
 		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -64,7 +75,7 @@ public class UserPinPass extends JFrame implements Runnable {
 		pnlHeader_1.setBounds(10, 11, 637, 69);
 		getContentPane().add(pnlHeader_1);
 
-		JLabel label = new JLabel("PMDA BANK");
+		label = new JLabel("PMDA BANK");
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Serif", Font.BOLD, 40));
 		label.setBounds(124, 11, 259, 48);
@@ -83,35 +94,35 @@ public class UserPinPass extends JFrame implements Runnable {
 		lblLogo.setBounds(10, -1, 70, 70);
 		pnlHeader_1.add(lblLogo);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Create Pin", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), Color.BLUE));
 		panel.setBounds(100, 116, 456, 88);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblEnterPin = new JLabel("Enter Pin");
+		lblEnterPin = new JLabel("Enter Pin");
 		lblEnterPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblEnterPin.setForeground(Color.BLUE);
 		lblEnterPin.setBounds(117, 18, 67, 14);
 		panel.add(lblEnterPin);
 		
-		JLabel lblRenterPin = new JLabel("Renter Pin");
+		lblRenterPin = new JLabel("Renter Pin");
 		lblRenterPin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblRenterPin.setForeground(Color.BLUE);
 		lblRenterPin.setBounds(117, 43, 67, 14);
 		panel.add(lblRenterPin);
 		
-		textField = new JTextField();
-		textField.setBounds(211, 17, 86, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtPin = new JTextField();
+		txtPin.setBounds(211, 17, 86, 20);
+		panel.add(txtPin);
+		txtPin.setColumns(16);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(211, 42, 86, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtRePin = new JTextField();
+		txtRePin.setBounds(211, 42, 86, 20);
+		panel.add(txtRePin);
+		txtRePin.setColumns(16);
 		
-		JPanel panel_1 = new JPanel();
+		panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0), 1, true), "Create Password", TitledBorder.LEADING, TitledBorder.TOP, new Font("Tahoma", Font.BOLD, 14), Color.BLUE));
 		panel_1.setBounds(100, 215, 456, 88);
 		getContentPane().add(panel_1);
@@ -121,40 +132,48 @@ public class UserPinPass extends JFrame implements Runnable {
 		label_1.setBounds(198, 5, 0, 0);
 		panel_1.add(label_1);
 		
-		JLabel lblNewLabel = new JLabel("Enter Password");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setForeground(Color.BLUE);
-		lblNewLabel.setBounds(78, 22, 120, 14);
-		panel_1.add(lblNewLabel);
+		JLabel lblPassword = new JLabel("Enter Password");
+		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPassword.setForeground(Color.BLUE);
+		lblPassword.setBounds(78, 22, 120, 14);
+		panel_1.add(lblPassword);
 		
-		JLabel lblNewLabel_1 = new JLabel("Renter Password");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setForeground(Color.BLUE);
-		lblNewLabel_1.setBounds(78, 47, 120, 14);
-		panel_1.add(lblNewLabel_1);
+		lblRePassword = new JLabel("Renter Password");
+		lblRePassword.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblRePassword.setForeground(Color.BLUE);
+		lblRePassword.setBounds(78, 47, 120, 14);
+		panel_1.add(lblRePassword);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(218, 21, 86, 20);
-		panel_1.add(textField_2);
-		textField_2.setColumns(10);
+		txtPassword = new JTextField();
+		txtPassword.setBounds(218, 21, 86, 20);
+		panel_1.add(txtPassword);
+		txtPassword.setColumns(16);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(218, 46, 86, 20);
-		panel_1.add(textField_3);
-		textField_3.setColumns(10);
+		txtRePassword = new JTextField();
+		txtRePassword.setBounds(218, 46, 86, 20);
+		panel_1.add(txtRePassword);
+		txtRePassword.setColumns(10);
 		
-		JPanel panel_2 = new JPanel();
+		panel_2 = new JPanel();
 		panel_2.setBounds(139, 314, 395, 50);
 		getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
-		JButton btnNewButton = new JButton("OK");
-		btnNewButton.setBounds(59, 11, 89, 23);
-		panel_2.add(btnNewButton);
+		btnOK = new JButton("OK");
+		btnOK.setBackground(new Color(201, 216, 239));
+		btnOK.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnOK.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnOK.setBounds(59, 11, 89, 23);
+		panel_2.add(btnOK);
 		
-		JButton btnCancel = new JButton("Cancel");
+		btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(201, 216, 239));
+		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnCancel.setBounds(221, 11, 89, 23);
 		panel_2.add(btnCancel);
+		
+		
 
 	}
 
