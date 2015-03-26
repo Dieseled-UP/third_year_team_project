@@ -1,5 +1,7 @@
 package security;
 
+import gui.Login;
+
 import javax.crypto.Cipher;
 
 import java.security.spec.KeySpec;
@@ -12,11 +14,10 @@ import javax.crypto.SecretKeyFactory;
 import java.security.AlgorithmParameters;
 
 import javax.crypto.spec.IvParameterSpec;
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardEndHandler;
 
-import com.sun.istack.internal.FinalArrayList;
+import connect.Query;
 
-import java.util.concurrent.AbstractExecutorService;
+import java.util.ArrayList;
 
 public class AES {
 	
@@ -29,6 +30,7 @@ public class AES {
 	private byte[] decryptedData;
 	private byte[] utf8;
 	private final String MAGIC = new String("ABCDEFGHIJKL");
+	
 	
 	public AES() throws Exception {
 		SecretKeyFactory factory = SecretKeyFactory
