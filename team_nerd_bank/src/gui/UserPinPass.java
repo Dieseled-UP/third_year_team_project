@@ -180,8 +180,8 @@ public class UserPinPass extends JFrame implements Runnable {
 		btnOK.addActionListener(arg0 -> {
 
 			// Check that the user has filled out all fields
-			if (txtRePin.getPassword() == null
-					&& txtRePassword.getPassword() == null) {
+			if (txtRePin.getPassword().length == 0
+					&& txtRePassword.getPassword().length == 0) {
 
 				JOptionPane.showMessageDialog(null,
 						"Please fill out all sections before proceeding");

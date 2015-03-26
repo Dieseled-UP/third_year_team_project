@@ -95,28 +95,39 @@ public class Register extends JFrame implements Runnable {
 		pnlForm.setBorder(new LineBorder(new Color(255, 165, 0), 1, true));
 		pnlForm.setBounds(60, 124, 430, 408);
 		getContentPane().add(pnlForm);
-		pnlForm.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(52dlu;default)"), FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(19dlu;default)"), FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(127dlu;default):grow"), FormFactory.RELATED_GAP_COLSPEC,
+		pnlForm.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(52dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(19dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(127dlu;default):grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
 				ColumnSpec.decode("default:grow"), }, new RowSpec[] {
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(1dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(1dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
 				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
 
 		pnlHeader = new JPanel();
@@ -241,16 +252,25 @@ public class Register extends JFrame implements Runnable {
 		pnlBankDetails.setBorder(new LineBorder(new Color(255, 165, 0)));
 		pnlBankDetails.setBounds(60, 543, 430, 85);
 		getContentPane().add(pnlBankDetails);
-		pnlBankDetails.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(12dlu;default)"), FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(140dlu;default)"), FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] {
-				RowSpec.decode("max(29dlu;default)"), FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
+		pnlBankDetails.setLayout(new FormLayout(
+				new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC,
+						FormFactory.DEFAULT_COLSPEC,
+						FormFactory.RELATED_GAP_COLSPEC,
+						FormFactory.DEFAULT_COLSPEC,
+						FormFactory.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("max(12dlu;default)"),
+						FormFactory.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("max(140dlu;default)"),
+						FormFactory.RELATED_GAP_COLSPEC,
+						FormFactory.DEFAULT_COLSPEC,
+						FormFactory.RELATED_GAP_COLSPEC,
+						FormFactory.DEFAULT_COLSPEC,
+						FormFactory.RELATED_GAP_COLSPEC,
+						FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] {
+						RowSpec.decode("max(29dlu;default)"),
+						FormFactory.DEFAULT_ROWSPEC,
+						FormFactory.RELATED_GAP_ROWSPEC,
+						FormFactory.DEFAULT_ROWSPEC, }));
 
 		lblAccNum = new JLabel("Account Number:");
 		lblAccNum.setForeground(Color.BLUE);
@@ -348,7 +368,7 @@ public class Register extends JFrame implements Runnable {
 
 			for (int i = 0; i < nums.length - 1; i++) {
 
-				nums[1] = rand.nextInt()* 4;
+				nums[1] = rand.nextInt() * 4;
 			}
 
 			code.append(birth[2]).append(birth[1]).append(birth[0]);
@@ -358,24 +378,30 @@ public class Register extends JFrame implements Runnable {
 				code.append(String.valueOf(nums[i]));
 			}
 
-			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString()
-					+ ".\nPlease take note of this code and keep in a safe place.");
+			JOptionPane.showMessageDialog(
+					null,
+					"Here is your generated code "
+							+ code.toString()
+							+ ".\nPlease take note of this code and keep in a safe place.");
 
 			java.awt.EventQueue.invokeLater(() -> {
 
-				Login frame = new Login();
+				UserPinPass frame = new UserPinPass();
 				SwingUtilities.invokeLater(frame);
 
 			});
 		});
 
-		btnCancel
-				.addActionListener(arg0 -> {
+		btnCancel.addActionListener(arg0 -> {
 
-					JOptionPane.showMessageDialog(null, "Please re-enter your account number if you still have problems\n please contact"
+					JOptionPane.showMessageDialog(
+									null,
+									"Please re-enter your account number if you still have problems\n please contact"
 											+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
 				});
 
+		Login frame = new Login();
+		SwingUtilities.invokeLater(frame);
 	}
 
 	@Override
