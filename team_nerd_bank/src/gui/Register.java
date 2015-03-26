@@ -95,40 +95,21 @@ public class Register extends JFrame implements Runnable {
 		pnlForm.setBorder(new LineBorder(new Color(255, 165, 0), 1, true));
 		pnlForm.setBounds(60, 124, 430, 408);
 		getContentPane().add(pnlForm);
-		pnlForm.setLayout(new FormLayout(new ColumnSpec[] {
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(52dlu;default)"),
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(19dlu;default)"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(127dlu;default):grow"),
-				FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"), }, new RowSpec[] {
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(1dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
+		pnlForm.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(52dlu;default)"), FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(19dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(127dlu;default):grow"), FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"), }, new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(1dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
 
 		pnlHeader = new JPanel();
 		pnlHeader.setBackground(new Color(0, 0, 139));
@@ -252,25 +233,12 @@ public class Register extends JFrame implements Runnable {
 		pnlBankDetails.setBorder(new LineBorder(new Color(255, 165, 0)));
 		pnlBankDetails.setBounds(60, 543, 430, 85);
 		getContentPane().add(pnlBankDetails);
-		pnlBankDetails.setLayout(new FormLayout(
-				new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC,
-						FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC,
-						FormFactory.RELATED_GAP_COLSPEC,
-						ColumnSpec.decode("max(12dlu;default)"),
-						FormFactory.RELATED_GAP_COLSPEC,
-						ColumnSpec.decode("max(140dlu;default)"),
-						FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC,
-						FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC,
-						FormFactory.RELATED_GAP_COLSPEC,
-						FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] {
-						RowSpec.decode("max(29dlu;default)"),
-						FormFactory.DEFAULT_ROWSPEC,
-						FormFactory.RELATED_GAP_ROWSPEC,
-						FormFactory.DEFAULT_ROWSPEC, }));
+		pnlBankDetails.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(12dlu;default)"), FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(140dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] { RowSpec.decode("max(29dlu;default)"),
+				FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
 
 		lblAccNum = new JLabel("Account Number:");
 		lblAccNum.setForeground(Color.BLUE);
@@ -292,8 +260,7 @@ public class Register extends JFrame implements Runnable {
 		pnlBankDetails.add(txtSortCode, "8, 2, fill, default");
 		txtSortCode.setColumns(10);
 
-		lblConfirm = new JLabel(
-				"If these details are correct  press OK to continue else press CANCEL");
+		lblConfirm = new JLabel("If these details are correct  press OK to continue else press CANCEL");
 		lblConfirm.setHorizontalAlignment(SwingConstants.CENTER);
 		lblConfirm.setForeground(Color.BLUE);
 		lblConfirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -336,9 +303,9 @@ public class Register extends JFrame implements Runnable {
 			// Split the address to fill in the correct fields
 			String[] add = temp.getAddress().split(" ");
 			StringBuilder dress = new StringBuilder();
-			
+
 			if (add.length < 3) {
-				
+
 				for (int i = 0; i < add.length - 1; i++) {
 
 					dress.append(add[i]);
@@ -352,21 +319,63 @@ public class Register extends JFrame implements Runnable {
 
 				}
 			}
-			
+
 			// Name of house/street
 			String street = dress.toString();
-			
-			System.out.println(street.length());
 			// Get substring from street
-			String split = street.substring(street.length()-6, street.length());
-			
-			System.out.println(split);
+			String split = street.substring(street.length() - 6, street.length());
+			// StringBuilders to store right number of stars
+			StringBuilder starsStreet = new StringBuilder();
+			// Add correct number of stars
+			for (int i = 0; i < split.length() - 1; i++) {
 
-			// Replace the end of street with asterix 
-			String newStreet = street.replaceAll("[split]", "*");
-			
-			System.out.println(newStreet);
-			
+				starsStreet.append('*');
+			}
+			// Replace the end of street with asterix
+			String newStreet = street.replace(split, starsStreet);
+
+			// Telephone number
+			String tel = temp.getTelPhone();
+			// Get substring from tel
+			String splitTel = tel.substring(tel.length() - 4, tel.length());
+			// StringBuilders to store right number of stars
+			StringBuilder starsTel = new StringBuilder();
+			// Add correct number of stars
+			for (int i = 0; i < splitTel.length() - 1; i++) {
+
+				starsTel.append('*');
+			}
+			// Replace the end of tel with asterix
+			String stringTel = tel.replace(splitTel, starsTel);
+
+			// Mobile number
+			String mobile = temp.getMobile();
+			// Get substring from mobile
+			String splitMob = mobile.substring(3, 8);
+			// StringBuilders to store right number of stars
+			StringBuilder starsMob = new StringBuilder();
+			// Add correct number of stars
+			for (int i = 0; i < splitMob.length() - 1; i++) {
+
+				starsMob.append('*');
+			}
+			// Replace the end of tel with asterix
+			String stringMob = mobile.replace(splitMob, starsMob);
+
+			// Email
+			String email = temp.getEmail();
+			// Get substring from mobile
+			String splitEmail = email.substring(1, 5);
+			// StringBuilders to store right number of stars
+			StringBuilder starsEmail = new StringBuilder();
+			// Add correct number of stars
+			for (int i = 0; i < splitEmail.length() - 1; i++) {
+
+				starsEmail.append('*');
+			}
+			// Replace the end of tel with asterix
+			String stringEmail = email.replace(splitEmail, starsEmail);
+
 			// Fill in the registration form
 			txtName.setText(temp.getName());
 			txtSurname.setText(temp.getSurname());
@@ -374,9 +383,9 @@ public class Register extends JFrame implements Runnable {
 			txtStreet.setText(newStreet);
 			txtTown.setText(add[add.length - 2]);
 			txtCounty.setText(add[add.length - 1]);
-			txtTelPhone.setText(temp.getTelPhone());
-			txtMobile.setText(temp.getMobile());
-			txtEmail.setText(temp.getEmail());
+			txtTelPhone.setText(stringTel);
+			txtMobile.setText(stringMob);
+			txtEmail.setText(stringEmail);
 
 			txtAccNum.setText(acc[0]);
 			txtSortCode.setText(acc[1]);
@@ -392,7 +401,7 @@ public class Register extends JFrame implements Runnable {
 
 			for (int i = 0; i < nums.length - 1; i++) {
 
-				nums[1] = rand.nextInt() * 4;
+				nums[i] = rand.nextInt(4);
 			}
 
 			code.append(birth[2]).append(birth[1]).append(birth[0]);
@@ -402,11 +411,8 @@ public class Register extends JFrame implements Runnable {
 				code.append(String.valueOf(nums[i]));
 			}
 
-			JOptionPane.showMessageDialog(
-					null,
-					"Here is your generated code "
-							+ code.toString()
-							+ ".\nPlease take note of this code and keep in a safe place.");
+			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString()
+					+ ".\nPlease take note of this code and keep in a safe place.");
 
 			java.awt.EventQueue.invokeLater(() -> {
 
@@ -414,26 +420,24 @@ public class Register extends JFrame implements Runnable {
 				SwingUtilities.invokeLater(frame);
 
 			});
-			
+
 			this.dispose();
 		});
 
 		btnCancel.addActionListener(arg0 -> {
 
-					JOptionPane.showMessageDialog(
-									null,
-									"Please re-enter your account number if you still have problems\n please contact"
-											+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
-					
-					java.awt.EventQueue.invokeLater(() -> {
+			JOptionPane.showMessageDialog(null, "Please re-enter your account number if you still have problems\n please contact"
+					+ " our helpdesk or call in to your nearest branch.\nSorry for any inconvince caused by this fault.");
 
-						Login frame = new Login();
-						SwingUtilities.invokeLater(frame);
-						
-					});
-				});
-		
-		this.dispose();
+			java.awt.EventQueue.invokeLater(() -> {
+
+				Login frame = new Login();
+				SwingUtilities.invokeLater(frame);
+
+			});
+
+			this.dispose();
+		});
 	}
 
 	@Override
