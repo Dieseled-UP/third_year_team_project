@@ -16,7 +16,7 @@ import connect.Query;
 
 public class AES {
 
-	private static int pin;
+	private static String pin;
 	private static ArrayList<String> details;
 	private static ArrayList<String> encryptedList = new ArrayList<>();
 	private static ArrayList<String> uncryptedArrayList = new ArrayList<>();
@@ -33,11 +33,12 @@ public class AES {
 
 	public static void getAutoPin(String item) {
 
-		pin = Integer.parseInt(item);
-		details = Query.getLogin(pin);
+		pin = item;
 	}
 
 	public AES() throws Exception {
+		
+		details = Query.getLogin(pin);
 		
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 

@@ -78,11 +78,21 @@ public class UserLogin extends JFrame implements Runnable {
 	private JPanel panel;
 	private JLabel lblEnterTheFollowing;
 	private ArrayList<String> temp;
+	private ArrayList<String> results;
 
 	public UserLogin() {
 
 		// Get the decrypted data from the AES class
-		getloginDetails();
+		try {
+			AES secu = new AES();
+			
+			results = new ArrayList<>();
+			
+			results = secu.decryptedPinPass();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
 
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {

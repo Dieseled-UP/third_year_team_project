@@ -142,7 +142,7 @@ public class Query {
 
 			while (result.next()) {
 
-				if (result.getString(1) == number) {
+				if (result.getString(1).equalsIgnoreCase(number)) {
 
 					correct = true;
 				}
@@ -160,7 +160,7 @@ public class Query {
 	 * @param num
 	 * @return ArrayList temp
 	 */
-	public static ArrayList<String> getLogin(int num) {
+	public static ArrayList<String> getLogin(String num) {
 
 		ArrayList<String> temp = new ArrayList<>();
 		
@@ -168,7 +168,7 @@ public class Query {
 			
 			sql = "SELECT pin, password FROM the_bank.Member WHERE auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
-			statement.setInt(1, num);
+			statement.setString(1, num);
 			
 			
 			result = statement.executeQuery();

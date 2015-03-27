@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -24,6 +25,7 @@ import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 
 import people.Customer;
+import security.AES;
 
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -70,12 +72,13 @@ public class Register extends JFrame implements Runnable {
 	// private ArrayList<Customer> details;
 	private JLabel lblDob;
 	private JTextField txtDob;
+	
 	// Create a customer object and an array to hold data
 	Customer temp;
 	String[] acc = new String[2];
 
 	public Register() {
-
+		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
 				if ("Nimbus".equals(info.getName())) {

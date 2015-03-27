@@ -171,13 +171,18 @@ public class Login extends JFrame implements Runnable {
 
 					// Pass the number to the query to check that the autopin
 					// exists
+					
+					System.out.println(autoNumber + " Login class");
+					
 					correct = Query.getAutoID(autoNumber);
+					
+					System.out.println(correct);
 
 					// If the autopin is a match let the user continue
 					if (correct == true) {
 
-						txtAutoPin.setText("");
 						AES.getAutoPin(txtAutoPin.getText());
+						txtAutoPin.setText("");
 						this.dispose();
 
 						// Open the UserPinPass frame
