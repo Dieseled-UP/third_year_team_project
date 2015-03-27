@@ -212,8 +212,15 @@ public class UserPinPass extends JFrame implements Runnable {
 				
 				System.out.println(pinString + " " + pinB.toString() + " " + passB.toString() + " " + num);
 
-				// Send data to AES class to encrypt
-				AES.encryptPinPass(pinString, pinB.toString(), passB.toString(), num);
+				try {
+					
+					AES secu = new AES();
+					
+					// Send data to AES class to encrypt
+					secu.encryptPinPass(pinString, pinB.toString(), passB.toString(), num);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				
 				this.dispose();
 

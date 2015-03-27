@@ -10,6 +10,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
 
 import connect.Query;
 
@@ -20,14 +21,14 @@ public class AES {
 	private static ArrayList<String> encryptedList = new ArrayList<>();
 	private static ArrayList<String> uncryptedArrayList = new ArrayList<>();
 
-	private static Cipher dcipher;
+	private Cipher dcipher;
 	private final byte[] SALT = new String("TheBestSaltEver").getBytes();
 	private int iterationCount = 1024;
 	private int keyStrength = 128;
-	private static SecretKey key;
-	private static byte[] iv;
-	private static byte[] decryptedData;
-	private static byte[] utf8;
+	private SecretKey key;
+	private byte[] iv;
+	private byte[] decryptedData;
+	private byte[] utf8;
 	private final String MAGIC = new String("ABCDEFGHIJKL");
 
 	public static void getAutoPin(String item) {
@@ -46,7 +47,7 @@ public class AES {
 		dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 	}
 
-	public static String encrypt(String data) throws Exception {
+	public String encrypt(String data) throws Exception {
 		
 		dcipher.init(Cipher.ENCRYPT_MODE, key);
 		AlgorithmParameters params = dcipher.getParameters();
@@ -60,7 +61,7 @@ public class AES {
 		return base64EncryptedData;
 	}
 
-	public static String decrypt(String base64EncryptedData) throws Exception {
+	public String decrypt(String base64EncryptedData) throws Exception {
 		
 		dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 		decryptedData = new sun.misc.BASE64Decoder().decodeBuffer(base64EncryptedData);
@@ -75,7 +76,7 @@ public class AES {
 	 * @param passIn
 	 * @param num
 	 */
-	public static void encryptPinPass(String auto, String pinIn, String passIn, int num) {
+	public void encryptPinPass(String auto, String pinIn, String passIn, int num) {
 		
 		try {
 
@@ -92,7 +93,14 @@ public class AES {
 			encryptedList.add(passString);
 
 			// Send data to the database
-			Query.setPinPass(encryptedList, num);
+			if (Query.setPinPass(encryptedList, num)) {
+				
+				JOptionPane.showMessageDialog(null, "Your registation has been complete");
+				
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Sorry an error has occured");
+			}
 
 		} catch (Exception e) {
 
@@ -105,7 +113,7 @@ public class AES {
 	 * Method to decrypt the data from the database
 	 * @return ArrayList uncryptedArrayList
 	 */
-	public static ArrayList<String> decryptedPinPass() {
+	public ArrayList<String> decryptedPinPass() {
 
 		try {
 

@@ -34,7 +34,7 @@ public class Login extends JFrame implements Runnable {
 	private JLabel lblTitle;
 	private JLabel lblimg;
 	private String length;
-	private int autoNumber;
+	private String autoNumber;
 	private String path = "Assets/banklogo.jpg";
 	private File file;
 	private BufferedImage image;
@@ -146,12 +146,12 @@ public class Login extends JFrame implements Runnable {
 			// Split the string to check the count is correct return message if
 			// number is to small or large
 			String[] count = length.split("");
-			autoNumber = 0;
+			autoNumber = null;
 
 			// Parse the input to an int return message if there is a problem
 			try {
 
-				autoNumber = Integer.parseInt(txtAutoPin.getText());
+				autoNumber = txtAutoPin.getText();
 			} catch (NumberFormatException e) {
 
 				txtAutoPin.setText("");
@@ -174,7 +174,7 @@ public class Login extends JFrame implements Runnable {
 					correct = Query.getAutoID(autoNumber);
 
 					// If the autopin is a match let the user continue
-					if (correct) {
+					if (correct == true) {
 
 						txtAutoPin.setText("");
 						AES.getAutoPin(txtAutoPin.getText());

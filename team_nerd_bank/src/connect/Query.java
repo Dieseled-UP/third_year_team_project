@@ -100,7 +100,7 @@ public class Query {
 	 * @param list
 	 * @param id
 	 */
-	public static void setPinPass(ArrayList<String> list, int id) {
+	public static boolean setPinPass(ArrayList<String> list, int id) {
 		
 		try {
 			
@@ -111,9 +111,17 @@ public class Query {
 			statement.setString(3, list.get(2));
 			statement.setInt(4, id);
 			
-			result = statement.executeQuery();
+			int done = statement.executeUpdate();
+			
+			if (done == 1) {
+				
+				return  true;
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
+		return false;
 	}
 
 	/**
@@ -121,21 +129,22 @@ public class Query {
 	 * @param number
 	 * @return boolean
 	 */
-	public static boolean getAutoID(int number) {
+	public static boolean getAutoID(String number) {
 
+		boolean correct = false;
 		try {
 
 			sql = "SELECT auto_id FROM the_bank.Member WHERE Member.auto_id = ?";
 			statement = Connect_DB.pStatement(sql);
-			statement.setInt(1, number);
+			statement.setString(1, number);
 
 			result = statement.executeQuery();
 
 			while (result.next()) {
 
-				if (result.getInt(1) == number) {
+				if (result.getString(1) == number) {
 
-					return true;
+					correct = true;
 				}
 			}
 
@@ -143,7 +152,7 @@ public class Query {
 
 			e1.printStackTrace();
 		}
-		return false;
+		return correct;
 	}
 
 	/**

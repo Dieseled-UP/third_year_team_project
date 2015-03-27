@@ -429,7 +429,14 @@ public class UserLogin extends JFrame implements Runnable {
 
 	public void getloginDetails() {
 
-		temp = AES.decryptedPinPass();
+		AES secu;
+		try {
+			secu = new AES();
+			
+			temp = secu.decryptedPinPass();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
