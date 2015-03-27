@@ -84,11 +84,19 @@ public class UserLogin extends JFrame implements Runnable {
 
 		// Get the decrypted data from the AES class
 		try {
+			
+			// Create instance of a AES object
 			AES secu = new AES();
 			
+			// Instantiate the ArrayList
 			results = new ArrayList<>();
 			
+			// Get the login details from database
+			secu.getLoginDetails();
+			
+			// Retrieve the decrypted data
 			results = secu.decryptedPinPass();
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

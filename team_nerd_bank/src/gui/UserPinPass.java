@@ -210,6 +210,7 @@ public class UserPinPass extends JFrame implements Runnable {
 					passB.append(txtPassword.getPassword()[i]);
 				}
 				
+				// For testing purpose
 				System.out.println(pinString + " " + pinB.toString() + " " + passB.toString() + " " + num);
 
 				try {
@@ -344,8 +345,14 @@ public class UserPinPass extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Method to get customer ID number and auto-generated pin
+	 * @param id
+	 * @param autoPin
+	 */
 	public static void getID(int id, String autoPin) {
 
+		// Set the ID and pin
 		num = id;
 		pinString = autoPin;
 	}
