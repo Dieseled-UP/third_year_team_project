@@ -392,18 +392,24 @@ public class Register extends JFrame implements Runnable {
 		// Action to generate code and move customer to next stage
 		btnOK.addActionListener(arg0 -> {
 
+			// Create new random
 			Random rand = new Random();
+			// Create temporary 
 			int[] nums = new int[4];
+			
+			// Split the date of birth String
 			String[] birth = String.valueOf(temp.getDob()).split("-");
 			StringBuilder code = new StringBuilder();
 			
 			char[] endYear = birth[0].toCharArray();
 
+			// Create random 4 digit code
 			for (int i = 0; i < nums.length; i++) {
 
 				nums[i] = rand.nextInt(4);
 			}
 
+			// Append the date and 4 digit code together
 			code.append(birth[2]).append(birth[1]).append(endYear[2]).append(endYear[3]);
 
 			for (int i = 0; i < nums.length; i++) {
@@ -411,6 +417,7 @@ public class Register extends JFrame implements Runnable {
 				code.append(String.valueOf(nums[i]));
 			}
 			
+			// Pass id number and code to UserPinPass
 			UserPinPass.getID(temp.getId(), code.toString());
 
 			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString()

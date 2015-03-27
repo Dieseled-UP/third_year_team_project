@@ -61,23 +61,37 @@ public class AES {
 	}
 
 	public static String decrypt(String base64EncryptedData) throws Exception {
+		
 		dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 		decryptedData = new sun.misc.BASE64Decoder().decodeBuffer(base64EncryptedData);
 		utf8 = dcipher.doFinal(decryptedData);
 		return new String(utf8, "UTF8");
 	}
 
+	/**
+	 * Method to take data and encrypt it then send to database
+	 * @param auto
+	 * @param pinIn
+	 * @param passIn
+	 * @param num
+	 */
 	public static void encryptPinPass(String auto, String pinIn, String passIn, int num) {
 		
 		try {
 
+			// For testing
 			System.out.println(auto + " " + pinIn + " " + passIn + " " + num);
+			
+			// Encrypt pin and password
 			String pinString = encrypt(pinIn);
 			String passString = encrypt(passIn);
+			
+			// Add to ArrayList
 			encryptedList.add(auto);
 			encryptedList.add(pinString);
 			encryptedList.add(passString);
 
+			// Send data to the database
 			Query.setPinPass(encryptedList, num);
 
 		} catch (Exception e) {
@@ -87,6 +101,10 @@ public class AES {
 
 	}
 
+	/**
+	 * Method to decrypt the data from the database
+	 * @return ArrayList uncryptedArrayList
+	 */
 	public static ArrayList<String> decryptedPinPass() {
 
 		try {
