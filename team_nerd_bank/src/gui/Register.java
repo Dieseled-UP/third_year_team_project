@@ -288,8 +288,6 @@ public class Register extends JFrame implements Runnable {
 		btnGO.setBounds(401, 91, 89, 26);
 		getContentPane().add(btnGO);
 
-		// details = new ArrayList<>();
-
 		// Action to fill in the form
 		btnGO.addActionListener(arg0 -> {
 
@@ -412,6 +410,8 @@ public class Register extends JFrame implements Runnable {
 
 				code.append(String.valueOf(nums[i]));
 			}
+			
+			UserPinPass.getID(temp.getId(), code.toString());
 
 			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString()
 					+ ".\nPlease take note of this code and keep in a safe place.");

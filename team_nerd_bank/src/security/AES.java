@@ -37,6 +37,7 @@ public class AES {
 	}
 
 	public AES() throws Exception {
+		
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
 		KeySpec spec = new PBEKeySpec(MAGIC.toCharArray(), SALT, iterationCount, keyStrength);
@@ -46,6 +47,7 @@ public class AES {
 	}
 
 	public static String encrypt(String data) throws Exception {
+		
 		dcipher.init(Cipher.ENCRYPT_MODE, key);
 		AlgorithmParameters params = dcipher.getParameters();
 		iv = params.getParameterSpec(IvParameterSpec.class).getIV();
@@ -65,11 +67,14 @@ public class AES {
 		return new String(utf8, "UTF8");
 	}
 
-	public static void encryptPinPass(String pinIn, String passIn, int num) {
+	public static void encryptPinPass(String auto, String pinIn, String passIn, int num) {
+		
 		try {
 
+			System.out.println(auto + " " + pinIn + " " + passIn + " " + num);
 			String pinString = encrypt(pinIn);
 			String passString = encrypt(passIn);
+			encryptedList.add(auto);
 			encryptedList.add(pinString);
 			encryptedList.add(passString);
 

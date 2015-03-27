@@ -58,6 +58,7 @@ public class UserPinPass extends JFrame implements Runnable {
 	private JPanel panel_2;
 	private JLabel lblPassword;
 	private static int num;
+	private static String pinString;
 
 	public UserPinPass() {
 
@@ -208,9 +209,11 @@ public class UserPinPass extends JFrame implements Runnable {
 
 					passB.append(txtPassword.getPassword()[i]);
 				}
+				
+				System.out.println(pinString + " " + pinB.toString() + " " + passB.toString() + " " + num);
 
 				// Send data to AES class to encrypt
-				AES.encryptPinPass(pinB.toString(), passB.toString(), num);
+				AES.encryptPinPass(pinString, pinB.toString(), passB.toString(), num);
 				
 				this.dispose();
 
@@ -334,9 +337,10 @@ public class UserPinPass extends JFrame implements Runnable {
 		}
 	}
 
-	public static void getID(int id) {
+	public static void getID(int id, String autoPin) {
 
 		num = id;
+		pinString = autoPin;
 	}
 
 	@Override
