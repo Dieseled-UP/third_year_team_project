@@ -1,10 +1,18 @@
 package security;
 
 import java.security.AlgorithmParameters;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.IvParameterSpec;
@@ -12,99 +20,134 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.swing.JOptionPane;
 
+import org.apache.commons.codec.binary.Base64;
+
 import connect.Query;
 
 public class AES {
 
-	private static String pin;
-	private static ArrayList<String> details;
-	private static ArrayList<String> encryptedList = new ArrayList<>();
 	private static ArrayList<String> uncryptedArrayList = new ArrayList<>();
-
+	private static String pinString;
+	
+	private SecretKeyFactory factory;
+	private KeySpec spec;
+	private SecretKey tmp;
 	private Cipher dcipher;
-	private final byte[] SALT = new String("TheBestSaltEver").getBytes();
+	private final byte[] SALT = new String("TheBestSaltEvers").getBytes();
 	private int iterationCount = 1024;
 	private int keyStrength = 128;
 	private SecretKey key;
 	private byte[] iv;
+	private byte[] decodedData;
 	private byte[] decryptedData;
-	private byte[] utf8;
-	private final String MAGIC = new String("ABCDEFGHIJKL");
+	private byte[] pin;
+	private byte[] pass;
+	private byte[] encryptedData;
+	private byte[] encodedData;
+	private final String MAGIC = new String("ABCDEFGHIJKLMNOP");
 	private AlgorithmParameters params;
 
-	public static void getAutoPin(String item) {
+	public AES() {
 
-		pin = item;
+		try {
+			
+			factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+			spec = new PBEKeySpec(MAGIC.toCharArray(), SALT, iterationCount, keyStrength);
+			tmp = factory.generateSecret(spec);
+			key = new SecretKeySpec(tmp.getEncoded(), "AES");
+			dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+			params = dcipher.getParameters();
+			iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+			
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			e.printStackTrace();
+		} catch (NoSuchPaddingException e) {
+			e.printStackTrace();
+		} catch (InvalidParameterSpecException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public AES() throws Exception {
-		
-		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+	public byte[] encrypt(String data) {
 
-		KeySpec spec = new PBEKeySpec(MAGIC.toCharArray(), SALT, iterationCount, keyStrength);
-		SecretKey tmp = factory.generateSecret(spec);
-		key = new SecretKeySpec(tmp.getEncoded(), "AES");
-		dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-		params = dcipher.getParameters();
+		try {
+			
+			dcipher.init(Cipher.ENCRYPT_MODE, key);
+			encryptedData = dcipher.doFinal(data.getBytes());
+			encodedData = new Base64().encode(encryptedData);
+			
+		} catch (InvalidKeyException e) {
+			e.printStackTrace();
+		} catch (IllegalBlockSizeException e) {
+			e.printStackTrace();
+		} catch (BadPaddingException e) {
+			e.printStackTrace();
+		}
+
+		return encodedData;
 	}
 
-	public String encrypt(String data) throws Exception {
-		
-		dcipher.init(Cipher.ENCRYPT_MODE, key);
-		iv = params.getParameterSpec(IvParameterSpec.class).getIV();
-		byte[] utf8EncryptedData = dcipher.doFinal(data.getBytes());
-		String base64EncryptedData = new sun.misc.BASE64Encoder().encodeBuffer(utf8EncryptedData);
+	public String decrypt(byte[] data) {
 
-		return base64EncryptedData;
-	}
-
-	public String decrypt(String base64EncryptedData) throws Exception {
+		// For testing purpose please remove
+		System.out.println(new String(data) + " In decrypt method");
 		
-		// For testing purpose
-		System.out.println(base64EncryptedData.toString());
+		try {
+			
+			dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+			decodedData = new Base64().decode(data);
+			decryptedData = dcipher.doFinal(decodedData);
+			
+		} catch (InvalidKeyException e) {
+			e.printStackTrace();
+		} catch (InvalidAlgorithmParameterException e) {
+			e.printStackTrace();
+		} catch (IllegalBlockSizeException e) {
+			e.printStackTrace();
+		} catch (BadPaddingException e) {
+			e.printStackTrace();
+		}
 		
-		dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
-		decryptedData = new sun.misc.BASE64Decoder().decodeBuffer(base64EncryptedData);
-		utf8 = dcipher.doFinal(decryptedData);
-		
-		return new String(utf8, "UTF8");
+		// For testing purpose please remove
+		System.out.println(new String(decryptedData));
+				
+		return new String(decryptedData);
 	}
 
 	/**
 	 * Method to take data and encrypt it then send to database
+	 * 
 	 * @param auto
 	 * @param pinIn
 	 * @param passIn
 	 * @param num
 	 */
 	public void encryptPinPass(String auto, String pinIn, String passIn, int num) {
-		
+
 		try {
 
-			// For testing
+			// For testing purpose please remove
 			System.out.println(auto + " " + pinIn + " " + passIn + " " + num);
-			
+
 			// Encrypt pin and password
-			String pinString = encrypt(pinIn);
-			String passString = encrypt(passIn);
-			
-			// Add to ArrayList
-			encryptedList.add(auto);
-			encryptedList.add(pinString);
-			encryptedList.add(passString);
+			byte[] pinString = encrypt(pinIn);
+			byte[] passString = encrypt(passIn);
 
 			// Send data to the database
-			if (Query.setPinPass(encryptedList, num)) {
-				
-				JOptionPane.showMessageDialog(null, "Your registation has been complete");
-				
+			if (Query.setPinPass(auto, pinString, passString, num)) {
+
+				// Let user know the registration as been successful
+				JOptionPane.showMessageDialog(null, "Your registration has been complete");
+
 			} else {
 
-				JOptionPane.showMessageDialog(null, "Sorry an error has occured");
+				// Let user know a problem has occurred
+				JOptionPane.showMessageDialog(null, "Sorry an error has occurred");
 			}
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 
@@ -112,34 +155,42 @@ public class AES {
 
 	/**
 	 * Method to decrypt the data from the database
+	 * 
 	 * @return ArrayList uncryptedArrayList
 	 */
 	public ArrayList<String> decryptedPinPass() {
 
 		try {
 
-			// For testing purpose
-			System.out.println(details.get(0).toString() + " " + details.get(1).toString());
-			
-			uncryptedArrayList.add(decrypt(details.get(0)));
-			uncryptedArrayList.add(decrypt(details.get(1)));
-			
-			// For testing purpose
-			System.out.println(uncryptedArrayList.get(0).toString() + " " + uncryptedArrayList.get(1).toString());
+			// For testing purpose please remove
+			System.out.println(pinString + " AES class");
+
+			// Get pin and password from database
+			pin = Query.getDBPin(pinString);
+			pass = Query.getDBPass(pinString);
+
+			// For testing purpose please remove
+			System.out.println(new String(pin) + " " + new String(pass) + " In decryted PinPass method");
+
+			// Add decrypted data to List
+			uncryptedArrayList.add(decrypt(pin));
+			uncryptedArrayList.add(decrypt(pass));
+
 		} catch (Exception e) {
 
 			e.printStackTrace();
 		}
 
+		// For testing purpose please remove
+		System.out.println(uncryptedArrayList.get(0) + " " + uncryptedArrayList.get(1));
+
+		// Return the List
 		return uncryptedArrayList;
 	}
-	
-	/**
-	 * Method to retrieve the encrypted data from the database
-	 */
-	public void getLoginDetails() {
-		
-		details = Query.getLogin(pin);
+
+	public static void getAutoPin(String autoPin) {
+
+		pinString = autoPin;
 	}
 
 	public String getKey() {

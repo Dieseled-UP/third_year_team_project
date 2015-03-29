@@ -8,10 +8,9 @@ package connect;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.util.ArrayList;
-import java.util.ArrayList;
 
 import people.Customer;
+//import java.util.ArrayList;
 
 public class Query {
 
@@ -100,27 +99,32 @@ public class Query {
 	 * @param list
 	 * @param id
 	 */
-	public static boolean setPinPass(ArrayList<String> list, int id) {
-		
+	public static boolean setPinPass(String auto, byte[] pin, byte[] pass, int id) {
+
 		try {
-			
+
 			sql = "INSERT INTO the_bank.Member VALUES (?, ?, ?, ?)";
 			statement = Connect_DB.pStatement(sql);
-			statement.setString(1, list.get(0));
-			statement.setString(2, list.get(1));
-			statement.setString(3, list.get(2));
+
+			statement.setString(1, auto);
+			statement.setBytes(2, pin);
+			statement.setBytes(3, pass);
 			statement.setInt(4, id);
-			
+
 			int done = statement.executeUpdate();
-			
+
 			if (done == 1) {
-				
-				return  true;
+
+				return true;
 			}
+
+			// Close the connection
+			Connect_DB.finish();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -156,32 +160,75 @@ public class Query {
 	}
 
 	/**
-	 * Method to query the database and return the user pin and password
+	 * Method to query the database and return the user pin
+	 * 
 	 * @param num
-	 * @return ArrayList temp
+	 * @return byte[] pin
 	 */
-	public static ArrayList<String> getLogin(String num) {
+	public static byte[] getDBPin(String num) {
 
-		ArrayList<String> temp = new ArrayList<>();
+		byte[] pin = null;
 		
+		// For testing purposes
+		System.out.println(num);
+
 		try {
-			
-			sql = "SELECT pin, password FROM the_bank.Member WHERE auto_ID = ?";
+
+			sql = "SELECT pin FROM the_bank.Member WHERE auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 			statement.setString(1, num);
-			
-			
+
 			result = statement.executeQuery();
-			result.next();
-			
-			temp.add(result.getString("pin"));
-			temp.add(result.getString("password"));
-			
+			while (result.next()) {
+
+				pin = result.getBytes(1);
+			}
+
+			// Close the connection
+			Connect_DB.finish();
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-		return temp;
+		
+		return pin;
+	}
+	
+	/**
+	 * Method to query the database and return the user password
+	 * 
+	 * @param num
+	 * @return byte[] pin
+	 */
+	public static byte[] getDBPass(String num) {
+
+		byte[] pass = null;
+		
+		// For testing purposes
+		System.out.println(num);
+
+		try {
+
+			sql = "SELECT passw FROM the_bank.Member WHERE auto_ID = ?";
+			statement = Connect_DB.pStatement(sql);
+			statement.setString(1, num);
+
+			result = statement.executeQuery();
+			while (result.next()) {
+
+				pass = result.getBytes(1);
+			}
+
+			// Close the connection
+			Connect_DB.finish();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		return pass;
 	}
 
 }

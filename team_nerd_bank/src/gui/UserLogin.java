@@ -91,9 +91,6 @@ public class UserLogin extends JFrame implements Runnable {
 			// Instantiate the ArrayList
 			results = new ArrayList<>();
 			
-			// Get the login details from database
-			secu.getLoginDetails();
-			
 			// Retrieve the decrypted data
 			results = secu.decryptedPinPass();
 			
