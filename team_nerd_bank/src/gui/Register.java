@@ -409,7 +409,7 @@ public class Register extends JFrame implements Runnable {
 			// Create random 4 digit code
 			for (int i = 0; i < nums.length; i++) {
 
-				nums[i] = rand.nextInt(4);
+				nums[i] = rand.nextInt(9);
 			}
 
 			// Append the date and 4 digit code together

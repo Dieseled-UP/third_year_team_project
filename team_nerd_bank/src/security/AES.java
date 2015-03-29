@@ -1,5 +1,6 @@
 package security;
 
+import java.io.UnsupportedEncodingException;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -75,7 +76,7 @@ public class AES {
 		try {
 			
 			dcipher.init(Cipher.ENCRYPT_MODE, key);
-			encryptedData = dcipher.doFinal(data.getBytes());
+			encryptedData = dcipher.doFinal(data.getBytes("UTF8"));
 			encodedData = new Base64().encode(encryptedData);
 			
 		} catch (InvalidKeyException e) {
@@ -83,6 +84,8 @@ public class AES {
 		} catch (IllegalBlockSizeException e) {
 			e.printStackTrace();
 		} catch (BadPaddingException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 
@@ -94,11 +97,15 @@ public class AES {
 		// For testing purpose please remove
 		System.out.println(new String(data) + " In decrypt method");
 		
+		String result = null;
+		
 		try {
 			
 			dcipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 			decodedData = new Base64().decode(data);
 			decryptedData = dcipher.doFinal(decodedData);
+			
+			result = new String(decryptedData, "UTF8");
 			
 		} catch (InvalidKeyException e) {
 			e.printStackTrace();
@@ -108,12 +115,14 @@ public class AES {
 			e.printStackTrace();
 		} catch (BadPaddingException e) {
 			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		}
 		
 		// For testing purpose please remove
-		System.out.println(new String(decryptedData));
+		System.out.println(result);
 				
-		return new String(decryptedData);
+		return result;
 	}
 
 	/**
@@ -191,9 +200,5 @@ public class AES {
 	public static void getAutoPin(String autoPin) {
 
 		pinString = autoPin;
-	}
-
-	public String getKey() {
-		return MAGIC;
 	}
 }
