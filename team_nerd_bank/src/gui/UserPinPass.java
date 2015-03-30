@@ -194,7 +194,8 @@ public class UserPinPass extends JFrame implements Runnable {
 				JOptionPane.showMessageDialog(null, "Please fill out all sections before proceeding");
 			} else {
 
-				// Create StringBuilders to convert pin and password fields into strings
+				// Create StringBuilders to convert pin and password fields into
+				// strings
 				StringBuilder pinB = new StringBuilder();
 				StringBuilder passB = new StringBuilder();
 
@@ -209,20 +210,20 @@ public class UserPinPass extends JFrame implements Runnable {
 
 					passB.append(txtPassword.getPassword()[i]);
 				}
-				
+
 				// For testing purpose
 				System.out.println(pinString + " " + pinB.toString() + " " + passB.toString() + " " + num);
 
 				try {
-					
+
 					AES secu = new AES();
-					
+
 					// Send data to AES class to encrypt
 					secu.encryptPinPass(pinString, pinB.toString(), passB.toString(), num);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
-				
+
 				this.dispose();
 
 				java.awt.EventQueue.invokeLater(() -> {
@@ -249,24 +250,49 @@ public class UserPinPass extends JFrame implements Runnable {
 		@Override
 		public boolean verify(JComponent input) {
 
-			// Get the second pin
+			boolean result = false;
+			StringBuilder pinB = new StringBuilder();
+
+			// Get the second password
 			JPasswordField tField = (JPasswordField) input;
+			
+			// Append pin characters
+			for (int i = 0; i < tField.getPassword().length; i++) {
 
-			// Check that the two arrays are the same
-			if (Arrays.equals(tField.getPassword(), txtPin.getPassword())) {
+				pinB.append(tField.getPassword()[i]);
+			}
+			// For testing purpose please remove
+			System.out.println(pinB.toString());
+			
+			if (NumberTest(pinB.toString())) {
 
-				return true;
+				// Check that the two arrays are the same
+				if (Arrays.equals(tField.getPassword(), txtPin.getPassword())) {
+
+					result = true;
+					return result;
+
+				} else {
+
+					// Instruct user that the passwords don't match
+					JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
+
+					// Reset input field
+					txtRePin.setText(null);
+					tField.setText(null);
+				}
 
 			} else {
 
-				// Instruct user that the pin numbers don't match
-				JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
-
-				// Reset input field
+				JOptionPane.showMessageDialog(null, "Pin can only consist of numbers!!");
+				
+				txtPin.setText(null);
 				txtRePin.setText(null);
-				tField.setText(null);
-				return false;
+				
+				txtPin.grabFocus();
 			}
+
+			return result;
 		}
 	}
 
@@ -278,13 +304,16 @@ public class UserPinPass extends JFrame implements Runnable {
 		@Override
 		public boolean verify(JComponent input) {
 
+			boolean result = false;
+
 			// Get the second password
 			JPasswordField tField = (JPasswordField) input;
 
 			// Check that the two arrays are the same
 			if (Arrays.equals(tField.getPassword(), txtPassword.getPassword())) {
 
-				return true;
+				result = true;
+				return result;
 
 			} else {
 
@@ -294,8 +323,9 @@ public class UserPinPass extends JFrame implements Runnable {
 				// Reset input field
 				txtRePassword.setText(null);
 				tField.setText(null);
-				return false;
 			}
+
+			return result;
 		}
 	}
 
@@ -305,6 +335,7 @@ public class UserPinPass extends JFrame implements Runnable {
 	 */
 	@SuppressWarnings("serial")
 	class PinLimit extends PlainDocument {
+
 		private int limit;
 
 		PinLimit(int limit) {
@@ -328,6 +359,7 @@ public class UserPinPass extends JFrame implements Runnable {
 	 */
 	@SuppressWarnings("serial")
 	class PassLimit extends PlainDocument {
+
 		private int limit;
 
 		PassLimit(int limit) {
@@ -345,8 +377,20 @@ public class UserPinPass extends JFrame implements Runnable {
 		}
 	}
 
+	public boolean NumberTest(String num) {
+
+		try {
+
+			Integer.parseInt(num);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
 	/**
 	 * Method to get customer ID number and auto-generated pin
+	 * 
 	 * @param id
 	 * @param autoPin
 	 */

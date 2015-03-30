@@ -50,7 +50,6 @@ public class AES {
 			key = new SecretKeySpec(tmp.getEncoded(), "AES");
 			dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 			iv = new String("LetThisHaveAGoIT").getBytes();
-//			iv = params.getParameterSpec(IvParameterSpec.class).getIV();
 			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
