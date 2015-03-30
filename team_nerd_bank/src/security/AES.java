@@ -1,12 +1,10 @@
 package security;
 
 import java.io.UnsupportedEncodingException;
-import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.InvalidParameterSpecException;
 import java.security.spec.KeySpec;
 import java.util.ArrayList;
 
@@ -34,39 +32,31 @@ public class AES {
 	private KeySpec spec;
 	private SecretKey tmp;
 	private Cipher dcipher;
-	private final byte[] SALT = new String("TheBestSaltEvers").getBytes();
+	private byte[] salt, iv, decodedData, decryptedData, pin, pass, encryptedData, encodedData;
 	private int iterationCount = 1024;
 	private int keyStrength = 128;
 	private SecretKey key;
-	private byte[] iv;
-	private byte[] decodedData;
-	private byte[] decryptedData;
-	private byte[] pin;
-	private byte[] pass;
-	private byte[] encryptedData;
-	private byte[] encodedData;
-	private final String MAGIC = new String("ABCDEFGHIJKLMNOP");
-	private AlgorithmParameters params;
+	private String magic;
 
 	public AES() {
 
 		try {
 			
+			salt = new String("TheBestSaltEvers").getBytes();
+			magic = new String("ABCDEFGHIJKLMNOP");
 			factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-			spec = new PBEKeySpec(MAGIC.toCharArray(), SALT, iterationCount, keyStrength);
+			spec = new PBEKeySpec(magic.toCharArray(), salt, iterationCount, keyStrength);
 			tmp = factory.generateSecret(spec);
 			key = new SecretKeySpec(tmp.getEncoded(), "AES");
 			dcipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-			params = dcipher.getParameters();
-			iv = params.getParameterSpec(IvParameterSpec.class).getIV();
+			iv = new String("LetThisHaveAGoIT").getBytes();
+//			iv = params.getParameterSpec(IvParameterSpec.class).getIV();
 			
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (InvalidKeySpecException e) {
 			e.printStackTrace();
 		} catch (NoSuchPaddingException e) {
-			e.printStackTrace();
-		} catch (InvalidParameterSpecException e) {
 			e.printStackTrace();
 		}
 	}
@@ -75,7 +65,7 @@ public class AES {
 
 		try {
 			
-			dcipher.init(Cipher.ENCRYPT_MODE, key);
+			dcipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
 			encryptedData = dcipher.doFinal(data.getBytes("UTF8"));
 			encodedData = new Base64().encode(encryptedData);
 			
@@ -86,6 +76,8 @@ public class AES {
 		} catch (BadPaddingException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (InvalidAlgorithmParameterException e) {
 			e.printStackTrace();
 		}
 
