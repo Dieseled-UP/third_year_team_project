@@ -5,6 +5,8 @@
  */
 package gui;
 
+import gui.UserPinPass.PinLimit;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
@@ -25,6 +27,9 @@ import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import security.AES;
 
@@ -77,7 +82,6 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblCharacter;
 	private JPanel panel;
 	private JLabel lblEnterTheFollowing;
-	private ArrayList<String> temp;
 	private ArrayList<String> results;
 
 	public UserLogin() {
@@ -157,7 +161,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinOne.setForeground(Color.BLUE);
 		lblPinOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		lblPinOneText = new JLabel("third");
+		lblPinOneText = new JLabel(" ");
 		lblPinOneText.setBounds(80, 4, 28, 14);
 		panel_3.add(lblPinOneText);
 		lblPinOneText.setForeground(Color.BLUE);
@@ -165,6 +169,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		txtPinOne = new JTextField();
 		txtPinOne.setBounds(183, 0, 40, 26);
+		txtPinOne.setDocument(new NumLimit(1));
 		panel_3.add(txtPinOne);
 		txtPinOne.setColumns(10);
 
@@ -185,7 +190,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinTwo.setForeground(Color.BLUE);
 		lblPinTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		lblPinTwoText = new JLabel("first");
+		lblPinTwoText = new JLabel(" ");
 		lblPinTwoText.setBounds(80, 4, 29, 14);
 		panel_4.add(lblPinTwoText);
 		lblPinTwoText.setForeground(Color.BLUE);
@@ -193,6 +198,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		txtPinTwo = new JTextField();
 		txtPinTwo.setBounds(183, 0, 40, 26);
+		txtPinTwo.setDocument(new NumLimit(1));
 		panel_4.add(txtPinTwo);
 		txtPinTwo.setColumns(10);
 
@@ -213,7 +219,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinThree.setForeground(Color.BLUE);
 		lblPinThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		lblPinThreeText = new JLabel("second");
+		lblPinThreeText = new JLabel(" ");
 		lblPinThreeText.setBounds(80, 4, 29, 14);
 		panel_5.add(lblPinThreeText);
 		lblPinThreeText.setForeground(Color.BLUE);
@@ -221,6 +227,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		txtPinThree = new JTextField();
 		txtPinThree.setBounds(183, 0, 40, 26);
+		txtPinThree.setDocument(new NumLimit(1));
 		panel_5.add(txtPinThree);
 		txtPinThree.setColumns(10);
 
@@ -230,6 +237,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinThreeNum.setForeground(Color.BLUE);
 		lblPinThreeNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
+		// Set the labels to the random characters
 		randomPinLabel();
 
 		lblInfoOne = new JLabel("Enter the following numbers from your PIN");
@@ -260,7 +268,7 @@ public class UserLogin extends JFrame implements Runnable {
 		label.setBounds(10, 4, 59, 14);
 		panel_6.add(label);
 
-		lblPassOne = new JLabel("third");
+		lblPassOne = new JLabel(" ");
 		lblPassOne.setForeground(Color.BLUE);
 		lblPassOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassOne.setBounds(75, 4, 28, 14);
@@ -268,6 +276,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		txtPassOne = new JTextField();
 		txtPassOne.setColumns(10);
+		txtPassOne.setDocument(new NumLimit(1));
 		txtPassOne.setBounds(183, 0, 40, 26);
 		panel_6.add(txtPassOne);
 
@@ -288,7 +297,7 @@ public class UserLogin extends JFrame implements Runnable {
 		label_2.setBounds(10, 4, 57, 14);
 		panel_7.add(label_2);
 
-		lblPassTwo = new JLabel("third");
+		lblPassTwo = new JLabel(" ");
 		lblPassTwo.setForeground(Color.BLUE);
 		lblPassTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassTwo.setBounds(75, 4, 28, 14);
@@ -296,6 +305,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		txtPassTwo = new JTextField();
 		txtPassTwo.setColumns(10);
+		txtPassTwo.setDocument(new NumLimit(1));
 		txtPassTwo.setBounds(183, 0, 40, 26);
 		panel_7.add(txtPassTwo);
 
@@ -316,14 +326,18 @@ public class UserLogin extends JFrame implements Runnable {
 		label_4.setBounds(10, 4, 57, 14);
 		panel_8.add(label_4);
 
-		lblPassThree = new JLabel("third");
+		lblPassThree = new JLabel(" ");
 		lblPassThree.setForeground(Color.BLUE);
 		lblPassThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassThree.setBounds(75, 4, 28, 14);
 		panel_8.add(lblPassThree);
+		
+		// Set the labels to the random characters
+		randomPassLabel();
 
 		txtPassThree = new JTextField();
 		txtPassThree.setColumns(10);
+		txtPassThree.setDocument(new NumLimit(1));
 		txtPassThree.setBounds(183, 0, 40, 26);
 		panel_8.add(txtPassThree);
 
@@ -349,6 +363,8 @@ public class UserLogin extends JFrame implements Runnable {
 		getContentPane().add(btnForgot);
 
 		btnLogin.addActionListener(arg0 -> {
+			
+			
 
 		});
 	}
@@ -398,14 +414,12 @@ public class UserLogin extends JFrame implements Runnable {
 	 */
 	public void randomPassLabel() {
 
-		getloginDetails();
-
 		// Create variables for label tags
 		String one = null;
 		String two = null;
 		String three = null;
 
-		String[] size = new String[temp.get(1).length()];
+		String[] size = new String[results.get(1).length()];
 
 		for (int i = 0; i < size.length - 1; i++) {
 
@@ -441,16 +455,28 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassTwo.setText(two);
 		lblPassThree.setText(three);
 	}
+	
+	/**
+	 * Add a limiter to the input field that only allows the user to input the
+	 * specified number of characters
+	 */
+	@SuppressWarnings("serial")
+	class NumLimit extends PlainDocument {
 
-	public void getloginDetails() {
+		private int limit;
 
-		AES secu;
-		try {
-			secu = new AES();
-			
-			temp = secu.decryptedPinPass();
-		} catch (Exception e) {
-			e.printStackTrace();
+		NumLimit(int limit) {
+			super();
+			this.limit = limit;
+		}
+
+		public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+			if (str == null)
+				return;
+
+			if ((getLength() + str.length()) <= limit) {
+				super.insertString(offset, str, attr);
+			}
 		}
 	}
 
