@@ -5,8 +5,6 @@
  */
 package gui;
 
-import gui.UserPinPass.PinLimit;
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
@@ -21,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
@@ -49,16 +48,16 @@ public class UserLogin extends JFrame implements Runnable {
 	private JLabel lblPinOneText;
 	private JLabel lblPinTwoText;
 	private JLabel lblPinThreeText;
-	private JTextField txtPinOne;
-	private JTextField txtPinTwo;
-	private JTextField txtPinThree;
+	private JPasswordField txtPinOne;
+	private JPasswordField txtPinTwo;
+	private JPasswordField txtPinThree;
 	private JLabel lblInfoOne;
 	private JButton btnLogin;
 	private JButton btnForgot;
 	private JPanel panel_5;
-	private JTextField txtPassOne;
-	private JTextField txtPassTwo;
-	private JTextField txtPassThree;
+	private JPasswordField txtPassOne;
+	private JPasswordField txtPassTwo;
+	private JPasswordField txtPassThree;
 	private String[] pinNumbers = new String[] { "1st", "2nd", "3rd", "4th" };
 	private String[] passNumbers = new String[] { "1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th", "11th", "12th",
 			"13th", "14th", "15th", "16th" };
@@ -83,25 +82,29 @@ public class UserLogin extends JFrame implements Runnable {
 	private JPanel panel;
 	private JLabel lblEnterTheFollowing;
 	private ArrayList<String> results;
+	
+	// Create variables for label tags
+	private String onePinLbl = null;
+	private String twoPinLbl = null;
+	private String threePinLbl = null;
 
 	public UserLogin() {
 
 		// Get the decrypted data from the AES class
 		try {
-			
+
 			// Create instance of a AES object
 			AES secu = new AES();
-			
+
 			// Instantiate the ArrayList
 			results = new ArrayList<>();
-			
+
 			// Retrieve the decrypted data
 			results = secu.decryptedPinPass();
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
 
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -167,7 +170,8 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinOneText.setForeground(Color.BLUE);
 		lblPinOneText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		txtPinOne = new JTextField();
+		txtPinOne = new JPasswordField();
+		txtPinOne.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtPinOne.setBounds(183, 0, 40, 26);
 		txtPinOne.setDocument(new NumLimit(1));
 		panel_3.add(txtPinOne);
@@ -196,7 +200,8 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinTwoText.setForeground(Color.BLUE);
 		lblPinTwoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		txtPinTwo = new JTextField();
+		txtPinTwo = new JPasswordField();
+		txtPinTwo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtPinTwo.setBounds(183, 0, 40, 26);
 		txtPinTwo.setDocument(new NumLimit(1));
 		panel_4.add(txtPinTwo);
@@ -225,7 +230,8 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPinThreeText.setForeground(Color.BLUE);
 		lblPinThreeText.setFont(new Font("Tahoma", Font.PLAIN, 14));
 
-		txtPinThree = new JTextField();
+		txtPinThree = new JPasswordField();
+		txtPinThree.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtPinThree.setBounds(183, 0, 40, 26);
 		txtPinThree.setDocument(new NumLimit(1));
 		panel_5.add(txtPinThree);
@@ -274,7 +280,8 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassOne.setBounds(75, 4, 28, 14);
 		panel_6.add(lblPassOne);
 
-		txtPassOne = new JTextField();
+		txtPassOne = new JPasswordField();
+		txtPassOne.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtPassOne.setColumns(10);
 		txtPassOne.setDocument(new NumLimit(1));
 		txtPassOne.setBounds(183, 0, 40, 26);
@@ -303,7 +310,8 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassTwo.setBounds(75, 4, 28, 14);
 		panel_7.add(lblPassTwo);
 
-		txtPassTwo = new JTextField();
+		txtPassTwo = new JPasswordField();
+		txtPassTwo.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtPassTwo.setColumns(10);
 		txtPassTwo.setDocument(new NumLimit(1));
 		txtPassTwo.setBounds(183, 0, 40, 26);
@@ -331,11 +339,12 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPassThree.setBounds(75, 4, 28, 14);
 		panel_8.add(lblPassThree);
-		
+
 		// Set the labels to the random characters
 		randomPassLabel();
 
-		txtPassThree = new JTextField();
+		txtPassThree = new JPasswordField();
+		txtPassThree.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtPassThree.setColumns(10);
 		txtPassThree.setDocument(new NumLimit(1));
 		txtPassThree.setBounds(183, 0, 40, 26);
@@ -363,8 +372,6 @@ public class UserLogin extends JFrame implements Runnable {
 		getContentPane().add(btnForgot);
 
 		btnLogin.addActionListener(arg0 -> {
-			
-			
 
 		});
 	}
@@ -375,38 +382,40 @@ public class UserLogin extends JFrame implements Runnable {
 	public void randomPinLabel() {
 
 		// Create variables for label tags
-		String one = null;
-		String two = null;
-		String three = null;
+		onePinLbl = null;
+		twoPinLbl = null;
+		threePinLbl = null;
 
 		// Generate a variable for each label
-		if (one == null) {
+		if (onePinLbl == null) {
 			// Set text for first label using a random String from the Array
-			one = pinNumbers[rand.nextInt(pinNumbers.length)];
+			onePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
 		}
-		if (two == null) {
+		if (twoPinLbl == null) {
 			// Set text for second label using a random String from the Array
-			two = pinNumbers[rand.nextInt(pinNumbers.length)];
+			twoPinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
 
 			// Check that the text has not already been used
-			while (two == one) {
-				two = pinNumbers[rand.nextInt(pinNumbers.length)];
+			while (twoPinLbl == onePinLbl) {
+				twoPinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
 			}
 		}
-		if (three == null) {
+		if (threePinLbl == null) {
 			// Set text for third label using a random String from the Array
-			three = pinNumbers[rand.nextInt(pinNumbers.length)];
+			threePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
 
 			// Check that the text has not already been used
-			while (three == one || three == two) {
-				three = pinNumbers[rand.nextInt(pinNumbers.length)];
+			while (threePinLbl == onePinLbl || threePinLbl == twoPinLbl) {
+				threePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
 			}
 		}
 
+		orderPinLables();
+		
 		// Set the text
-		lblPinOneText.setText(one);
-		lblPinTwoText.setText(two);
-		lblPinThreeText.setText(three);
+//		lblPinOneText.setText(onePinLbl);
+//		lblPinTwoText.setText(twoPinLbl);
+//		lblPinThreeText.setText(threePinLbl);
 	}
 
 	/**
@@ -455,7 +464,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassTwo.setText(two);
 		lblPassThree.setText(three);
 	}
-	
+
 	/**
 	 * Add a limiter to the input field that only allows the user to input the
 	 * specified number of characters
@@ -476,6 +485,56 @@ public class UserLogin extends JFrame implements Runnable {
 
 			if ((getLength() + str.length()) <= limit) {
 				super.insertString(offset, str, attr);
+			}
+		}
+	}
+
+	public void orderPinLables() {
+
+		int temp = onePinLbl.compareTo(twoPinLbl);
+		System.out.println(temp);
+		
+		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
+
+			lblPinOneText.setText(onePinLbl);
+			
+			if (twoPinLbl.compareTo(threePinLbl) == 1) {
+				
+				lblPinTwoText.setText(twoPinLbl);
+				lblPinThreeText.setText(threePinLbl);
+			} else {
+
+				lblPinTwoText.setText(threePinLbl);
+				lblPinThreeText.setText(twoPinLbl);
+			}
+		}
+		
+		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
+
+			lblPinOneText.setText(twoPinLbl);
+			lblPinTwoText.setText(onePinLbl);
+			lblPinThreeText.setText(threePinLbl);
+		}
+		
+		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
+			
+			lblPinOneText.setText(twoPinLbl);
+			lblPinTwoText.setText(threePinLbl);
+			lblPinThreeText.setText(onePinLbl);
+		}
+		
+		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
+
+			lblPinThreeText.setText(onePinLbl);
+			
+			if (twoPinLbl.compareTo(threePinLbl) == 1) {
+				
+				lblPinOneText.setText(twoPinLbl);
+				lblPinTwoText.setText(threePinLbl);
+			} else {
+
+				lblPinTwoText.setText(threePinLbl);
+				lblPinOneText.setText(twoPinLbl);
 			}
 		}
 	}
