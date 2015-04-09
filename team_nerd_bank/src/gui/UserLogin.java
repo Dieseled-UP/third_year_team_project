@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -18,9 +19,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
@@ -29,6 +31,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import javax.xml.bind.Unmarshaller.Listener;
 
 import security.AES;
 
@@ -82,11 +85,20 @@ public class UserLogin extends JFrame implements Runnable {
 	private JPanel panel;
 	private JLabel lblEnterTheFollowing;
 	private ArrayList<String> results;
-	
+
 	// Create variables for label tags
 	private String onePinLbl = null;
 	private String twoPinLbl = null;
 	private String threePinLbl = null;
+	private String onePassLbl = null;
+	private String twoPassLbl = null;
+	private String threePassLbl = null;
+	private int pinNumOne;
+	private int pinNumTwo;
+	private int pinNumThree;
+	private int passNumOne;
+	private int passNumTwo;
+	private int passNumThree;
 
 	public UserLogin() {
 
@@ -277,7 +289,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassOne = new JLabel(" ");
 		lblPassOne.setForeground(Color.BLUE);
 		lblPassOne.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPassOne.setBounds(75, 4, 28, 14);
+		lblPassOne.setBounds(80, 4, 28, 14);
 		panel_6.add(lblPassOne);
 
 		txtPassOne = new JPasswordField();
@@ -307,7 +319,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassTwo = new JLabel(" ");
 		lblPassTwo.setForeground(Color.BLUE);
 		lblPassTwo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPassTwo.setBounds(75, 4, 28, 14);
+		lblPassTwo.setBounds(80, 4, 28, 14);
 		panel_7.add(lblPassTwo);
 
 		txtPassTwo = new JPasswordField();
@@ -337,7 +349,7 @@ public class UserLogin extends JFrame implements Runnable {
 		lblPassThree = new JLabel(" ");
 		lblPassThree.setForeground(Color.BLUE);
 		lblPassThree.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPassThree.setBounds(75, 4, 28, 14);
+		lblPassThree.setBounds(80, 4, 28, 14);
 		panel_8.add(lblPassThree);
 
 		// Set the labels to the random characters
@@ -373,6 +385,29 @@ public class UserLogin extends JFrame implements Runnable {
 
 		btnLogin.addActionListener(arg0 -> {
 
+			if (checkPinValatation() && checkPassValatation()) {
+
+				java.awt.EventQueue.invokeLater(() -> {
+
+					MainFrame frame = new MainFrame();
+					SwingUtilities.invokeLater(frame);
+
+				});
+
+				this.dispose();
+
+			} else {
+
+				JOptionPane.showMessageDialog(null, "There seems to be a problem with your login details");
+				this.dispose();
+
+				java.awt.EventQueue.invokeLater(() -> {
+
+					Login frame = new Login();
+					SwingUtilities.invokeLater(frame);
+
+				});
+			}
 		});
 	}
 
@@ -380,11 +415,6 @@ public class UserLogin extends JFrame implements Runnable {
 	 * Method to set the labels for the pin
 	 */
 	public void randomPinLabel() {
-
-		// Create variables for label tags
-		onePinLbl = null;
-		twoPinLbl = null;
-		threePinLbl = null;
 
 		// Generate a variable for each label
 		if (onePinLbl == null) {
@@ -411,22 +441,12 @@ public class UserLogin extends JFrame implements Runnable {
 		}
 
 		orderPinLables();
-		
-		// Set the text
-//		lblPinOneText.setText(onePinLbl);
-//		lblPinTwoText.setText(twoPinLbl);
-//		lblPinThreeText.setText(threePinLbl);
 	}
 
 	/**
 	 * Method to set the labels for the pin
 	 */
 	public void randomPassLabel() {
-
-		// Create variables for label tags
-		String one = null;
-		String two = null;
-		String three = null;
 
 		String[] size = new String[results.get(1).length()];
 
@@ -436,33 +456,30 @@ public class UserLogin extends JFrame implements Runnable {
 		}
 
 		// Generate a variable for each label
-		if (one == null) {
+		if (onePassLbl == null) {
 			// Set text for first label using a random String from the Array
-			one = size[rand.nextInt(size.length)];
+			onePassLbl = size[rand.nextInt(size.length - 1)];
 		}
-		if (two == null) {
+		if (twoPassLbl == null) {
 			// Set text for second label using a random String from the Array
-			two = size[rand.nextInt(size.length)];
+			twoPassLbl = size[rand.nextInt(size.length - 1)];
 
 			// Check that the text has not already been used
-			while (two == one) {
-				two = size[rand.nextInt(size.length)];
+			while (twoPassLbl == onePassLbl) {
+				twoPassLbl = size[rand.nextInt(size.length - 1)];
 			}
 		}
-		if (three == null) {
+		if (threePassLbl == null) {
 			// Set text for third label using a random String from the Array
-			three = size[rand.nextInt(size.length)];
+			threePassLbl = size[rand.nextInt(size.length - 1)];
 
 			// Check that the text has not already been used
-			while (three == one || three == two) {
-				three = size[rand.nextInt(size.length)];
+			while (threePassLbl == onePassLbl || threePassLbl == twoPassLbl) {
+				threePassLbl = size[rand.nextInt(size.length - 1)];
 			}
 		}
 
-		// Set the text
-		lblPassOne.setText(one);
-		lblPassTwo.setText(two);
-		lblPassThree.setText(three);
+		orderPassLables();
 	}
 
 	/**
@@ -489,17 +506,24 @@ public class UserLogin extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Method to set the pin labels in the correct numerical order
+	 */
 	public void orderPinLables() {
 
-		int temp = onePinLbl.compareTo(twoPinLbl);
-		System.out.println(temp);
-		
-		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
+		pinNumOne = Integer.parseInt(onePinLbl.substring(0, 1));
+		pinNumTwo = Integer.parseInt(twoPinLbl.substring(0, 1));
+		pinNumThree = Integer.parseInt(threePinLbl.substring(0, 1));
+
+		// For testing purposes please remove
+		System.out.println(pinNumOne + " " + pinNumTwo + " " + pinNumThree + " Pin munbers");
+
+		if (pinNumTwo > pinNumOne && pinNumThree > pinNumOne) {
 
 			lblPinOneText.setText(onePinLbl);
-			
-			if (twoPinLbl.compareTo(threePinLbl) == 1) {
-				
+
+			if (pinNumThree > pinNumTwo) {
+
 				lblPinTwoText.setText(twoPinLbl);
 				lblPinThreeText.setText(threePinLbl);
 			} else {
@@ -507,35 +531,146 @@ public class UserLogin extends JFrame implements Runnable {
 				lblPinTwoText.setText(threePinLbl);
 				lblPinThreeText.setText(twoPinLbl);
 			}
-		}
-		
-		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
+		} else if (pinNumOne > pinNumTwo && pinNumThree > pinNumTwo) {
 
 			lblPinOneText.setText(twoPinLbl);
-			lblPinTwoText.setText(onePinLbl);
-			lblPinThreeText.setText(threePinLbl);
-		}
-		
-		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
-			
-			lblPinOneText.setText(twoPinLbl);
-			lblPinTwoText.setText(threePinLbl);
-			lblPinThreeText.setText(onePinLbl);
-		}
-		
-		if (onePinLbl.compareTo(twoPinLbl) == 1 && onePinLbl.compareTo(threePinLbl) == 1) {
 
-			lblPinThreeText.setText(onePinLbl);
-			
-			if (twoPinLbl.compareTo(threePinLbl) == 1) {
-				
-				lblPinOneText.setText(twoPinLbl);
-				lblPinTwoText.setText(threePinLbl);
+			if (pinNumThree > pinNumOne) {
+
+				lblPinTwoText.setText(onePinLbl);
+				lblPinThreeText.setText(threePinLbl);
 			} else {
 
 				lblPinTwoText.setText(threePinLbl);
-				lblPinOneText.setText(twoPinLbl);
+				lblPinThreeText.setText(onePinLbl);
 			}
+
+		} else if (pinNumOne > pinNumThree && pinNumTwo > pinNumThree) {
+
+			lblPinOneText.setText(threePinLbl);
+
+			if (pinNumTwo > pinNumOne) {
+
+				lblPinThreeText.setText(twoPinLbl);
+				lblPinTwoText.setText(onePinLbl);
+			} else {
+
+				lblPinThreeText.setText(onePinLbl);
+				lblPinTwoText.setText(twoPinLbl);
+			}
+		}
+	}
+
+	/**
+	 * Method to set the pass labels in the correct numerical order
+	 */
+	public void orderPassLables() {
+
+		passNumOne = Integer.parseInt(onePassLbl.substring(0, 1));
+		passNumTwo = Integer.parseInt(twoPassLbl.substring(0, 1));
+		passNumThree = Integer.parseInt(threePassLbl.substring(0, 1));
+
+		// For testing purposes please remove
+		System.out.println(passNumOne + " " + passNumTwo + " " + passNumThree + " Pass numbers");
+
+		if (passNumTwo > passNumOne && passNumThree > passNumOne) {
+
+			lblPassOne.setText(onePassLbl);
+
+			if (passNumThree > passNumTwo) {
+
+				lblPassTwo.setText(twoPassLbl);
+				lblPassThree.setText(threePassLbl);
+			} else {
+
+				lblPassTwo.setText(threePassLbl);
+				lblPassThree.setText(twoPassLbl);
+			}
+		} else if (passNumOne > passNumTwo && passNumThree > passNumTwo) {
+
+			lblPassOne.setText(twoPassLbl);
+
+			if (passNumThree > passNumOne) {
+
+				lblPassTwo.setText(onePassLbl);
+				lblPassThree.setText(threePassLbl);
+			} else {
+
+				lblPassTwo.setText(threePassLbl);
+				lblPassThree.setText(onePassLbl);
+			}
+
+		} else if (passNumOne > passNumThree && passNumTwo > passNumThree) {
+
+			lblPassOne.setText(threePassLbl);
+
+			if (passNumTwo > passNumOne) {
+
+				lblPassThree.setText(twoPassLbl);
+				lblPassTwo.setText(onePassLbl);
+			} else {
+
+				lblPassThree.setText(onePassLbl);
+				lblPassTwo.setText(twoPassLbl);
+			}
+		}
+	}
+
+	public boolean checkPinValatation() {
+
+		boolean allGood = false;
+		char[] pin = results.get(0).toCharArray();
+		ArrayList<Integer> order = new ArrayList<>();
+		order.add(pinNumOne - 1);
+		order.add(pinNumTwo - 1);
+		order.add(pinNumThree - 1);
+
+		Collections.sort(order);
+
+		// For testing purposes please remove
+		System.out.println("Actual pin array - " + pin[0] + " " + pin[1] + " " + pin[2] + " " + pin[3]);
+
+		// For testing purposes please remove
+		System.out.println("Generated numbers - " + pin[pinNumOne - 1] + " " + pin[pinNumTwo - 1] + " " + pin[pinNumThree - 1]);
+
+		// For testing purposes please remove
+		System.out.println("Actual numbers needed - " + txtPinOne.getPassword()[0] + " " + txtPinTwo.getPassword()[0] + " "
+				+ txtPinThree.getPassword()[0]);
+
+		if (pin[order.get(0)] == txtPinOne.getPassword()[0] && pin[order.get(1)] == txtPinTwo.getPassword()[0]
+				&& pin[order.get(2)] == txtPinThree.getPassword()[0]) {
+
+			allGood = true;
+			return allGood;
+		} else {
+
+			return allGood;
+		}
+	}
+
+	public boolean checkPassValatation() {
+
+		boolean allGood = false;
+		char[] pass = results.get(1).toCharArray();
+		ArrayList<Integer> order = new ArrayList<>();
+		order.add(passNumOne - 1);
+		order.add(passNumTwo - 1);
+		order.add(passNumThree - 1);
+
+		Collections.sort(order);
+
+		// For testing purposes please remove
+		System.out
+				.println("Actual characters needed - " + pass[passNumOne - 1] + " " + pass[passNumTwo - 1] + " " + pass[passNumThree - 1]);
+
+		if (pass[order.get(0)] == txtPassOne.getPassword()[0] && pass[order.get(1)] == txtPassTwo.getPassword()[0]
+				&& pass[order.get(2)] == txtPassThree.getPassword()[0]) {
+
+			allGood = true;
+			return allGood;
+		} else {
+
+			return allGood;
 		}
 	}
 
