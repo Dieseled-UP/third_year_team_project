@@ -31,8 +31,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
+import javax.xml.bind.Unmarshaller.Listener;
 
 import security.AES;
 
@@ -394,7 +393,7 @@ public class UserLogin extends JFrame implements Runnable {
 					SwingUtilities.invokeLater(frame);
 
 				});
-				
+
 				this.dispose();
 
 			} else {
@@ -622,10 +621,10 @@ public class UserLogin extends JFrame implements Runnable {
 		boolean allGood = false;
 		char[] pin = results.get(0).toCharArray();
 		ArrayList<Integer> order = new ArrayList<>();
-		order.add(pinNumOne-1);
-		order.add(pinNumTwo-1);
-		order.add(pinNumThree-1);
-		
+		order.add(pinNumOne - 1);
+		order.add(pinNumTwo - 1);
+		order.add(pinNumThree - 1);
+
 		Collections.sort(order);
 
 		// For testing purposes please remove
@@ -654,10 +653,10 @@ public class UserLogin extends JFrame implements Runnable {
 		boolean allGood = false;
 		char[] pass = results.get(1).toCharArray();
 		ArrayList<Integer> order = new ArrayList<>();
-		order.add(passNumOne-1);
-		order.add(passNumTwo-1);
-		order.add(passNumThree-1);
-		
+		order.add(passNumOne - 1);
+		order.add(passNumTwo - 1);
+		order.add(passNumThree - 1);
+
 		Collections.sort(order);
 
 		// For testing purposes please remove
