@@ -1,27 +1,27 @@
 package gui;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JTextField;
-
-import java.awt.Color;
-
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.WindowConstants;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 import security.AES;
 import connect.Query;
@@ -75,6 +75,7 @@ public class Login extends JFrame implements Runnable {
 		txtAutoPin = new JTextField();
 		txtAutoPin.setFont(new Font("Dialog", Font.PLAIN, 14));
 		txtAutoPin.setBounds(305, 136, 175, 26);
+		txtAutoPin.setDocument(new NumLimit(10));
 		getContentPane().add(txtAutoPin);
 		txtAutoPin.setColumns(10);
 
@@ -141,64 +142,74 @@ public class Login extends JFrame implements Runnable {
 
 		btnNext.addActionListener(arg0 -> {
 
-			// Get the user input
-			length = txtAutoPin.getText();
-			// Split the string to check the count is correct return message if
-			// number is to small or large
-			String[] count = length.split("");
-			autoNumber = null;
+			if (NumberTest(txtAutoPin.getText())) {
 
-			// Parse the input to an int return message if there is a problem
-			try {
+				// Get the user input
+				length = txtAutoPin.getText();
+				// Split the string to check the count is correct return message
+				// if
+				// number is to small or large
+				String[] count = length.split("");
+				autoNumber = null;
 
-				autoNumber = txtAutoPin.getText();
-			} catch (NumberFormatException e) {
+				// Parse the input to an int return message if there is a
+				// problem
+				try {
 
-				txtAutoPin.setText("");
-			} catch (StackOverflowError e) {
+					autoNumber = txtAutoPin.getText();
+				} catch (NumberFormatException e) {
 
-				txtAutoPin.setText("");
-			} catch (Exception e) {
-
-				txtAutoPin.setText("");
-			} finally {
-
-				if (count.length < 10 || count.length > 10) {
-
-					JOptionPane.showMessageDialog(null, "Sorry this pin is incorrect please try again");
 					txtAutoPin.setText("");
-				} else {
+				} catch (StackOverflowError e) {
 
-					// Pass the number to the query to check that the autopin
-					// exists
-					
-					System.out.println(autoNumber + " Login class");
-					
-					correct = Query.getAutoID(autoNumber);
-					
-					System.out.println(correct);
+					txtAutoPin.setText("");
+				} catch (Exception e) {
 
-					// If the autopin is a match let the user continue
-					if (correct == true) {
+					txtAutoPin.setText("");
+				} finally {
 
-						AES.getAutoPin(txtAutoPin.getText());
+					if (count.length < 10 || count.length > 10) {
+
+						JOptionPane.showMessageDialog(null, "Sorry this pin is incorrect please try again");
 						txtAutoPin.setText("");
-						this.dispose();
-
-						// Open the UserPinPass frame
-						java.awt.EventQueue.invokeLater(() -> {
-
-							UserLogin frame = new UserLogin();
-							SwingUtilities.invokeLater(frame);
-
-						});
 					} else {
 
-						JOptionPane.showMessageDialog(null, "Sorry this pin is incorrect please try again"
-								+ "\nor contact our customer help desk");
-						txtAutoPin.setText("");
+						// Pass the number to the query to check that the
+						// autopin
+						// exists
+
+						System.out.println(autoNumber + " Login class");
+
+						correct = Query.getAutoID(autoNumber);
+
+						System.out.println(correct);
+
+						// If the autopin is a match let the user continue
+						if (correct == true) {
+
+							AES.getAutoPin(txtAutoPin.getText());
+							txtAutoPin.setText("");
+							this.dispose();
+
+							// Open the UserPinPass frame
+							java.awt.EventQueue.invokeLater(() -> {
+
+								UserLogin frame = new UserLogin();
+								SwingUtilities.invokeLater(frame);
+
+							});
+						} else {
+
+							JOptionPane.showMessageDialog(null, "Sorry this pin is incorrect please try again"
+									+ "\nor contact our customer help desk");
+							txtAutoPin.setText("");
+						}
 					}
 				}
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Sorry this pin is incorrect please try again" + "\nor contact our customer help desk");
+				txtAutoPin.setText("");
 			}
 
 		});
@@ -215,6 +226,47 @@ public class Login extends JFrame implements Runnable {
 			});
 		});
 
+	}
+
+	/**
+	 * Add a limiter to the input field that only allows the user to input the
+	 * specified number of characters
+	 */
+	@SuppressWarnings("serial")
+	class NumLimit extends PlainDocument {
+
+		private int limit;
+
+		NumLimit(int limit) {
+			super();
+			this.limit = limit;
+		}
+
+		public void insertString(int offset, String str, AttributeSet attr) throws BadLocationException {
+			if (str == null)
+				return;
+
+			if ((getLength() + str.length()) <= limit) {
+				super.insertString(offset, str, attr);
+			}
+		}
+	}
+
+	/**
+	 * Method to ensure user enters numbers only
+	 * 
+	 * @param num
+	 * @return boolean
+	 */
+	public boolean NumberTest(String num) {
+
+		try {
+
+			Integer.parseInt(num);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	@Override
