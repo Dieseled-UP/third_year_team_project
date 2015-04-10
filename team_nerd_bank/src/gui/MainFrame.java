@@ -36,7 +36,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private JButton btnPayees;
 	private JButton btnLogout;
 	private JPanel mainView;
-	private JPanel summary, account, transfer, details, security, payees;
+	private JPanel summary, account, transfer, details, security, payees, state;
 	private JPanel panel_3;
 	private JLabel lblLogo;
 	private String path = "Assets/logo2.svg.png";
@@ -60,9 +60,9 @@ public class MainFrame extends JFrame implements Runnable {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
-		
+
 		int id = Integer.parseInt(autoNumber);
-		
+
 		String name = Query.getUserName(id);
 
 		getContentPane().setBackground(Color.WHITE);
@@ -75,6 +75,7 @@ public class MainFrame extends JFrame implements Runnable {
 		details = new Details();
 		security = new Security();
 		payees = new Payees();
+		state = new Statements();
 
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 139), 1, true));
@@ -168,6 +169,14 @@ public class MainFrame extends JFrame implements Runnable {
 		btnPayees.setBounds(10, 257, 151, 32);
 		getContentPane().add(btnPayees);
 
+		btnStatements = new JButton("Statements");
+		btnStatements.setForeground(new Color(0, 0, 139));
+		btnStatements.setFont(new Font("Tahoma", Font.BOLD, 14));
+		btnStatements.setFocusPainted(false);
+		btnStatements.setBackground(new Color(201, 216, 239));
+		btnStatements.setBounds(10, 290, 151, 32);
+		getContentPane().add(btnStatements);
+
 		btnLogout = new JButton("Logout");
 		btnLogout.setForeground(new Color(0, 0, 139));
 		btnLogout.setBackground(new Color(201, 216, 239));
@@ -192,20 +201,13 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.add(details, "details");
 		mainView.add(summary, "summary");
 		mainView.add(account, "account");
-		mainView.add(security, "security");
 		mainView.add(payees, "payee");
+		mainView.add(security, "security");
+		mainView.add(state, "states");
 
 		CardLayout cardLayout = (CardLayout) mainView.getLayout();
 
 		cardLayout.show(mainView, "summary");
-		
-		btnStatements = new JButton("Statements");
-		btnStatements.setForeground(new Color(0, 0, 139));
-		btnStatements.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnStatements.setFocusPainted(false);
-		btnStatements.setBackground(new Color(201, 216, 239));
-		btnStatements.setBounds(10, 290, 151, 32);
-		getContentPane().add(btnStatements);
 
 		btnSummary.addActionListener(arg0 -> {
 
@@ -265,6 +267,17 @@ public class MainFrame extends JFrame implements Runnable {
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
+		});
+
+		btnStatements.addActionListener(arg0 -> {
+
+			cardLayout.show(mainView, "states");
+			btnStatements.setBackground(new Color(166, 166, 166));
+			btnAccounts.setBackground(new Color(201, 216, 239));
+			btnTransfers.setBackground(new Color(201, 216, 239));
+			btnDetails.setBackground(new Color(201, 216, 239));
+			btnSecurity.setBackground(new Color(201, 216, 239));
+			btnPayees.setBackground(new Color(201, 216, 239));
 		});
 	}
 
