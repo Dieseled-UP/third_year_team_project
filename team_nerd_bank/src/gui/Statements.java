@@ -72,7 +72,7 @@ public class Statements extends JPanel {
 		add(selectAccPanel);
 		selectAccPanel.setLayout(null);
 
-		AccComboBox = new JComboBox<String>(words);
+		AccComboBox = new JComboBox<>();
 		AccComboBox.setBounds(192, 32, 181, 20);
 		selectAccPanel.add(AccComboBox);
 
