@@ -34,7 +34,7 @@ public class Login extends JFrame implements Runnable {
 	private JLabel lblTitle;
 	private JLabel lblimg;
 	private String length;
-	private String autoNumber;
+	private static String autoNumber;
 	private String path = "Assets/banklogo.jpg";
 	private File file;
 	private BufferedImage image;
@@ -194,7 +194,7 @@ public class Login extends JFrame implements Runnable {
 							// Open the UserPinPass frame
 							java.awt.EventQueue.invokeLater(() -> {
 
-								UserLogin frame = new UserLogin();
+								UserLogin frame = new UserLogin(autoNumber);
 								SwingUtilities.invokeLater(frame);
 
 							});

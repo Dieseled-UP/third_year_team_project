@@ -6,6 +6,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -31,7 +32,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
-import javax.xml.bind.Unmarshaller.Listener;
 
 import security.AES;
 
@@ -100,7 +100,7 @@ public class UserLogin extends JFrame implements Runnable {
 	private int passNumTwo;
 	private int passNumThree;
 
-	public UserLogin() {
+	public UserLogin(String autoNumber) {
 
 		// Get the decrypted data from the AES class
 		try {
@@ -372,6 +372,7 @@ public class UserLogin extends JFrame implements Runnable {
 		btnLogin.setForeground(Color.BLUE);
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLogin.setBounds(408, 616, 89, 26);
+		btnLogin.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		getContentPane().add(btnLogin);
 
 		btnForgot = new JButton("<html><strong style=\"color: #FFA500\">==></strong> Forgot your PIN or Password?</html>");
@@ -381,6 +382,7 @@ public class UserLogin extends JFrame implements Runnable {
 		btnForgot.setBorderPainted(false);
 		btnForgot.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnForgot.setBounds(55, 613, 256, 32);
+		btnForgot.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		getContentPane().add(btnForgot);
 
 		btnLogin.addActionListener(arg0 -> {
@@ -389,11 +391,11 @@ public class UserLogin extends JFrame implements Runnable {
 
 				java.awt.EventQueue.invokeLater(() -> {
 
-					MainFrame frame = new MainFrame();
+					MainFrame frame = new MainFrame(autoNumber);
 					SwingUtilities.invokeLater(frame);
 
 				});
-
+				
 				this.dispose();
 
 			} else {
@@ -444,7 +446,7 @@ public class UserLogin extends JFrame implements Runnable {
 	}
 
 	/**
-	 * Method to set the labels for the pin
+	 * Method to set the labels for the password
 	 */
 	public void randomPassLabel() {
 
@@ -616,6 +618,10 @@ public class UserLogin extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Method to check that the pin entered by the user matches what is on record
+	 * @return boolean allGood
+	 */
 	public boolean checkPinValatation() {
 
 		boolean allGood = false;
@@ -648,6 +654,10 @@ public class UserLogin extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Method to check that the pass entered by the user matches what is on record
+	 * @return
+	 */
 	public boolean checkPassValatation() {
 
 		boolean allGood = false;

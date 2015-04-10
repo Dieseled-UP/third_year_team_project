@@ -377,6 +377,11 @@ public class UserPinPass extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Method to ensure user enters numbers only
+	 * @param num
+	 * @return boolean
+	 */
 	public boolean NumberTest(String num) {
 
 		try {

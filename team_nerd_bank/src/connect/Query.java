@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import people.Customer;
+
 //import java.util.ArrayList;
 
 public class Query {
@@ -32,8 +33,7 @@ public class Query {
 
 		try {
 
-			sql = "SELECT * FROM the_bank.Customer" + " INNER JOIN Account"
-					+ " ON Account.customer_ID = Customer.customer_ID"
+			sql = "SELECT * FROM the_bank.Customer INNER JOIN Account ON Account.customer_ID = Customer.customer_ID"
 					+ " WHERE Account.account_num = ?";
 			statement = Connect_DB.pStatement(sql);
 			statement.setInt(1, number);
@@ -42,9 +42,8 @@ public class Query {
 
 			while (result.next()) {
 
-				cust = new Customer(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4),
-						result.getString(5), result.getString(6), result.getString(7),
-						result.getString(8));
+				cust = new Customer(result.getInt(1), result.getString(2), result.getString(3), result.getDate(4), result.getString(5),
+						result.getString(6), result.getString(7), result.getString(8));
 			}
 
 			// Close the connection
@@ -71,7 +70,7 @@ public class Query {
 
 		try {
 
-			sql = "SELECT * FROM the_bank.Account" + " WHERE Account.account_num = ?";
+			sql = "SELECT * FROM the_bank.Account WHERE Account.account_num = ?";
 			statement = Connect_DB.pStatement(sql);
 			statement.setInt(1, number);
 
@@ -93,9 +92,10 @@ public class Query {
 
 		return account;
 	}
-	
+
 	/**
 	 * Method to add new member details to the database
+	 * 
 	 * @param list
 	 * @param id
 	 */
@@ -130,6 +130,7 @@ public class Query {
 
 	/**
 	 * Method to query the database to return the auto generated pin
+	 * 
 	 * @param number
 	 * @return boolean
 	 */
@@ -168,7 +169,7 @@ public class Query {
 	public static byte[] getDBPin(String num) {
 
 		byte[] pin = null;
-		
+
 		// For testing purposes
 		System.out.println(num);
 
@@ -191,10 +192,10 @@ public class Query {
 
 			e.printStackTrace();
 		}
-		
+
 		return pin;
 	}
-	
+
 	/**
 	 * Method to query the database and return the user password
 	 * 
@@ -204,7 +205,7 @@ public class Query {
 	public static byte[] getDBPass(String num) {
 
 		byte[] pass = null;
-		
+
 		// For testing purposes
 		System.out.println(num);
 
@@ -227,8 +228,34 @@ public class Query {
 
 			e.printStackTrace();
 		}
-		
+
 		return pass;
 	}
 
+	public static String getUserName(int pin) {
+
+		String name = null;
+
+		try {
+
+			sql = "SELECT f_name, s_name FROM the_bank.Customer INNER JOIN Member ON Customer.customer_ID"
+					+ " = Member.customer_ID WHERE Member.auto_ID = ?";
+			statement = Connect_DB.pStatement(sql);
+			statement.setInt(1, pin);
+
+			result = statement.executeQuery();
+			while (result.next()) {
+
+				name = result.getString(1);
+				name += " ";
+				name += result.getString(2);
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return name;
+	}
 }

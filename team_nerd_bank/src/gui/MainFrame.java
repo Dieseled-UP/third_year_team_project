@@ -3,27 +3,23 @@ package gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-import javax.swing.UIManager;
-
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.SwingConstants;
-import javax.swing.UIManager.LookAndFeelInfo;
-import javax.swing.border.LineBorder;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.WindowConstants;
+import javax.swing.border.LineBorder;
 
-import connect.Connect_DB;
+import connect.Query;
 
 /**
  * @author Team Nerd Banks L00099023 26 Feb 2015
@@ -51,7 +47,7 @@ public class MainFrame extends JFrame implements Runnable {
 	private JLabel lblName;
 	private JButton btnStatements;
 
-	public MainFrame() {
+	public MainFrame(String autoNumber) {
 
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -64,6 +60,10 @@ public class MainFrame extends JFrame implements Runnable {
 			// If Nimbus is not available, you can set the GUI to another look
 			// and feel.
 		}
+		
+		int id = Integer.parseInt(autoNumber);
+		
+		String name = Query.getUserName(id);
 
 		getContentPane().setBackground(Color.WHITE);
 
@@ -105,13 +105,13 @@ public class MainFrame extends JFrame implements Runnable {
 		lblWelcome = new JLabel("Welcome");
 		lblWelcome.setForeground(Color.WHITE);
 		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblWelcome.setBounds(540, 47, 70, 14);
+		lblWelcome.setBounds(540, 47, 61, 14);
 		panel.add(lblWelcome);
 
-		lblName = new JLabel("");
+		lblName = new JLabel(name);
 		lblName.setForeground(Color.WHITE);
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblName.setBounds(620, 48, 118, 14);
+		lblName.setBounds(596, 47, 118, 14);
 		panel.add(lblName);
 
 		btnSummary = new JButton("Summary");
