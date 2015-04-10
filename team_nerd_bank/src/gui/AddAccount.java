@@ -4,6 +4,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 public class AddAccount extends JPanel {
+	
+	private static final long serialVersionUID = 1L;
+
 	public AddAccount() {
 		setLayout(null);
 		

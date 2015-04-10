@@ -19,7 +19,7 @@ public class Account extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JLabel lblNewLabel;
 	private JLabel lblType;
 	private JLabel lblBalance;
@@ -31,7 +31,7 @@ public class Account extends JPanel {
 
 		setLayout(null);
 
-		comboBox = new JComboBox(words);
+		comboBox = new JComboBox<String>(words);
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		comboBox.setForeground(Color.BLUE);
 		comboBox.setBounds(295, 134, 80, 26);

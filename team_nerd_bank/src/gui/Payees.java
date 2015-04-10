@@ -6,7 +6,6 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,12 +15,6 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
-
-import net.proteanit.sql.DbUtils;
-
-import com.mysql.jdbc.Connection;
-
-import connect.Connect_DB;
 
 public class Payees extends JPanel {
 

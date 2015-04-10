@@ -104,14 +104,14 @@ public class MainFrame extends JFrame implements Runnable {
 
 		lblWelcome = new JLabel("Welcome");
 		lblWelcome.setForeground(Color.WHITE);
-		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblWelcome.setBounds(540, 47, 61, 14);
 		panel.add(lblWelcome);
 
 		lblName = new JLabel(name);
 		lblName.setForeground(Color.WHITE);
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblName.setBounds(596, 47, 118, 14);
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblName.setBounds(604, 47, 118, 14);
 		panel.add(lblName);
 
 		btnSummary = new JButton("Summary");

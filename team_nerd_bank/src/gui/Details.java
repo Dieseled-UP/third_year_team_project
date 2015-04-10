@@ -28,7 +28,7 @@ public class Details extends JPanel {
 	private JTextField txtAddLine;
 	private JLabel lblAdressTwo;
 	private JTextField textField;
-	private JComboBox cbxCounty;
+	private JComboBox<String> cbxCounty;
 	private JLabel lblTelPhone;
 	private JTextField txtTelPhone;
 	private JLabel lblMobile;
@@ -95,7 +95,7 @@ public class Details extends JPanel {
 		lblCounty.setBounds(380, 230, 62, 14);
 		add(lblCounty);
 		
-		cbxCounty = new JComboBox();
+		cbxCounty = new JComboBox<String>();
 		cbxCounty.setForeground(new Color(0, 0, 0));
 		cbxCounty.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cbxCounty.setBounds(380, 253, 161, 26);

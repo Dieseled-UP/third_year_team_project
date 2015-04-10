@@ -14,22 +14,20 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 
 
 public class Transfers extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel pnlPayee;
-	private JComboBox cbxAccounts;
+	private JComboBox<String> cbxAccounts;
 	private JLabel lblFrom;
 	private JSpinner sprMoney;
 	private JLabel lblValue;
 	private JLabel lblTo;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	private JLabel lblOr;
 	private JPanel pnlDate;
 	private JSpinner spinner;
@@ -54,7 +52,7 @@ public class Transfers extends JPanel {
 		lblFrom.setBounds(239, 48, 115, 31);
 		add(lblFrom);
 		
-		cbxAccounts = new JComboBox();
+		cbxAccounts = new JComboBox<String>();
 		cbxAccounts.setBounds(239, 90, 101, 26);
 		add(cbxAccounts);
 		
@@ -70,7 +68,7 @@ public class Transfers extends JPanel {
 		lblTo.setBounds(10, 24, 46, 14);
 		pnlPayee.add(lblTo);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<String>();
 		comboBox.setBounds(20, 47, 246, 26);
 		pnlPayee.add(comboBox);
 		
