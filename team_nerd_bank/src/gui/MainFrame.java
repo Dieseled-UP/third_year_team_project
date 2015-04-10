@@ -217,6 +217,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnDetails.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
+			btnStatements.setBackground(new Color(201, 216, 239));
 		});
 
 		btnAccounts.addActionListener(arg0 -> {
@@ -227,6 +228,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnDetails.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
+			btnStatements.setBackground(new Color(201, 216, 239));
 		});
 
 		btnTransfers.addActionListener(arg0 -> {
@@ -237,6 +239,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnDetails.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
+			btnStatements.setBackground(new Color(201, 216, 239));
 		});
 
 		btnDetails.addActionListener(arg0 -> {
@@ -247,6 +250,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
+			btnStatements.setBackground(new Color(201, 216, 239));
 		});
 
 		btnSecurity.addActionListener(arg0 -> {
@@ -257,6 +261,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
+			btnStatements.setBackground(new Color(201, 216, 239));
 		});
 
 		btnPayees.addActionListener(arg0 -> {
@@ -267,6 +272,7 @@ public class MainFrame extends JFrame implements Runnable {
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
 			btnSecurity.setBackground(new Color(201, 216, 239));
+			btnStatements.setBackground(new Color(201, 216, 239));
 		});
 
 		btnStatements.addActionListener(arg0 -> {
