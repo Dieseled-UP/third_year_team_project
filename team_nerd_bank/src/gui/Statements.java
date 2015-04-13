@@ -17,6 +17,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import java.awt.SystemColor;
+import javax.swing.border.MatteBorder;
 
 public class Statements extends JPanel {
 
@@ -152,36 +154,43 @@ public class Statements extends JPanel {
 		viewStatements = new JPanel();
 		viewStatements.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Statements", TitledBorder.LEADING,
 				TitledBorder.TOP, null, new Color(0, 0, 255)));
-		viewStatements.setBounds(20, 209, 619, 211);
+		viewStatements.setBounds(20, 198, 619, 222);
 		add(viewStatements);
 		viewStatements.setLayout(null);
-
-		table = new JTable();
-		table.setBounds(10, 33, 586, 167);
-		viewStatements.add(table);
-
-		lblDate = new JLabel("Date");
-		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDate.setForeground(new Color(0, 0, 255));
-		lblDate.setBounds(20, 10, 62, 21);
-		viewStatements.add(lblDate);
-
-		lblNewLabel = new JLabel("Description");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setForeground(new Color(0, 0, 255));
-		lblNewLabel.setBounds(101, 7, 92, 26);
-		viewStatements.add(lblNewLabel);
-
-		lblDebit = new JLabel("Debit");
-		lblDebit.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblDebit.setForeground(new Color(0, 0, 255));
-		lblDebit.setBounds(451, 1, 46, 38);
-		viewStatements.add(lblDebit);
-
-		lblCredit = new JLabel("Credit");
-		lblCredit.setForeground(new Color(0, 0, 255));
-		lblCredit.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblCredit.setBounds(526, 5, 56, 30);
-		viewStatements.add(lblCredit);
+		
+				table = new JTable();
+				table.setBounds(10, 54, 599, 159);
+				viewStatements.add(table);
+				
+				JPanel panel = new JPanel();
+				panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+				panel.setBackground(SystemColor.inactiveCaption);
+				panel.setBounds(10, 23, 599, 32);
+				viewStatements.add(panel);
+				panel.setLayout(null);
+				
+						lblDate = new JLabel("Date");
+						lblDate.setBounds(21, 11, 61, 19);
+						panel.add(lblDate);
+						lblDate.setFont(new Font("Tahoma", Font.BOLD, 15));
+						lblDate.setForeground(Color.BLACK);
+						
+								lblNewLabel = new JLabel("Description");
+								lblNewLabel.setBounds(108, 7, 92, 26);
+								panel.add(lblNewLabel);
+								lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+								lblNewLabel.setForeground(Color.BLACK);
+								
+										lblDebit = new JLabel("Debit");
+										lblDebit.setBounds(430, 1, 46, 38);
+										panel.add(lblDebit);
+										lblDebit.setFont(new Font("Tahoma", Font.BOLD, 15));
+										lblDebit.setForeground(Color.BLACK);
+										
+												lblCredit = new JLabel("Credit");
+												lblCredit.setBounds(515, 5, 56, 30);
+												panel.add(lblCredit);
+												lblCredit.setForeground(Color.BLACK);
+												lblCredit.setFont(new Font("Tahoma", Font.BOLD, 15));
 	}
 }
