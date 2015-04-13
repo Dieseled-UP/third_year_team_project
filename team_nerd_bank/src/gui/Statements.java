@@ -172,25 +172,25 @@ public class Statements extends JPanel {
 						lblDate = new JLabel("Date");
 						lblDate.setBounds(21, 11, 61, 19);
 						panel.add(lblDate);
-						lblDate.setFont(new Font("Tahoma", Font.BOLD, 15));
+						lblDate.setFont(new Font("Tahoma", Font.BOLD, 12));
 						lblDate.setForeground(Color.BLACK);
 						
 								lblNewLabel = new JLabel("Description");
 								lblNewLabel.setBounds(108, 7, 92, 26);
 								panel.add(lblNewLabel);
-								lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+								lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
 								lblNewLabel.setForeground(Color.BLACK);
 								
 										lblDebit = new JLabel("Debit");
 										lblDebit.setBounds(430, 1, 46, 38);
 										panel.add(lblDebit);
-										lblDebit.setFont(new Font("Tahoma", Font.BOLD, 15));
+										lblDebit.setFont(new Font("Tahoma", Font.BOLD, 12));
 										lblDebit.setForeground(Color.BLACK);
 										
 												lblCredit = new JLabel("Credit");
 												lblCredit.setBounds(515, 5, 56, 30);
 												panel.add(lblCredit);
 												lblCredit.setForeground(Color.BLACK);
-												lblCredit.setFont(new Font("Tahoma", Font.BOLD, 15));
+												lblCredit.setFont(new Font("Tahoma", Font.BOLD, 12));
 	}
 }
