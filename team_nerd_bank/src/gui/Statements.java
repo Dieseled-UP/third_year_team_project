@@ -35,20 +35,8 @@ public class Statements extends JPanel {
 	private JLabel lblDebit;
 	private JLabel lblCredit;
 	private JComboBox<String> AccComboBox;
-	private JSpinner spinner;
-	private JSpinner spinner_1;
-	private JSpinner spinner_2;
-	private JLabel lblDay;
-	private JLabel lblMonth;
-	private JLabel lblYear;
 	private JLabel lblTo;
 	private JLabel lblNewLabel_1;
-	private JSpinner spinner_3;
-	private JSpinner spinner_4;
-	private JSpinner spinner_5;
-	private JLabel lblDay_1;
-	private JLabel lblMonth_1;
-	private JLabel lblYear_1;
 
 	public Statements() {
 
@@ -66,6 +54,18 @@ public class Statements extends JPanel {
 		}
 
 		setLayout(null);
+		
+		//datePicker
+		/*UtilDateModel model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel);
+		 
+		frame.add(datePicker);  */
+		
+		
+		
+		
+		
 
 		selectAccPanel = new JPanel();
 		selectAccPanel.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Select Account to view", TitledBorder.LEADING,
@@ -85,30 +85,6 @@ public class Statements extends JPanel {
 		add(selectDatePanel);
 		selectDatePanel.setLayout(null);
 
-		spinner = new JSpinner();
-		spinner.setBounds(94, 50, 39, 27);
-		selectDatePanel.add(spinner);
-
-		spinner_1 = new JSpinner();
-		spinner_1.setBounds(149, 50, 64, 27);
-		selectDatePanel.add(spinner_1);
-
-		spinner_2 = new JSpinner();
-		spinner_2.setBounds(230, 50, 54, 27);
-		selectDatePanel.add(spinner_2);
-
-		spinner_3 = new JSpinner();
-		spinner_3.setBounds(387, 50, 48, 27);
-		selectDatePanel.add(spinner_3);
-
-		spinner_4 = new JSpinner();
-		spinner_4.setBounds(451, 50, 73, 27);
-		selectDatePanel.add(spinner_4);
-
-		spinner_5 = new JSpinner();
-		spinner_5.setBounds(534, 50, 48, 27);
-		selectDatePanel.add(spinner_5);
-
 		lblNewLabel_1 = new JLabel("FROM");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel_1.setForeground(new Color(0, 0, 205));
@@ -120,36 +96,6 @@ public class Statements extends JPanel {
 		lblTo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblTo.setBounds(335, 38, 29, 27);
 		selectDatePanel.add(lblTo);
-
-		lblDay = new JLabel("Day");
-		lblDay.setForeground(new Color(0, 0, 255));
-		lblDay.setBounds(94, 26, 39, 27);
-		selectDatePanel.add(lblDay);
-
-		lblMonth = new JLabel("Month");
-		lblMonth.setForeground(new Color(0, 0, 255));
-		lblMonth.setBounds(159, 26, 48, 27);
-		selectDatePanel.add(lblMonth);
-
-		lblYear = new JLabel("Year");
-		lblYear.setForeground(new Color(0, 0, 255));
-		lblYear.setBounds(230, 29, 48, 20);
-		selectDatePanel.add(lblYear);
-
-		lblDay_1 = new JLabel("Day");
-		lblDay_1.setForeground(new Color(0, 0, 255));
-		lblDay_1.setBounds(387, 26, 29, 27);
-		selectDatePanel.add(lblDay_1);
-
-		lblMonth_1 = new JLabel("Month");
-		lblMonth_1.setForeground(new Color(0, 0, 255));
-		lblMonth_1.setBounds(451, 26, 39, 26);
-		selectDatePanel.add(lblMonth_1);
-
-		lblYear_1 = new JLabel("Year");
-		lblYear_1.setForeground(new Color(0, 0, 255));
-		lblYear_1.setBounds(534, 29, 54, 20);
-		selectDatePanel.add(lblYear_1);
 
 		viewStatements = new JPanel();
 		viewStatements.setBorder(new TitledBorder(new LineBorder(new Color(255, 165, 0)), "Statements", TitledBorder.LEADING,
