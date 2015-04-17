@@ -6,6 +6,9 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,6 +18,22 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+
+import net.proteanit.sql.DbUtils;
+
+import com.sun.jndi.ldap.Connection;
+
+
+
+
+
+
+//import com.sun.java.util.jar.pack.Package.Class.Member;
+import people.Customer;
+import people.Payee;
+import connect.Connect_DB;
+import connect.Query;
+
 
 public class Payees extends JPanel {
 
@@ -36,13 +55,14 @@ public class Payees extends JPanel {
 	private JLabel lblReference;
 	private static JTable table;
 	private JScrollPane scrollPane;
-
+	private static Payee new_payee = null;
+	
 	public Payees() {
 
 		setBorder(new LineBorder(new Color(255, 165, 0)));
 		setLayout(null);
 
-		lblFname = new JLabel("Name:");
+		lblFname = new JLabel("First Name:");
 		lblFname.setForeground(Color.BLUE);
 		lblFname.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFname.setBounds(10, 299, 46, 14);
@@ -54,7 +74,7 @@ public class Payees extends JPanel {
 		txtFname.setBounds(10, 318, 179, 32);
 		add(txtFname);
 
-		lblLname = new JLabel("Surname:");
+		lblLname = new JLabel("Last Name:");
 		lblLname.setForeground(Color.BLUE);
 		lblLname.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblLname.setBounds(10, 365, 71, 14);
@@ -141,21 +161,45 @@ public class Payees extends JPanel {
 		table.setShowGrid(false);
 		table.getTableHeader().setResizingAllowed(false);
 		table.getTableHeader().setReorderingAllowed(false);
-		populateTable();
+	
+		try {
+			populateTable();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		scrollPane.setViewportView(table);
 
 		// ///////////////////////////////////
 		// /// Add button to be updated //////
 		// ///////////////////////////////////
-
+		
 		btnAdd.addActionListener(arg0 -> {
-			populateTable();
+			try {
+			String full_name = txtFname.getText() + " " + txtLname.getText();
+			int accNo = Integer.parseInt(txtAccountNo.getText());
+			new_payee = new Payee(txtReference.getText(), full_name, accNo, txtSortCode.getText());
+			
+			//get assigned account id to be fixed
+			Query.setPayee(new_payee.getPayeeId(), new_payee.getReference(), new_payee.getName(), new_payee.getPayeeAccNo(), 
+					new_payee.getPayeeCode(), 1234);
+			
+				populateTable();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("No input");
+				e.printStackTrace();
+			}
 		});
 	}
 
-	public static void populateTable() {
-
-//		table.setModel(DbUtils.resultSetToTableModel(rs));
+	public static void populateTable() throws SQLException {
+		java.sql.Connection connection = Connect_DB.getConnection();
+		String query = Query.getPayeeDetails();
+		
+		PreparedStatement statement = Connect_DB.pStatement(query);
+		ResultSet rs = statement.executeQuery();
+     	table.setModel(DbUtils.resultSetToTableModel(rs));
 	}
 }
