@@ -13,6 +13,10 @@ import people.Customer;
 
 //import java.util.ArrayList;
 
+/**
+ * @author Denis Bourne L00099023
+ * 15 Apr 2015
+ */
 public class Query {
 
 	private static String sql = null;
@@ -257,5 +261,63 @@ public class Query {
 		}
 
 		return name;
+	}
+	
+	/**
+	 * Method to insert payee details into database
+	 * 
+	 * 
+	 * @return boolean
+	 */
+	public static boolean setPayee(int id, String ref, String name, int acc_no, String sort_code, int acc_ref)
+	{
+		try {
+
+			sql = "INSERT INTO the_bank.Payee VALUES (?, ?, ?, ?, ?, ?)";
+			statement = Connect_DB.pStatement(sql);
+			
+			statement.setInt(1, id);
+			statement.setString(2, ref);
+			statement.setString(3, name);
+			statement.setInt(4, acc_no);
+			statement.setString(5, sort_code);
+			statement.setInt(6, acc_ref);
+
+			int done = statement.executeUpdate();
+
+			if (done == 1) {
+
+				return true;
+			}
+
+			// Close the connection
+			Connect_DB.finish();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+	
+	// Method to get payee details
+	// Returns the ResultSet as a string
+	// To be used in PopulateTable() method in Payees class
+	public static String getPayeeDetails() {	
+		try {
+
+			sql = "SELECT Reference, Name, Account_Number as \"Account Number\", Sort_Code as \"Sort Code\" FROM the_bank.Payee";
+			statement = Connect_DB.pStatement(sql);
+			
+
+			result = statement.executeQuery();
+			while (result.next()) {}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return sql;
 	}
 }
