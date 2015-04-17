@@ -11,8 +11,8 @@ public class TemplateTest {
 		
 		java.awt.EventQueue.invokeLater(() -> {
 
-//			MainFrame frame = new MainFrame();
-//			SwingUtilities.invokeLater(frame);
+			MainFrame frame = new MainFrame("0703805232");
+			SwingUtilities.invokeLater(frame);
 			
 		});
 	}

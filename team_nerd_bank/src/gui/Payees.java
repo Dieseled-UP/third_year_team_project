@@ -20,8 +20,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import net.proteanit.sql.DbUtils;
-
 import com.sun.jndi.ldap.Connection;
+import table.*;
 
 
 
@@ -157,11 +157,18 @@ public class Payees extends JPanel {
 		scrollPane.setBounds(10, 11, 433, 228);
 		add(scrollPane);
 
-		table = new JTable();
+		table = new JTable()
+		{
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		        // To disable editing
+		        return false;
+		    }
+		};
 		table.setShowGrid(false);
 		table.getTableHeader().setResizingAllowed(false);
 		table.getTableHeader().setReorderingAllowed(false);
-	
+		table.setSelectionModel(new ForcedListSelectionModel());
 		try {
 			populateTable();
 		} catch (SQLException e1) {
@@ -201,5 +208,6 @@ public class Payees extends JPanel {
 		PreparedStatement statement = Connect_DB.pStatement(query);
 		ResultSet rs = statement.executeQuery();
      	table.setModel(DbUtils.resultSetToTableModel(rs));
+     	
 	}
 }
