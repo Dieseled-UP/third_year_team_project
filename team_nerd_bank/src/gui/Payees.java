@@ -41,13 +41,11 @@ public class Payees extends JPanel {
 	private JTextField txtFname;
 	private JTextField txtLname;
 	private JTextField txtAccountNo;
-	private JTextField txtIbanNo;
 	private JTextField txtSortCode;
 	private JButton btnAdd;
 	private JLabel lblFname;
 	private JLabel lblLname;
 	private JLabel lblAccountNo;
-	private JLabel lblIbanNo;
 	private JLabel lblSortCode;
 	private JButton btnRemove;
 	private JLabel label;
@@ -65,7 +63,7 @@ public class Payees extends JPanel {
 		lblFname = new JLabel("First Name:");
 		lblFname.setForeground(Color.BLUE);
 		lblFname.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFname.setBounds(10, 299, 46, 14);
+		lblFname.setBounds(10, 299, 71, 14);
 		add(lblFname);
 
 		txtFname = new JTextField();
@@ -97,18 +95,6 @@ public class Payees extends JPanel {
 		lblAccountNo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblAccountNo.setBounds(215, 299, 83, 14);
 		add(lblAccountNo);
-
-		lblIbanNo = new JLabel("IBAN no:");
-		lblIbanNo.setForeground(Color.BLUE);
-		lblIbanNo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblIbanNo.setBounds(215, 365, 83, 14);
-		add(lblIbanNo);
-
-		txtIbanNo = new JTextField();
-		txtIbanNo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		txtIbanNo.setColumns(10);
-		txtIbanNo.setBounds(214, 390, 179, 32);
-		add(txtIbanNo);
 
 		btnAdd = new JButton("Add ");
 		btnAdd.setHorizontalAlignment(SwingConstants.LEADING);
@@ -144,13 +130,13 @@ public class Payees extends JPanel {
 		txtReference = new JTextField();
 		txtReference.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		txtReference.setColumns(10);
-		txtReference.setBounds(421, 390, 179, 32);
+		txtReference.setBounds(214, 390, 179, 32);
 		add(txtReference);
 
 		lblReference = new JLabel("Reference:");
 		lblReference.setForeground(Color.BLUE);
 		lblReference.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblReference.setBounds(421, 365, 83, 14);
+		lblReference.setBounds(214, 365, 83, 14);
 		add(lblReference);
 
 		scrollPane = new JScrollPane();
@@ -169,6 +155,7 @@ public class Payees extends JPanel {
 		table.getTableHeader().setResizingAllowed(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setSelectionModel(new ForcedListSelectionModel());
+		//JScrollPane scrollPane = new JScrollPane(table);
 		try {
 			populateTable();
 		} catch (SQLException e1) {
@@ -199,8 +186,47 @@ public class Payees extends JPanel {
 				e.printStackTrace();
 			}
 		});
+		
+		
+		
+		
+		btnRemove.addActionListener(arg0 -> {
+			try {
+				removePayee();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("No input");
+				e.printStackTrace();
+			}
+		});
 	}
-
+	
+	public static void removePayee()
+	{
+		//to get account number of selected row
+		int selectedAccountRow = table.getSelectedRow();
+		int selectedAccountColumn = 2;
+		Object selectedAccount = (Object) table.getModel().getValueAt(selectedAccountRow, selectedAccountColumn);	
+		int accountNo = Integer.parseInt(selectedAccount.toString());
+		System.out.println(selectedAccount.toString());
+		//System.out.println(selectedRowIndex);
+		
+		//to get sort code of selected row
+		int selectedSortCodeRow = table.getSelectedRow();
+		int selectedSortCodeColumn = 3;
+		Object selectedSortCode = (Object) table.getModel().getValueAt(selectedSortCodeRow, selectedSortCodeColumn);
+		System.out.println(selectedSortCode.toString());
+		
+		//to identify payee in database and remove it
+		Query.removePayeeDatabase(accountNo, selectedSortCode.toString());
+		try {
+			populateTable();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public static void populateTable() throws SQLException {
 		java.sql.Connection connection = Connect_DB.getConnection();
 		String query = Query.getPayeeDetails();
