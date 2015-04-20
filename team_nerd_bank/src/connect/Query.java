@@ -320,4 +320,21 @@ public class Query {
 
 		return sql;
 	}
+	
+	// Method to remove payee from database
+	public static void removePayeeDatabase(int account, String sortCode)
+	{	
+			String delete = "DELETE from the_bank.Payee where Account_Number = ? AND Sort_Code = ?";
+			statement = Connect_DB.pStatement(delete);	
+			
+			try {
+				statement.setInt(1, account);
+				statement.setString(2, sortCode);
+				int execute = statement.executeUpdate();
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+	}
 }

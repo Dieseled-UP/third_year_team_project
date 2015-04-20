@@ -5,6 +5,8 @@
 */
 package people;
 
+import java.util.ArrayList;
+
 
 public class Payee {
 
@@ -13,7 +15,7 @@ public class Payee {
 	private static int payee_id;
 	private int payee_acc_no;
 	private String payee_code;
-	
+	private static ArrayList assigned_Customers = new ArrayList<>();
 	/**
 	 * Default constructor
 	 */
