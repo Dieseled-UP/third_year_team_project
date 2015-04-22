@@ -350,7 +350,7 @@ public class Query {
 
 	}
 
-	public static ArrayList<String> getSummary() {
+	public static ArrayList<String> getSummary(int pin) {
 
 		ArrayList<String> temp = new ArrayList<String>();
 

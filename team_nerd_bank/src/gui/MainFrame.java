@@ -69,7 +69,7 @@ public class MainFrame extends JFrame implements Runnable {
 
 		getContentPane().setLayout(null);
 
-		summary = new Summary();
+		summary = new Summary(autoNumber);
 		account = new Account();
 		transfer = new Transfers();
 		details = new Details();

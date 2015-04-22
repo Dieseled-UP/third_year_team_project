@@ -37,9 +37,12 @@ public class Summary extends JPanel {
 	private String path = "Assets/mmEuroSign.gif";
 	private File file;
 	private BufferedImage image;
+	private static int pin;
 
-	public Summary() {
+	public Summary(String autoNumber) {
 
+		pin = Integer.parseInt(autoNumber);
+		
 		setLayout(null);
 
 		lblSumm = new JLabel("Account Summary");
