@@ -8,6 +8,8 @@ package connect;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import people.Customer;
 
@@ -236,6 +238,11 @@ public class Query {
 		return pass;
 	}
 
+	/**
+	 * Method to return the user name on login this will be displayed during session
+	 * @param pin
+	 * @return String name
+	 */
 	public static String getUserName(int pin) {
 
 		String name = null;
@@ -265,7 +272,6 @@ public class Query {
 	
 	/**
 	 * Method to insert payee details into database
-	 * 
 	 * 
 	 * @return boolean
 	 */
@@ -324,17 +330,41 @@ public class Query {
 	// Method to remove payee from database
 	public static void removePayeeDatabase(int account, String sortCode)
 	{	
-			String delete = "DELETE from the_bank.Payee where Account_Number = ? AND Sort_Code = ?";
-			statement = Connect_DB.pStatement(delete);	
+			sql = "DELETE from the_bank.Payee where Account_Number = ? AND Sort_Code = ?";
+			statement = Connect_DB.pStatement(sql);	
 			
 			try {
 				statement.setInt(1, account);
 				statement.setString(2, sortCode);
-				int execute = statement.executeUpdate();
+				statement.executeUpdate();
 			} 
 			catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
+	}
+	
+	public static ArrayList<String> getSummary() {
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		
+		Calendar date = Calendar.getInstance();
+		Calendar past = Calendar.getInstance();
+		past.add(Calendar.DATE, -7);
+		
+		try {
+			sql = "SELECT  FROM Transaction where date BETWEEN ? AND ?";
+			statement = Connect_DB.pStatement(sql);
+			
+			statement.setDate(1, new java.sql.Date(date.getTimeInMillis()));
+			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return temp;
 	}
 }

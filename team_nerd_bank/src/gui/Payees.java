@@ -20,19 +20,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import net.proteanit.sql.DbUtils;
-import com.sun.jndi.ldap.Connection;
-import table.*;
-
-
-
-
-
-
-//import com.sun.java.util.jar.pack.Package.Class.Member;
-import people.Customer;
 import people.Payee;
+import table.ForcedListSelectionModel;
 import connect.Connect_DB;
 import connect.Query;
+//import com.sun.java.util.jar.pack.Package.Class.Member;
 
 
 public class Payees extends JPanel {
@@ -145,7 +137,9 @@ public class Payees extends JPanel {
 
 		table = new JTable()
 		{
-		    @Override
+		   private static final long serialVersionUID = 1L;
+
+			@Override
 		    public boolean isCellEditable(int row, int column) {
 		        // To disable editing
 		        return false;
@@ -159,7 +153,7 @@ public class Payees extends JPanel {
 		try {
 			populateTable();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 
@@ -181,7 +175,7 @@ public class Payees extends JPanel {
 			
 				populateTable();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				System.out.println("No input");
 				e.printStackTrace();
 			}
@@ -194,7 +188,7 @@ public class Payees extends JPanel {
 			try {
 				removePayee();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
+				
 				System.out.println("No input");
 				e.printStackTrace();
 			}
