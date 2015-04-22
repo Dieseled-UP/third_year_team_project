@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import people.Customer;
+import people.Payee;
 
 //import java.util.ArrayList;
 
 /**
- * @author Denis Bourne L00099023
- * 15 Apr 2015
+ * @author Denis Bourne L00099023 15 Apr 2015
  */
 public class Query {
 
@@ -239,7 +239,9 @@ public class Query {
 	}
 
 	/**
-	 * Method to return the user name on login this will be displayed during session
+	 * Method to return the user name on login this will be displayed during
+	 * session
+	 * 
 	 * @param pin
 	 * @return String name
 	 */
@@ -269,19 +271,18 @@ public class Query {
 
 		return name;
 	}
-	
+
 	/**
 	 * Method to insert payee details into database
 	 * 
 	 * @return boolean
 	 */
-	public static boolean setPayee(int id, String ref, String name, int acc_no, String sort_code, int acc_ref)
-	{
+	public static boolean setPayee(int id, String ref, String name, int acc_no, String sort_code, int acc_ref) {
 		try {
 
 			sql = "INSERT INTO the_bank.Payee VALUES (?, ?, ?, ?, ?, ?)";
 			statement = Connect_DB.pStatement(sql);
-			
+
 			statement.setInt(1, id);
 			statement.setString(2, ref);
 			statement.setString(3, name);
@@ -302,67 +303,70 @@ public class Query {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
-	
+
 	// Method to get payee details
 	// Returns the ResultSet as a string
 	// To be used in PopulateTable() method in Payees class
-	public static String getPayeeDetails() {	
+	public static ArrayList<Payee> getPayeeDetails(int pin) {
+
+		ArrayList<Payee> temPayees = new ArrayList<Payee>();
+
 		try {
 
-			sql = "SELECT Reference, Name, Account_Number as \"Account Number\", Sort_Code as \"Sort Code\" FROM the_bank.Payee";
+			sql = "SELECT Reference, Name, Account_Number, Payee.Sort_Code FROM the_bank.Payee, Account, Member WHERE Account.account_num"
+					+ " = Payee.assigned_account AND Member.customer_ID = Account.customer_ID AND Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
-			
+			statement.setInt(1, pin);
 
 			result = statement.executeQuery();
-			while (result.next()) {}
+			while (result.next()) {
+
+				temPayees.add(new Payee(result.getString(2), result.getString(3), result.getInt(4), result.getString(5)));
+			}
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
 
-		return sql;
+		return temPayees;
 	}
-	
+
 	// Method to remove payee from database
-	public static void removePayeeDatabase(int account, String sortCode)
-	{	
-			sql = "DELETE from the_bank.Payee where Account_Number = ? AND Sort_Code = ?";
-			statement = Connect_DB.pStatement(sql);	
-			
-			try {
-				statement.setInt(1, account);
-				statement.setString(2, sortCode);
-				statement.executeUpdate();
-			} 
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
+	public static void removePayeeDatabase(int account, String sortCode) {
+		sql = "DELETE from the_bank.Payee where Account_Number = ? AND Sort_Code = ?";
+		statement = Connect_DB.pStatement(sql);
+
+		try {
+			statement.setInt(1, account);
+			statement.setString(2, sortCode);
+			statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
-	
+
 	public static ArrayList<String> getSummary() {
-		
+
 		ArrayList<String> temp = new ArrayList<String>();
-		
+
 		Calendar date = Calendar.getInstance();
 		Calendar past = Calendar.getInstance();
 		past.add(Calendar.DATE, -7);
-		
+
 		try {
 			sql = "SELECT  FROM Transaction where date BETWEEN ? AND ?";
 			statement = Connect_DB.pStatement(sql);
-			
+
 			statement.setDate(1, new java.sql.Date(date.getTimeInMillis()));
 			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
-			
-			
-			
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 		return temp;

@@ -74,7 +74,7 @@ public class MainFrame extends JFrame implements Runnable {
 		transfer = new Transfers();
 		details = new Details();
 		security = new Security();
-		payees = new Payees();
+		payees = new Payees(autoNumber);
 		state = new Statements();
 
 		panel = new JPanel();

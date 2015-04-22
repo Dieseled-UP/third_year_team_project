@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -46,11 +47,14 @@ public class Payees extends JPanel {
 	private static JTable table;
 	private JScrollPane scrollPane;
 	private static Payee new_payee = null;
+	private static int pin;
 	
-	public Payees() {
+	public Payees(String autoNumber) {
 
 		setBorder(new LineBorder(new Color(255, 165, 0)));
 		setLayout(null);
+		
+		pin = Integer.parseInt(autoNumber);
 
 		lblFname = new JLabel("First Name:");
 		lblFname.setForeground(Color.BLUE);
@@ -222,12 +226,11 @@ public class Payees extends JPanel {
 	}
 	
 	public static void populateTable() throws SQLException {
-		java.sql.Connection connection = Connect_DB.getConnection();
-		String query = Query.getPayeeDetails();
 		
-		PreparedStatement statement = Connect_DB.pStatement(query);
-		ResultSet rs = statement.executeQuery();
-     	table.setModel(DbUtils.resultSetToTableModel(rs));
+		ArrayList<Payee> payeeList = new ArrayList<Payee>();
+		payeeList = Query.getPayeeDetails(pin);
+
+     	table.setModel(DbUtils.resultSetToTableModel((ResultSet) payeeList));
      	
 	}
 }
