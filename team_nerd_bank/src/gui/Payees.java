@@ -6,10 +6,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,7 +21,6 @@ import javax.swing.border.LineBorder;
 import net.proteanit.sql.DbUtils;
 import people.Payee;
 import table.ForcedListSelectionModel;
-import connect.Connect_DB;
 import connect.Query;
 //import com.sun.java.util.jar.pack.Package.Class.Member;
 
@@ -227,10 +224,9 @@ public class Payees extends JPanel {
 	
 	public static void populateTable() throws SQLException {
 		
-		ArrayList<Payee> payeeList = new ArrayList<Payee>();
-		payeeList = Query.getPayeeDetails(pin);
+		ResultSet result = Query.getPayeeDetails(pin);
 
-     	table.setModel(DbUtils.resultSetToTableModel((ResultSet) payeeList));
+     	table.setModel(DbUtils.resultSetToTableModel(result));
      	
 	}
 }

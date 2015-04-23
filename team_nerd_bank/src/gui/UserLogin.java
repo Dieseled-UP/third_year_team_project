@@ -387,7 +387,8 @@ public class UserLogin extends JFrame implements Runnable {
 
 		btnLogin.addActionListener(arg0 -> {
 
-			if (checkPinValatation() && checkPassValatation()) {
+			// If validation passes allow the user to continue
+			if (checkPinValitation() && checkPassValitation()) {
 
 				java.awt.EventQueue.invokeLater(() -> {
 
@@ -520,6 +521,7 @@ public class UserLogin extends JFrame implements Runnable {
 		// For testing purposes please remove
 		System.out.println(pinNumOne + " " + pinNumTwo + " " + pinNumThree + " Pin munbers");
 
+		// Check to see what number is greater and order correctly
 		if (pinNumTwo > pinNumOne && pinNumThree > pinNumOne) {
 
 			lblPinOneText.setText(onePinLbl);
@@ -568,6 +570,7 @@ public class UserLogin extends JFrame implements Runnable {
 	 */
 	public void orderPassLables() {
 
+		// Change text labels into actual numbers
 		passNumOne = Integer.parseInt(onePassLbl.substring(0, 1));
 		passNumTwo = Integer.parseInt(twoPassLbl.substring(0, 1));
 		passNumThree = Integer.parseInt(threePassLbl.substring(0, 1));
@@ -575,6 +578,7 @@ public class UserLogin extends JFrame implements Runnable {
 		// For testing purposes please remove
 		System.out.println(passNumOne + " " + passNumTwo + " " + passNumThree + " Pass numbers");
 
+		// Check to see what number is greater and order correctly
 		if (passNumTwo > passNumOne && passNumThree > passNumOne) {
 
 			lblPassOne.setText(onePassLbl);
@@ -608,12 +612,12 @@ public class UserLogin extends JFrame implements Runnable {
 
 			if (passNumTwo > passNumOne) {
 
-				lblPassThree.setText(twoPassLbl);
 				lblPassTwo.setText(onePassLbl);
+				lblPassThree.setText(twoPassLbl);
 			} else {
 
-				lblPassThree.setText(onePassLbl);
 				lblPassTwo.setText(twoPassLbl);
+				lblPassThree.setText(onePassLbl);
 			}
 		}
 	}
@@ -622,9 +626,10 @@ public class UserLogin extends JFrame implements Runnable {
 	 * Method to check that the pin entered by the user matches what is on record
 	 * @return boolean allGood
 	 */
-	public boolean checkPinValatation() {
+	public boolean checkPinValitation() {
 
 		boolean allGood = false;
+		// Add pin to char array
 		char[] pin = results.get(0).toCharArray();
 		ArrayList<Integer> order = new ArrayList<>();
 		order.add(pinNumOne - 1);
@@ -643,24 +648,24 @@ public class UserLogin extends JFrame implements Runnable {
 		System.out.println("Actual numbers needed - " + txtPinOne.getPassword()[0] + " " + txtPinTwo.getPassword()[0] + " "
 				+ txtPinThree.getPassword()[0]);
 
+		// Check that the numbers entered match the numbers in the pin
 		if (pin[order.get(0)] == txtPinOne.getPassword()[0] && pin[order.get(1)] == txtPinTwo.getPassword()[0]
 				&& pin[order.get(2)] == txtPinThree.getPassword()[0]) {
 
 			allGood = true;
-			return allGood;
-		} else {
-
-			return allGood;
 		}
+		
+		return allGood;
 	}
 
 	/**
 	 * Method to check that the pass entered by the user matches what is on record
-	 * @return
+	 * @return boolean allGood
 	 */
-	public boolean checkPassValatation() {
+	public boolean checkPassValitation() {
 
 		boolean allGood = false;
+		// Change password in char array
 		char[] pass = results.get(1).toCharArray();
 		ArrayList<Integer> order = new ArrayList<>();
 		order.add(passNumOne - 1);
@@ -673,15 +678,14 @@ public class UserLogin extends JFrame implements Runnable {
 		System.out
 				.println("Actual characters needed - " + pass[passNumOne - 1] + " " + pass[passNumTwo - 1] + " " + pass[passNumThree - 1]);
 
+		// Check that the characters entered match the characters and are in the right order in the password
 		if (pass[order.get(0)] == txtPassOne.getPassword()[0] && pass[order.get(1)] == txtPassTwo.getPassword()[0]
 				&& pass[order.get(2)] == txtPassThree.getPassword()[0]) {
 
 			allGood = true;
-			return allGood;
-		} else {
-
-			return allGood;
 		}
+		
+		return allGood;
 	}
 
 	@Override

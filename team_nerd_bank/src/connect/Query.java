@@ -8,11 +8,9 @@ package connect;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 import people.Customer;
-import people.Payee;
 
 //import java.util.ArrayList;
 
@@ -310,29 +308,24 @@ public class Query {
 	// Method to get payee details
 	// Returns the ResultSet as a string
 	// To be used in PopulateTable() method in Payees class
-	public static ArrayList<Payee> getPayeeDetails(int pin) {
-
-		ArrayList<Payee> temPayees = new ArrayList<Payee>();
+	public static ResultSet getPayeeDetails(int pin) {
 
 		try {
 
-			sql = "SELECT Reference, Name, Account_Number, Payee.Sort_Code FROM the_bank.Payee, Account, Member WHERE Account.account_num"
-					+ " = Payee.assigned_account AND Member.customer_ID = Account.customer_ID AND Member.auto_ID = ?";
+			sql = "SELECT Reference, Name, Account_Number, Payee.Sort_Code FROM the_bank.Payee "
+					+ "INNER JOIN  the_bank.Account ON Account.account_num = Payee.assigned_account "
+					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID WHERE Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 			statement.setInt(1, pin);
 
 			result = statement.executeQuery();
-			while (result.next()) {
-
-				temPayees.add(new Payee(result.getString(2), result.getString(3), result.getInt(4), result.getString(5)));
-			}
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
 
-		return temPayees;
+		return result;
 	}
 
 	// Method to remove payee from database
@@ -350,9 +343,7 @@ public class Query {
 
 	}
 
-	public static ArrayList<String> getSummary(int pin) {
-
-		ArrayList<String> temp = new ArrayList<String>();
+	public static ResultSet getSummary(int pin) {
 
 		Calendar date = Calendar.getInstance();
 		Calendar past = Calendar.getInstance();
@@ -368,11 +359,13 @@ public class Query {
 			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
 			statement.setDate(2, new java.sql.Date(date.getTimeInMillis()));
 			statement.setInt(3, pin);
+			
+			result = statement.executeQuery();
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
-		return temp;
+		return result;
 	}
 }
