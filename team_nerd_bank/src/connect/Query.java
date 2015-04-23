@@ -343,6 +343,11 @@ public class Query {
 
 	}
 
+	/**
+	 * Method to get the last seven days transactions associated with the user
+	 * @param pin
+	 * @return ResultSet result
+	 */
 	public static ResultSet getSummary(int pin) {
 
 		Calendar date = Calendar.getInstance();
