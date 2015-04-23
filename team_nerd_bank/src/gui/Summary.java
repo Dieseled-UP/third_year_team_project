@@ -117,27 +117,27 @@ public class Summary extends JPanel {
 
 		lblAccName = new JLabel("Type");
 		lblAccName.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAccName.setBounds(39, 12, 46, 14);
+		lblAccName.setBounds(10, 12, 46, 14);
 		panel_2.add(lblAccName);
 
 		lblAccNum = new JLabel("Account Number");
 		lblAccNum.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAccNum.setBounds(119, 12, 108, 14);
+		lblAccNum.setBounds(97, 12, 108, 14);
 		panel_2.add(lblAccNum);
 
 		lblSort = new JLabel("Sort Code");
 		lblSort.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSort.setBounds(283, 12, 68, 14);
+		lblSort.setBounds(245, 12, 68, 14);
 		panel_2.add(lblSort);
 
 		lblBalance = new JLabel("Balance");
 		lblBalance.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblBalance.setBounds(395, 12, 53, 14);
+		lblBalance.setBounds(365, 12, 53, 14);
 		panel_2.add(lblBalance);
 
 		lblAvail = new JLabel("Transaction");
 		lblAvail.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAvail.setBounds(488, 12, 80, 14);
+		lblAvail.setBounds(478, 12, 80, 14);
 		panel_2.add(lblAvail);
 
 		scrollPane = new JScrollPane();
@@ -158,6 +158,7 @@ public class Summary extends JPanel {
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setSelectionModel(new ForcedListSelectionModel());
 		table.setBorder(new MatteBorder(0, 1, 0, 1, (Color) new Color(255, 165, 0)));
+		table.setTableHeader(null);
 		
 		scrollPane.setViewportView(table);
 		

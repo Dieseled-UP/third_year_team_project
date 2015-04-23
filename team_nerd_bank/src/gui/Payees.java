@@ -22,8 +22,9 @@ import net.proteanit.sql.DbUtils;
 import people.Payee;
 import table.ForcedListSelectionModel;
 import connect.Query;
-//import com.sun.java.util.jar.pack.Package.Class.Member;
+import javax.swing.border.MatteBorder;
 
+//import com.sun.java.util.jar.pack.Package.Class.Member;
 
 public class Payees extends JPanel {
 
@@ -45,12 +46,14 @@ public class Payees extends JPanel {
 	private JScrollPane scrollPane;
 	private static Payee new_payee = null;
 	private static int pin;
-	
+	private JPanel pnlList;
+	private JPanel pnlTitles;
+
 	public Payees(String autoNumber) {
 
 		setBorder(new LineBorder(new Color(255, 165, 0)));
 		setLayout(null);
-		
+
 		pin = Integer.parseInt(autoNumber);
 
 		lblFname = new JLabel("First Name:");
@@ -132,101 +135,131 @@ public class Payees extends JPanel {
 		lblReference.setBounds(214, 365, 83, 14);
 		add(lblReference);
 
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 433, 228);
-		add(scrollPane);
+		pnlList = new JPanel();
+		pnlList.setBorder(new MatteBorder(0, 1, 1, 1, (Color) new Color(255, 165, 0)));
+		pnlList.setBounds(10, 11, 445, 246);
+		add(pnlList);
+		pnlList.setLayout(null);
 
-		table = new JTable()
-		{
-		   private static final long serialVersionUID = 1L;
+		pnlTitles = new JPanel();
+		pnlTitles.setLayout(null);
+		pnlTitles.setBorder(new MatteBorder(1, 1, 0, 1, (Color) new Color(255, 165, 0)));
+		pnlTitles.setBackground(new Color(201, 216, 239));
+		pnlTitles.setBounds(0, 0, 445, 34);
+		pnlList.add(pnlTitles);
+
+		JLabel lblReference_1 = new JLabel("Reference");
+		lblReference_1.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblReference_1.setBounds(10, 12, 68, 14);
+		pnlTitles.add(lblReference_1);
+
+		JLabel label_2 = new JLabel("Account Number");
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 12));
+		label_2.setBounds(197, 12, 108, 14);
+		pnlTitles.add(label_2);
+
+		JLabel label_3 = new JLabel("Sort Code");
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 12));
+		label_3.setBounds(338, 12, 68, 14);
+		pnlTitles.add(label_3);
+
+		JLabel lblName = new JLabel("Name");
+		lblName.setBounds(112, 12, 53, 14);
+		pnlTitles.add(lblName);
+		lblName.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(1, 33, 443, 212);
+		pnlList.add(scrollPane);
+
+		table = new JTable() {
+			private static final long serialVersionUID = 1L;
 
 			@Override
-		    public boolean isCellEditable(int row, int column) {
-		        // To disable editing
-		        return false;
-		    }
+			public boolean isCellEditable(int row, int column) {
+				// To disable editing
+				return false;
+			}
 		};
 		table.setShowGrid(false);
 		table.getTableHeader().setResizingAllowed(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setSelectionModel(new ForcedListSelectionModel());
-		//JScrollPane scrollPane = new JScrollPane(table);
+		table.setTableHeader(null);
+
+		scrollPane.setViewportView(table);
+
+		// JScrollPane scrollPane = new JScrollPane(table);
 		try {
 			populateTable();
 		} catch (SQLException e1) {
-			
+
 			e1.printStackTrace();
 		}
-
-		scrollPane.setViewportView(table);
 
 		// ///////////////////////////////////
 		// /// Add button to be updated //////
 		// ///////////////////////////////////
-		
+
 		btnAdd.addActionListener(arg0 -> {
 			try {
-			String full_name = txtFname.getText() + " " + txtLname.getText();
-			int accNo = Integer.parseInt(txtAccountNo.getText());
-			new_payee = new Payee(txtReference.getText(), full_name, accNo, txtSortCode.getText());
-			
-			//get assigned account id to be fixed
-			Query.setPayee(new_payee.getPayeeId(), new_payee.getReference(), new_payee.getName(), new_payee.getPayeeAccNo(), 
-					new_payee.getPayeeCode(), 1234);
-			
+				String full_name = txtFname.getText() + " " + txtLname.getText();
+				int accNo = Integer.parseInt(txtAccountNo.getText());
+				new_payee = new Payee(txtReference.getText(), full_name, accNo, txtSortCode.getText());
+
+				// get assigned account id to be fixed
+				Query.setPayee(new_payee.getPayeeId(), new_payee.getReference(), new_payee.getName(), new_payee.getPayeeAccNo(),
+						new_payee.getPayeeCode(), 1234);
+
 				populateTable();
 			} catch (Exception e) {
-				
+
 				System.out.println("No input");
 				e.printStackTrace();
 			}
 		});
-		
-		
-		
-		
+
 		btnRemove.addActionListener(arg0 -> {
 			try {
 				removePayee();
 			} catch (Exception e) {
-				
+
 				System.out.println("No input");
 				e.printStackTrace();
 			}
 		});
 	}
-	
-	public static void removePayee()
-	{
-		//to get account number of selected row
+
+	public static void removePayee() {
+		// to get account number of selected row
 		int selectedAccountRow = table.getSelectedRow();
 		int selectedAccountColumn = 2;
-		Object selectedAccount = (Object) table.getModel().getValueAt(selectedAccountRow, selectedAccountColumn);	
+		Object selectedAccount = (Object) table.getModel().getValueAt(selectedAccountRow, selectedAccountColumn);
 		int accountNo = Integer.parseInt(selectedAccount.toString());
 		System.out.println(selectedAccount.toString());
-		//System.out.println(selectedRowIndex);
-		
-		//to get sort code of selected row
+		// System.out.println(selectedRowIndex);
+
+		// to get sort code of selected row
 		int selectedSortCodeRow = table.getSelectedRow();
 		int selectedSortCodeColumn = 3;
 		Object selectedSortCode = (Object) table.getModel().getValueAt(selectedSortCodeRow, selectedSortCodeColumn);
 		System.out.println(selectedSortCode.toString());
-		
-		//to identify payee in database and remove it
+
+		// to identify payee in database and remove it
 		Query.removePayeeDatabase(accountNo, selectedSortCode.toString());
 		try {
 			populateTable();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public static void populateTable() throws SQLException {
-		
+
 		ResultSet result = Query.getPayeeDetails(pin);
 
-     	table.setModel(DbUtils.resultSetToTableModel(result));
-     	
+		table.setModel(DbUtils.resultSetToTableModel(result));
+
 	}
 }

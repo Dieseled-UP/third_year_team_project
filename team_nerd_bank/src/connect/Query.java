@@ -356,7 +356,7 @@ public class Query {
 
 		try {
 			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Account.balance, Transaction.amount " +
-					"FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.customer_ID = Account.customer_ID " +
+					"FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num " +
 					"INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " +
 					"WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
