@@ -104,29 +104,29 @@ public class Summary extends JPanel {
 		panel.add(panel_2);
 		panel_2.setLayout(null);
 		
-		lblAccName = new JLabel("Account Name");
+		lblAccName = new JLabel("Type");
 		lblAccName.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAccName.setBounds(22, 12, 95, 14);
+		lblAccName.setBounds(39, 12, 46, 14);
 		panel_2.add(lblAccName);
 		
 		lblAccNum = new JLabel("Account Number");
 		lblAccNum.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAccNum.setBounds(154, 12, 108, 14);
+		lblAccNum.setBounds(119, 12, 108, 14);
 		panel_2.add(lblAccNum);
 		
 		lblSort = new JLabel("Sort Code");
 		lblSort.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblSort.setBounds(308, 12, 68, 14);
+		lblSort.setBounds(283, 12, 68, 14);
 		panel_2.add(lblSort);
 		
 		lblBalance = new JLabel("Balance");
 		lblBalance.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblBalance.setBounds(425, 12, 53, 14);
+		lblBalance.setBounds(395, 12, 53, 14);
 		panel_2.add(lblBalance);
 		
-		lblAvail = new JLabel("Available");
+		lblAvail = new JLabel("Transaction");
 		lblAvail.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblAvail.setBounds(528, 11, 63, 14);
+		lblAvail.setBounds(488, 12, 80, 14);
 		panel_2.add(lblAvail);
 		
 		table = new JTable();

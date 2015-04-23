@@ -359,11 +359,15 @@ public class Query {
 		past.add(Calendar.DATE, -7);
 
 		try {
-			sql = "SELECT  FROM Transaction where date BETWEEN ? AND ?";
+			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Account.balance, Transaction.amount " +
+					"FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.customer_ID = Account.customer_ID " +
+					"INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " +
+					"WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 
-			statement.setDate(1, new java.sql.Date(date.getTimeInMillis()));
 			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
+			statement.setDate(2, new java.sql.Date(date.getTimeInMillis()));
+			statement.setInt(3, pin);
 
 		} catch (SQLException e) {
 
