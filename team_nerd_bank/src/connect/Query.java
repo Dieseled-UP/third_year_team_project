@@ -373,4 +373,33 @@ public class Query {
 		}
 		return result;
 	}
+	
+	@SuppressWarnings("null")
+	public static int[] getAccountNumbers(int pin) {
+		
+		int[] list = null;
+		int i = 0;
+		int num = 1;
+		
+		try {
+			sql = "SELECT Account.account_num FROM the_bank.Account INNER JOIN the_bank.Member ON Account.customer_ID "
+					+ "= Member.customer_ID WHERE Member.auto_ID = ?";
+			statement = Connect_DB.pStatement(sql);
+
+			statement.setInt(1, pin);
+			
+			result = statement.executeQuery();
+			while (result.next()) {
+
+				list[i] = result.getInt(num);
+				i++;
+				num++;
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

@@ -22,7 +22,7 @@ public class Transfers extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel pnlPayee;
-	private JComboBox<String> cbxAccounts;
+	private JComboBox<Integer> cbxAccounts;
 	private JLabel lblFrom;
 	private JSpinner sprMoney;
 	private JLabel lblValue;
@@ -40,8 +40,12 @@ public class Transfers extends JPanel {
 	private JLabel lblTran;
 	private JButton btnOK;
 	private JButton btnAddPayee;
+	private int pin;
 	
-	public Transfers() {
+	public Transfers(String autoNumber) {
+		
+		pin = Integer.parseInt(autoNumber);
+		
 		setBorder(new LineBorder(new Color(255, 165, 0)));
 		
 		setLayout(null);
@@ -52,7 +56,7 @@ public class Transfers extends JPanel {
 		lblFrom.setBounds(239, 48, 115, 31);
 		add(lblFrom);
 		
-		cbxAccounts = new JComboBox<String>();
+		cbxAccounts = new JComboBox<Integer>();
 		cbxAccounts.setBounds(239, 90, 101, 26);
 		add(cbxAccounts);
 		
@@ -150,5 +154,10 @@ public class Transfers extends JPanel {
 		btnOK.setBackground(new Color(201, 216, 239));
 		btnOK.setBounds(500, 400, 89, 26);
 		add(btnOK);
+		
+		btnAddPayee.addActionListener(arg0 -> {
+			
+			MainFrame.displayPayee();
+		});
 	}
 }

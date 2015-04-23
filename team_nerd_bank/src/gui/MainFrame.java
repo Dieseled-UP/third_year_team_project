@@ -29,13 +29,13 @@ public class MainFrame extends JFrame implements Runnable {
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JButton btnSummary;
-	private JButton btnAccounts;
-	private JButton btnTransfers;
-	private JButton btnDetails;
-	private JButton btnSecurity;
-	private JButton btnPayees;
+	private static JButton btnAccounts;
+	private static JButton btnTransfers;
+	private static JButton btnDetails;
+	private static JButton btnSecurity;
+	private static JButton btnPayees;
 	private JButton btnLogout;
-	private JPanel mainView;
+	private static JPanel mainView;
 	private JPanel summary, account, transfer, details, security, payees, state;
 	private JPanel panel_3;
 	private JLabel lblLogo;
@@ -45,7 +45,8 @@ public class MainFrame extends JFrame implements Runnable {
 	private JLabel lblMainName;
 	private JLabel lblWelcome;
 	private JLabel lblName;
-	private JButton btnStatements;
+	private static JButton btnStatements;
+	private static CardLayout cardLayout;
 
 	public MainFrame(String autoNumber) {
 
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame implements Runnable {
 
 		summary = new Summary(autoNumber);
 		account = new Account();
-		transfer = new Transfers();
+		transfer = new Transfers(autoNumber);
 		details = new Details();
 		security = new Security();
 		payees = new Payees(autoNumber);
@@ -205,7 +206,7 @@ public class MainFrame extends JFrame implements Runnable {
 		mainView.add(security, "security");
 		mainView.add(state, "states");
 
-		CardLayout cardLayout = (CardLayout) mainView.getLayout();
+		cardLayout = (CardLayout) mainView.getLayout();
 
 		cardLayout.show(mainView, "summary");
 
@@ -285,6 +286,17 @@ public class MainFrame extends JFrame implements Runnable {
 			btnSecurity.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
 		});
+	}
+	
+	public static void displayPayee() {
+		
+		cardLayout.show(mainView, "payee");
+		btnPayees.setBackground(new Color(166, 166, 166));
+		btnAccounts.setBackground(new Color(201, 216, 239));
+		btnTransfers.setBackground(new Color(201, 216, 239));
+		btnDetails.setBackground(new Color(201, 216, 239));
+		btnSecurity.setBackground(new Color(201, 216, 239));
+		btnStatements.setBackground(new Color(201, 216, 239));
 	}
 
 	@Override
