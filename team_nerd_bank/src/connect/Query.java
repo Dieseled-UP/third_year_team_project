@@ -483,4 +483,33 @@ public class Query {
 		
 		return allGood;
 	}
+	
+	/**
+	 * Method to subtract transfer amount from users account
+	 * @param amount
+	 * @param accout
+	 * @return boolean jobDone
+	 */
+	public static boolean subtractBalance(double amount, int accout) {
+		
+		boolean jobDone = false;
+		
+		try {
+
+			sql = "UPDATE the_bank.Account as acc SET balance = ? "
+					+ "WHERE account_num = ?";
+			statement = Connect_DB.pStatement(sql);
+			
+			statement.setDouble(1, amount);
+			statement.setInt(2, accout);
+
+			result = statement.executeQuery();
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		}
+		
+		return jobDone;
+	}
 }
