@@ -232,5 +232,15 @@ public class Transfers extends JPanel {
 	public void checkFunds() {
 		
 		boolean goodToGo = Query.checkBalance(amount, accountNum, pin);
+		
+		if (goodToGo) {
+			
+			boolean executed = Query.subtractBalance(amount, accountNum);
+			
+			if (executed) {
+				
+				JOptionPane.showMessageDialog(null, "Transfer has been complete");
+			}
+		}
 	}
 }

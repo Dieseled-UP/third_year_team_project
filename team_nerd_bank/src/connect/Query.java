@@ -493,6 +493,7 @@ public class Query {
 	public static boolean subtractBalance(double amount, int accout) {
 		
 		boolean jobDone = false;
+		int finished;
 		
 		try {
 
@@ -503,7 +504,12 @@ public class Query {
 			statement.setDouble(1, amount);
 			statement.setInt(2, accout);
 
-			result = statement.executeQuery();
+			finished = statement.executeUpdate();
+			
+			if (finished == 1) {
+				
+				jobDone = true;
+			}
 
 		} catch (SQLException e1) {
 
