@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
@@ -57,9 +58,14 @@ public class MainFrame extends JFrame implements Runnable {
 					break;
 				}
 			}
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
+		} catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		} catch (ClassNotFoundException e) {
+			// handle exception
+		} catch (InstantiationException e) {
+			// handle exception
+		} catch (IllegalAccessException e) {
+			// handle exception
 		}
 
 		int id = Integer.parseInt(autoNumber);
@@ -70,6 +76,7 @@ public class MainFrame extends JFrame implements Runnable {
 
 		getContentPane().setLayout(null);
 
+		// Get all panels for the cardLayout
 		summary = new Summary(autoNumber);
 		account = new Account();
 		transfer = new Transfers(autoNumber);
@@ -212,6 +219,8 @@ public class MainFrame extends JFrame implements Runnable {
 
 		btnSummary.addActionListener(arg0 -> {
 
+			cardLayout.show(mainView, "summary");
+			// Refresh the table data every time the summary is opened
 			try {
 
 				Summary.populateTableSummary();
@@ -219,7 +228,7 @@ public class MainFrame extends JFrame implements Runnable {
 
 				e.printStackTrace();
 			}
-			cardLayout.show(mainView, "summary");
+
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
 			btnDetails.setBackground(new Color(201, 216, 239));
@@ -300,8 +309,14 @@ public class MainFrame extends JFrame implements Runnable {
 			btnSecurity.setBackground(new Color(201, 216, 239));
 			btnPayees.setBackground(new Color(201, 216, 239));
 		});
+
+		// Button to exit session
+		btnLogout.addActionListener(arg0 -> this.dispose());
 	}
 
+	/**
+	 * Method to open Payee panel from the Transfer panel
+	 */
 	public static void displayPayee() {
 
 		cardLayout.show(mainView, "payee");

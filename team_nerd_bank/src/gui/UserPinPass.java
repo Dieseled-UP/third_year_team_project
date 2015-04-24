@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.WindowConstants;
 import javax.swing.border.LineBorder;
@@ -71,9 +72,14 @@ public class UserPinPass extends JFrame implements Runnable {
 					break;
 				}
 			}
-		} catch (Exception e) {
-			// If Nimbus is not available, you can set the GUI to another look
-			// and feel.
+		} catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		} catch (ClassNotFoundException e) {
+			// handle exception
+		} catch (InstantiationException e) {
+			// handle exception
+		} catch (IllegalAccessException e) {
+			// handle exception
 		}
 
 		getContentPane().setLayout(null);
@@ -222,7 +228,9 @@ public class UserPinPass extends JFrame implements Runnable {
 
 					// Send data to AES class to encrypt
 					secu.encryptPinPass(pinString, pinB.toString(), passB.toString(), num);
+					
 				} catch (Exception e1) {
+					
 					e1.printStackTrace();
 				}
 
@@ -431,6 +439,11 @@ public class UserPinPass extends JFrame implements Runnable {
 		}
 	}
 
+	/**
+	 * Method to check that the user enters 4 digits
+	 * @param num
+	 * @return boolean good
+	 */
 	public boolean checkPinLength(String num) {
 
 		boolean good = true;
@@ -443,6 +456,11 @@ public class UserPinPass extends JFrame implements Runnable {
 		return good;
 	}
 
+	/**
+	 * Method to check that the password is not to weak by been greater than 6 characters
+	 * @param num
+	 * @return boolean good
+	 */
 	public boolean checkPassLength(String num) {
 
 		boolean good = true;

@@ -134,7 +134,8 @@ public class Query {
 	}
 
 	/**
-	 * Method to query the database to check that the auto generated pin is correct
+	 * Method to query the database to check that the auto generated pin is
+	 * correct
 	 * 
 	 * @param number
 	 * @return boolean
@@ -355,7 +356,7 @@ public class Query {
 
 		try {
 
-			sql = "SELECT Name FROM the_bank.Payee INNER JOIN the_bank.Account ON " + "Payee.assigned_account = Account.account_num "
+			sql = "SELECT Name FROM the_bank.Payee INNER JOIN the_bank.Account ON Payee.assigned_account = Account.account_num "
 					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID WHERE Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 
@@ -381,16 +382,15 @@ public class Query {
 	 */
 	public static ResultSet getSummary(int pin) {
 
-		Calendar  now = Calendar.getInstance();
+		Calendar now = Calendar.getInstance();
 		Calendar past = Calendar.getInstance();
 		past.add(Calendar.DATE, -7);
 
 		try {
-			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Account.balance, Transaction.amount "
-					+ "FROM the_bank.Transaction "
-					+ "INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num "
+			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Transaction.old_balance, Transaction.amount "
+					+ "FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num "
 					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID "
-					+ "WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ?";
+					+ "WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ? ORDER BY Transaction.transaction_ID ASC";
 			statement = Connect_DB.pStatement(sql);
 
 			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
@@ -433,34 +433,34 @@ public class Query {
 
 			e.printStackTrace();
 		}
-		
+
 		for (int j = 0; j < list.size(); j++) {
-			
+
 			System.out.println(list.get(j));
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * Method to check that the user has sufficient funds before transfer
+	 * 
 	 * @param amount
 	 * @param accout
 	 * @param pin
 	 * @return boolean allGood
 	 */
 	public static boolean checkBalance(double amount, int accout, int pin) {
-		
+
 		boolean allGood = false;
 		double balance = 0;
-		
+
 		try {
 
-			sql = "SELECT balance FROM the_bank.Account "
-					+ "INNER JOIN the_bank.Member ON Account.customer_ID = Member.customer_ID "
+			sql = "SELECT balance FROM the_bank.Account INNER JOIN the_bank.Member ON Account.customer_ID = Member.customer_ID "
 					+ "WHERE Member.auto_ID = ? AND account_num = ?";
 			statement = Connect_DB.pStatement(sql);
-			
+
 			statement.setInt(1, pin);
 			statement.setInt(2, accout);
 
@@ -470,10 +470,10 @@ public class Query {
 
 				balance = result.getDouble(1);
 			}
-			
+
 			// check that there is sufficient funds
 			if (balance > amount) {
-				
+
 				allGood = true;
 			}
 
@@ -481,34 +481,69 @@ public class Query {
 
 			e1.printStackTrace();
 		}
-		
+
 		return allGood;
 	}
-	
+
+	/**
+	 * Method to users current balance on selected account
+	 * 
+	 * @param accout
+	 * @param pin
+	 * @return double balance
+	 */
+	public static double getBalance(int accout, int pin) {
+
+		double balance = 0;
+
+		try {
+
+			sql = "SELECT balance FROM the_bank.Account INNER JOIN the_bank.Member ON Account.customer_ID = Member.customer_ID "
+					+ "WHERE Member.auto_ID = ? AND account_num = ?";
+			statement = Connect_DB.pStatement(sql);
+
+			statement.setInt(1, pin);
+			statement.setInt(2, accout);
+
+			result = statement.executeQuery();
+
+			while (result.next()) {
+
+				balance = result.getDouble(1);
+			}
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		}
+
+		return balance;
+	}
+
 	/**
 	 * Method to subtract transfer amount from users account
+	 * 
 	 * @param amount
 	 * @param accout
 	 * @return boolean jobDone
 	 */
 	public static boolean subtractBalance(double amount, int accout) {
-		
+
 		boolean jobDone = false;
 		int finished;
-		
+
 		try {
 
-			sql = "UPDATE the_bank.Account as acc SET balance = balance - ? "
-					+ "WHERE account_num = ?";
+			sql = "UPDATE the_bank.Account as acc SET balance = balance - ? WHERE account_num = ?";
 			statement = Connect_DB.pStatement(sql);
-			
+
 			statement.setDouble(1, amount);
 			statement.setInt(2, accout);
 
 			finished = statement.executeUpdate();
-			
+
 			if (finished == 1) {
-				
+
 				jobDone = true;
 			}
 
@@ -516,31 +551,68 @@ public class Query {
 
 			e1.printStackTrace();
 		}
-		
+
 		return jobDone;
 	}
-	
+
+	/**
+	 * Method to add amount to an account
+	 * @param amount
+	 * @param accout
+	 * @return boolean jobDone
+	 */
+	public static boolean addBalance(double amount, int accout) {
+
+		boolean jobDone = false;
+		int finished;
+
+		try {
+
+			sql = "UPDATE the_bank.Account as acc SET balance = balance + ? WHERE account_num = ?";
+			statement = Connect_DB.pStatement(sql);
+
+			statement.setDouble(1, amount);
+			statement.setInt(2, accout);
+
+			finished = statement.executeUpdate();
+
+			if (finished == 1) {
+
+				jobDone = true;
+			}
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		}
+
+		return jobDone;
+	}
+
 	/**
 	 * Method to add transaction to the table if the user makes a transfer
+	 * 
 	 * @param name
 	 * @param account
 	 * @param amount
 	 * @param pin
 	 */
 	public static void insertTransaction(String name, int account, double amount, int pin) {
-		
+
 		int id = getUserID(pin);
-		
+		double old = getBalance(account, pin);
+
 		try {
 
-			sql = "INSERT INTO the_bank.Transaction (type, account_num, amount, customer_ID) VALUES (?, ?, ?, ?)";
+			sql = "INSERT INTO the_bank.Transaction (type, account_num, amount, customer_ID, old_balance) VALUES (?, ?, ?, ?, ?)";
 			statement = Connect_DB.pStatement(sql);
-			
+
 			statement.setString(1, name);
 			statement.setInt(2, account);
 			statement.setDouble(3, amount);
 			statement.setInt(4, id);
-			
+			statement.setDouble(5, old);
+
 			statement.executeUpdate();
 
 		} catch (SQLException e1) {
@@ -548,7 +620,7 @@ public class Query {
 			e1.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * Method to get the user ID based on auto-generated pin
 	 * 
@@ -556,27 +628,27 @@ public class Query {
 	 * @return int num
 	 */
 	public static int getUserID(int pin) {
-		
+
 		int num = 0;
-		
+
 		try {
-			
+
 			sql = "SELECT customer_ID FROM the_bank.Member WHERE Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
-			
+
 			statement.setInt(1, pin);
 			result = statement.executeQuery();
-			
+
 			while (result.next()) {
-				
+
 				num = result.getInt(1);
 			}
-			
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 		return num;
 	}
 }

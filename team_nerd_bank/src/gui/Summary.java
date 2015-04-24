@@ -154,8 +154,6 @@ public class Summary extends JPanel {
 			}
 		};
 		table.setShowGrid(false);
-		table.getTableHeader().setResizingAllowed(false);
-		table.getTableHeader().setReorderingAllowed(false);
 		table.setSelectionModel(new ForcedListSelectionModel());
 		table.setBorder(new MatteBorder(0, 1, 0, 1, (Color) new Color(255, 165, 0)));
 		table.setTableHeader(null);
@@ -177,6 +175,7 @@ public class Summary extends JPanel {
 	 */
 	public static void populateTableSummary() throws SQLException {
 
+		table.removeAll();
 		ResultSet result = Query.getSummary(pin);
 
 		table.setModel(DbUtils.resultSetToTableModel(result));
