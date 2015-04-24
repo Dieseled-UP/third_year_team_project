@@ -63,7 +63,7 @@ public class Transfers extends JPanel {
 		
 		setLayout(null);
 		
-		lblFrom = new JLabel("<html><span style=\"font-size: 11\">From<br/> </span>Current Account</html>");
+		lblFrom = new JLabel("<html><span style=\"font-size: 11\">From<br/> </span>Account</html>");
 		lblFrom.setForeground(Color.BLUE);
 		lblFrom.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFrom.setBounds(239, 48, 115, 31);

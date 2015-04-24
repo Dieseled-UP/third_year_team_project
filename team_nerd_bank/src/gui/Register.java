@@ -31,6 +31,8 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
 import connect.Query;
+import connect.SendSMS;
+
 
 public class Register extends JFrame implements Runnable {
 
@@ -69,6 +71,7 @@ public class Register extends JFrame implements Runnable {
 	private JPanel pnlBankDetails;
 	private JLabel lblDob;
 	private JTextField txtDob;
+	private static StringBuilder code;
 	
 	// Create a customer object and an array to hold data
 	Customer temp;
@@ -399,7 +402,7 @@ public class Register extends JFrame implements Runnable {
 			
 			// Split the date of birth String
 			String[] birth = String.valueOf(temp.getDob()).split("-");
-			StringBuilder code = new StringBuilder();
+			code = new StringBuilder();
 			
 			char[] endYear = birth[0].toCharArray();
 
@@ -420,7 +423,15 @@ public class Register extends JFrame implements Runnable {
 			// Pass id number and code to UserPinPass
 			UserPinPass.getID(temp.getId(), code.toString());
 
-			JOptionPane.showMessageDialog(null, "Here is your generated code " + code.toString()
+			try {
+				
+				SendSMS.sendVerification();
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "You will be forwarded on a auto-generated pin by SMS. "
+					+ ".\nThis will also be posted to your home address "
 					+ ".\nPlease take note of this code and keep in a safe place.");
 
 			java.awt.EventQueue.invokeLater(() -> {
@@ -447,6 +458,11 @@ public class Register extends JFrame implements Runnable {
 
 			this.dispose();
 		});
+	}
+	
+	public static String getAutoPin() {
+		
+		return code.toString();
 	}
 
 	@Override
