@@ -381,19 +381,20 @@ public class Query {
 	 */
 	public static ResultSet getSummary(int pin) {
 
-		Calendar date = Calendar.getInstance();
+		Calendar  now = Calendar.getInstance();
 		Calendar past = Calendar.getInstance();
 		past.add(Calendar.DATE, -7);
 
 		try {
 			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Account.balance, Transaction.amount "
-					+ "FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num "
+					+ "FROM the_bank.Transaction "
+					+ "INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num "
 					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID "
 					+ "WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 
 			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
-			statement.setDate(2, new java.sql.Date(date.getTimeInMillis()));
+			statement.setDate(2, new java.sql.Date(now.getTimeInMillis()));
 			statement.setInt(3, pin);
 
 			result = statement.executeQuery();

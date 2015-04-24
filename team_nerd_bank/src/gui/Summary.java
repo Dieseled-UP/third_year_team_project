@@ -171,6 +171,10 @@ public class Summary extends JPanel {
 		}
 	}
 
+	/**
+	 * Method to populate the table with past 7 days transactions
+	 * @throws SQLException
+	 */
 	public static void populateTableSummary() throws SQLException {
 
 		ResultSet result = Query.getSummary(pin);

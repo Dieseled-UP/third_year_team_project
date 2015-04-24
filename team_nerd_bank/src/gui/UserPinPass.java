@@ -193,6 +193,8 @@ public class UserPinPass extends JFrame implements Runnable {
 
 				JOptionPane.showMessageDialog(null, "Please fill out all sections before proceeding");
 			} else {
+				
+				
 
 				// Create StringBuilders to convert pin and password fields into
 				// strings
@@ -255,7 +257,7 @@ public class UserPinPass extends JFrame implements Runnable {
 
 			// Get the second password
 			JPasswordField tField = (JPasswordField) input;
-			
+
 			// Append pin characters
 			for (int i = 0; i < tField.getPassword().length; i++) {
 
@@ -263,32 +265,44 @@ public class UserPinPass extends JFrame implements Runnable {
 			}
 			// For testing purpose please remove
 			System.out.println(pinB.toString());
-			
+
 			if (NumberTest(pinB.toString())) {
 
-				// Check that the two arrays are the same
-				if (Arrays.equals(tField.getPassword(), txtPin.getPassword())) {
+				// Check that the user enter 4 numbers for pin
+				if (checkPinLength(pinB.toString())) {
 
-					result = true;
-					return result;
+					// Check that the two arrays are the same
+					if (Arrays.equals(tField.getPassword(), txtPin.getPassword())) {
 
+						result = true;
+						return result;
+
+					} else {
+
+						// Instruct user that the passwords don't match
+						JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
+
+						// Reset input field
+						txtRePin.setText(null);
+						tField.setText(null);
+					}
 				} else {
 
-					// Instruct user that the passwords don't match
-					JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
+					JOptionPane.showMessageDialog(null, "Pin must be at 4 digits!!");
 
-					// Reset input field
+					txtPin.setText(null);
 					txtRePin.setText(null);
-					tField.setText(null);
+
+					txtPin.grabFocus();
 				}
 
 			} else {
 
 				JOptionPane.showMessageDialog(null, "Pin can only consist of numbers!!");
-				
+
 				txtPin.setText(null);
 				txtRePin.setText(null);
-				
+
 				txtPin.grabFocus();
 			}
 
@@ -305,24 +319,47 @@ public class UserPinPass extends JFrame implements Runnable {
 		public boolean verify(JComponent input) {
 
 			boolean result = false;
+			StringBuilder passB = new StringBuilder();
 
 			// Get the second password
 			JPasswordField tField = (JPasswordField) input;
 
-			// Check that the two arrays are the same
-			if (Arrays.equals(tField.getPassword(), txtPassword.getPassword())) {
+			// Append pin characters
+			for (int i = 0; i < tField.getPassword().length; i++) {
 
-				result = true;
-				return result;
+				passB.append(tField.getPassword()[i]);
+			}
+			
+			System.out.println(passB.toString().length());
 
+			// Check that the password has a minimum of seven characters
+			if (checkPassLength(passB.toString())) {
+
+				// Check that the two arrays are the same
+				if (Arrays.equals(tField.getPassword(), txtPassword.getPassword())) {
+
+					result = true;
+					return result;
+
+				} else {
+
+					// Instruct user that the passwords don't match
+					JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
+
+					// Reset input field
+					txtPassword.setText(null);
+					txtRePassword.setText(null);
+
+					txtPassword.grabFocus();
+				}
 			} else {
+				
+				JOptionPane.showMessageDialog(null, "Password must consist of at least 7 characters!!");
 
-				// Instruct user that the passwords don't match
-				JOptionPane.showMessageDialog(null, "Sorry the fields don't match");
-
-				// Reset input field
+				txtPassword.setText(null);
 				txtRePassword.setText(null);
-				tField.setText(null);
+
+				txtPassword.grabFocus();
 			}
 
 			return result;
@@ -379,6 +416,7 @@ public class UserPinPass extends JFrame implements Runnable {
 
 	/**
 	 * Method to ensure user enters numbers only
+	 * 
 	 * @param num
 	 * @return boolean
 	 */
@@ -391,6 +429,32 @@ public class UserPinPass extends JFrame implements Runnable {
 		} catch (NumberFormatException e) {
 			return false;
 		}
+	}
+
+	public boolean checkPinLength(String num) {
+
+		boolean good = true;
+		char[] size = num.toCharArray();
+
+		if (size.length < 4) {
+
+			good = false;
+		}
+		return good;
+	}
+
+	public boolean checkPassLength(String num) {
+
+		boolean good = true;
+		char[] size = num.toCharArray();
+		
+		System.out.println(size.length);
+
+		if (size.length < 7) {
+
+			good = false;
+		}
+		return good;
 	}
 
 	/**

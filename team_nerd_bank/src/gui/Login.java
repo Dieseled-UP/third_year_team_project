@@ -91,22 +91,34 @@ public class Login extends JFrame implements Runnable {
 		lblimg = new JLabel(new ImageIcon(image));
 		lblimg.setBounds(10, 153, 226, 210);
 		getContentPane().add(lblimg);
+		
+				btnReg = new JButton("<html><u>register</u></html>");
+				btnReg.setForeground(Color.RED);
+				btnReg.setCursor(new Cursor(Cursor.HAND_CURSOR));
+				btnReg.setFont(new Font("Tahoma", Font.PLAIN, 14));
+				btnReg.setOpaque(false);
+				btnReg.setContentAreaFilled(false);
+				btnReg.setBorderPainted(false);
+				btnReg.setBounds(433, 255, 70, 21);
+				getContentPane().add(btnReg);
+				
+						btnReg.addActionListener(arg0 -> {
+				
+							this.dispose();
+				
+							java.awt.EventQueue.invokeLater(() -> {
+				
+								Register frame = new Register();
+								SwingUtilities.invokeLater(frame);
+				
+							});
+						});
 
 		lblNewLabel = new JLabel("<html>If you have an account and wish to use this service please feel free to</html>");
 		lblNewLabel.setForeground(Color.BLUE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(369, 203, 198, 88);
+		lblNewLabel.setBounds(369, 203, 198, 91);
 		getContentPane().add(lblNewLabel);
-
-		btnReg = new JButton("<html><u>register</u></html>");
-		btnReg.setForeground(Color.RED);
-		btnReg.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnReg.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnReg.setOpaque(false);
-		btnReg.setContentAreaFilled(false);
-		btnReg.setBorderPainted(false);
-		btnReg.setBounds(422, 253, 70, 21);
-		getContentPane().add(btnReg);
 
 		panel = new JPanel();
 		panel.setBackground(new Color(0, 0, 139));
@@ -212,18 +224,6 @@ public class Login extends JFrame implements Runnable {
 				txtAutoPin.setText("");
 			}
 
-		});
-
-		btnReg.addActionListener(arg0 -> {
-
-			this.dispose();
-
-			java.awt.EventQueue.invokeLater(() -> {
-
-				Register frame = new Register();
-				SwingUtilities.invokeLater(frame);
-
-			});
 		});
 
 	}

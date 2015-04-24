@@ -384,6 +384,22 @@ public class UserLogin extends JFrame implements Runnable {
 		btnForgot.setBounds(55, 613, 256, 32);
 		btnForgot.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		getContentPane().add(btnForgot);
+		
+		txtPinOne.addActionListener(arg0 -> {
+			txtPinTwo.requestFocusInWindow();
+		});
+		txtPinTwo.addActionListener(arg0 -> {
+			txtPinThree.requestFocusInWindow();
+		});
+		txtPinThree.addActionListener(arg0 -> {
+			txtPassOne.requestFocusInWindow();
+		});
+		txtPassOne.addActionListener(arg0 -> {
+			txtPassTwo.requestFocusInWindow();
+		});
+		txtPassTwo.addActionListener(arg0 -> {
+			txtPassThree.requestFocusInWindow();
+		});
 
 		btnLogin.addActionListener(arg0 -> {
 
@@ -422,24 +438,24 @@ public class UserLogin extends JFrame implements Runnable {
 		// Generate a variable for each label
 		if (onePinLbl == null) {
 			// Set text for first label using a random String from the Array
-			onePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
+			onePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)].toString();
 		}
 		if (twoPinLbl == null) {
 			// Set text for second label using a random String from the Array
-			twoPinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
+			twoPinLbl = pinNumbers[rand.nextInt(pinNumbers.length)].toString();
 
 			// Check that the text has not already been used
-			while (twoPinLbl == onePinLbl) {
-				twoPinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
+			while (twoPinLbl.equalsIgnoreCase(onePinLbl)) {
+				twoPinLbl = pinNumbers[rand.nextInt(pinNumbers.length)].toString();
 			}
 		}
 		if (threePinLbl == null) {
 			// Set text for third label using a random String from the Array
-			threePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
+			threePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)].toString();
 
 			// Check that the text has not already been used
-			while (threePinLbl == onePinLbl || threePinLbl == twoPinLbl) {
-				threePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)];
+			while (threePinLbl.equalsIgnoreCase(onePinLbl) || threePinLbl.equalsIgnoreCase(twoPinLbl)) {
+				threePinLbl = pinNumbers[rand.nextInt(pinNumbers.length)].toString();
 			}
 		}
 
@@ -453,7 +469,7 @@ public class UserLogin extends JFrame implements Runnable {
 
 		String[] size = new String[results.get(1).length()];
 
-		for (int i = 0; i < size.length - 1; i++) {
+		for (int i = 0; i < size.length; i++) {
 
 			size[i] = passNumbers[i];
 		}
@@ -461,24 +477,24 @@ public class UserLogin extends JFrame implements Runnable {
 		// Generate a variable for each label
 		if (onePassLbl == null) {
 			// Set text for first label using a random String from the Array
-			onePassLbl = size[rand.nextInt(size.length - 1)];
+			onePassLbl = size[rand.nextInt(size.length)].toString();
 		}
 		if (twoPassLbl == null) {
 			// Set text for second label using a random String from the Array
-			twoPassLbl = size[rand.nextInt(size.length - 1)];
+			twoPassLbl = size[rand.nextInt(size.length)].toString();
 
 			// Check that the text has not already been used
-			while (twoPassLbl == onePassLbl) {
-				twoPassLbl = size[rand.nextInt(size.length - 1)];
+			while (twoPassLbl.equalsIgnoreCase(onePassLbl)) {
+				twoPassLbl = size[rand.nextInt(size.length)].toString();
 			}
 		}
 		if (threePassLbl == null) {
 			// Set text for third label using a random String from the Array
-			threePassLbl = size[rand.nextInt(size.length - 1)];
+			threePassLbl = size[rand.nextInt(size.length )].toString();
 
 			// Check that the text has not already been used
-			while (threePassLbl == onePassLbl || threePassLbl == twoPassLbl) {
-				threePassLbl = size[rand.nextInt(size.length - 1)];
+			while (threePassLbl.equalsIgnoreCase(onePassLbl) || threePassLbl.equalsIgnoreCase(twoPassLbl)) {
+				threePassLbl = size[rand.nextInt(size.length)].toString();
 			}
 		}
 
