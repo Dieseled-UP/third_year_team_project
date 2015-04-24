@@ -8,6 +8,7 @@ package connect;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import people.Customer;
@@ -344,40 +345,19 @@ public class Query {
 	}
 
 	/**
-	 * Method to get total number of records associated with account then get
-	 * name of all Payees accounts
+	 * Method to get names of all Payees associated with account
 	 * 
 	 * @param pin
 	 * @return String[] names
 	 */
-	public static String[] getPayeesNames(int pin) {
+	public static ArrayList<String> getPayeesNames(int pin) {
 
-		int total = 0;
-		int i = 0;
-		try {
-
-			sql = "SELECT COUNT(Name) FROM the_bank.Payee INNER JOIN the_bank.Account ON "
-					+ "Payee.assigned_account = Account.account_num "
-					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " + "WHERE Member.auto_ID = ?";
-			statement = Connect_DB.pStatement(sql);
-
-			statement.setInt(1, pin);
-			result = statement.executeQuery();
-
-			while (result.next()) {
-
-				total = result.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		String[] names = new String[total];
+		ArrayList<String> names = new ArrayList<String>();
 
 		try {
 
 			sql = "SELECT Name FROM the_bank.Payee INNER JOIN the_bank.Account ON " + "Payee.assigned_account = Account.account_num "
-					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " + "WHERE Member.auto_ID = ?";
+					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID WHERE Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 
 			statement.setInt(1, pin);
@@ -385,8 +365,7 @@ public class Query {
 
 			while (result.next()) {
 
-				names[i] = result.getString(1);
-				i++;
+				names.add(result.getString(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -433,10 +412,9 @@ public class Query {
 	 * @param pin
 	 * @return int[] list
 	 */
-	public static int[] getAccountNumbers(int pin) {
+	public static ArrayList<String> getAccountNumbers(int pin) {
 
-		int[] list = new int[5];
-		int i = 0;
+		ArrayList<String> list = new ArrayList<String>();
 
 		try {
 			sql = "SELECT Account.account_num FROM the_bank.Account INNER JOIN the_bank.Member ON Account.customer_ID "
@@ -448,14 +426,19 @@ public class Query {
 			result = statement.executeQuery();
 			while (result.next()) {
 
-				list[i] = result.getInt(1);
-				i++;
+				list.add(String.valueOf(result.getInt(1)));
 			}
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		}
+		
+		for (int j = 0; j < list.size(); j++) {
+			
+			System.out.println(list.get(j));
+		}
+		
 		return list;
 	}
 }

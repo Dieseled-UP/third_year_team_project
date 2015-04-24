@@ -14,6 +14,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -21,6 +23,7 @@ import com.toedter.calendar.JDateChooser;
 
 import connect.Query;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 
@@ -28,9 +31,10 @@ public class Transfers extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel pnlPayee;
-	private JComboBox<Integer> cbxAccounts;
+	private JComboBox<String> cbxAccounts;
 	private JLabel lblFrom;
 	private JSpinner sprMoney;
+	private SpinnerModel spinMod;
 	private JLabel lblValue;
 	private JLabel lblTo;
 	private JComboBox<String> cobkNames;
@@ -44,8 +48,8 @@ public class Transfers extends JPanel {
 	private int pin;
 	private JPanel panel;
 	private JDateChooser dateChooser;
-	private int[] accounts;
-	private String[] payeeName;
+	private ArrayList<String> accounts;
+	private ArrayList<String> payeeName;
 	
 	public Transfers(String autoNumber) {
 		
@@ -54,6 +58,7 @@ public class Transfers extends JPanel {
 		accounts = Query.getAccountNumbers(pin);
 		payeeName = Query.getPayeesNames(pin);
 		
+		spinMod = new SpinnerNumberModel(0, 0, 500000, 1);
 		setBorder(new LineBorder(new Color(255, 165, 0)));
 		
 		setLayout(null);
@@ -64,8 +69,9 @@ public class Transfers extends JPanel {
 		lblFrom.setBounds(239, 48, 115, 31);
 		add(lblFrom);
 		
-		cbxAccounts = new JComboBox<Integer>();
+		cbxAccounts = new JComboBox<String>();
 		fillAccountCombo();
+		cbxAccounts.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cbxAccounts.setBounds(239, 90, 101, 26);
 		add(cbxAccounts);
 		
@@ -83,6 +89,7 @@ public class Transfers extends JPanel {
 		
 		cobkNames = new JComboBox<String>();
 		fillNameSCombo();
+		cobkNames.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		cobkNames.setBounds(20, 47, 246, 26);
 		pnlPayee.add(cobkNames);
 		
@@ -105,7 +112,8 @@ public class Transfers extends JPanel {
 		lblValue.setForeground(Color.BLUE);
 		lblValue.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		sprMoney = new JSpinner();
+		sprMoney = new JSpinner(spinMod);
+		sprMoney.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		sprMoney.setBounds(391, 30, 101, 26);
 		pnlPayee.add(sprMoney);
 		
@@ -149,25 +157,39 @@ public class Transfers extends JPanel {
 		btnOK.setBounds(500, 400, 89, 26);
 		add(btnOK);
 		
+		// Open Payee Panel if the user wishes to add a new Payee
 		btnAddPayee.addActionListener(arg0 -> {
 			
 			MainFrame.displayPayee();
 		});
+		
+		btnOK.addActionListener(arg0 -> {
+			
+			
+		});
 	}
 	
+	/**
+	 * Method to fill the accounts combo box
+	 */
 	public void fillAccountCombo() {
 		
-		for (int i = 0; i < accounts.length -1; i++) {
+		cbxAccounts.addItem("-Select-");
+		for (int i = 0; i < accounts.size(); i++) {
 			
-			cbxAccounts.addItem(accounts[i]);
+			cbxAccounts.addItem(accounts.get(i));
 		}
 	}
 	
+	/**
+	 * Method to fill the Payees combo box 
+	 */
 	public void fillNameSCombo() {
 		
-		for (int i = 0; i < payeeName.length -1; i++) {
+		cobkNames.addItem("-Select-");
+		for (int i = 0; i < payeeName.size(); i++) {
 			
-			cobkNames.addItem(payeeName[i]);
+			cobkNames.addItem(payeeName.get(i));
 		}
 	}
 }
