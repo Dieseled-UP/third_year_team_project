@@ -276,18 +276,17 @@ public class Query {
 	 * 
 	 * @return boolean
 	 */
-	public static boolean setPayee(int id, String ref, String name, int acc_no, String sort_code, int acc_ref) {
+	public static boolean setPayee(String ref, String name, int acc_no, String sort_code, int acc_ref) {
 		try {
 
-			sql = "INSERT INTO the_bank.Payee VALUES (?, ?, ?, ?, ?, ?)";
+			sql = "INSERT INTO the_bank.Payee (Reference, Name, Account_Number, Sort_code, assigned_account) VALUES (?, ?, ?, ?, ?)";
 			statement = Connect_DB.pStatement(sql);
 
-			statement.setInt(1, id);
-			statement.setString(2, ref);
-			statement.setString(3, name);
-			statement.setInt(4, acc_no);
-			statement.setString(5, sort_code);
-			statement.setInt(6, acc_ref);
+			statement.setString(1, ref);
+			statement.setString(2, name);
+			statement.setInt(3, acc_no);
+			statement.setString(4, sort_code);
+			statement.setInt(5, acc_ref);
 
 			int done = statement.executeUpdate();
 

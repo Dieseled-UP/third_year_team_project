@@ -9,6 +9,8 @@ import java.awt.Font;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,10 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+
 import net.proteanit.sql.DbUtils;
 import people.Payee;
 import table.ForcedListSelectionModel;
 import connect.Query;
+
 import javax.swing.border.MatteBorder;
 import javax.swing.JComboBox;
 
@@ -49,7 +53,9 @@ public class Payees extends JPanel {
 	private static int pin;
 	private JPanel pnlList;
 	private JPanel pnlTitles;
-
+	private JLabel lblAssignToAccount;
+	private JComboBox comboBox = new JComboBox();
+	
 	public Payees(String autoNumber) {
 
 		setBorder(new LineBorder(new Color(255, 165, 0)));
@@ -190,9 +196,20 @@ public class Payees extends JPanel {
 
 		scrollPane.setViewportView(table);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(421, 391, 103, 32);
+		
+		comboBox.setBounds(421, 391, 71, 26);
+		ArrayList<String> numbersArrayList = Query.getAccountNumbers(pin);
+		for(int i=0; i<numbersArrayList.size(); i++)
+		{
+			comboBox.addItem(numbersArrayList.get(i));
+		}
 		add(comboBox);
+		
+		lblAssignToAccount = new JLabel("Assign to account:");
+		lblAssignToAccount.setForeground(Color.BLUE);
+		lblAssignToAccount.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblAssignToAccount.setBounds(421, 367, 114, 17);
+		add(lblAssignToAccount);
 
 		// JScrollPane scrollPane = new JScrollPane(table);
 		try {
@@ -213,8 +230,9 @@ public class Payees extends JPanel {
 				new_payee = new Payee(txtReference.getText(), full_name, accNo, txtSortCode.getText());
 
 				// get assigned account id to be fixed
+				int assignTo = Integer.parseInt((String)comboBox.getSelectedItem());
 				Query.setPayee(new_payee.getReference(), new_payee.getName(), new_payee.getPayeeAccNo(),
-						new_payee.getPayeeCode(), 1234);
+						new_payee.getPayeeCode(), assignTo);
 
 				populateTable();
 			} catch (Exception e) {
@@ -233,6 +251,17 @@ public class Payees extends JPanel {
 				e.printStackTrace();
 			}
 		});
+		
+		comboBox.addActionListener(arg0 -> {
+			try {
+				
+			} catch (Exception e) {
+
+				System.out.println("No input");
+				e.printStackTrace();
+			}
+		});
+		
 	}
 
 	public static void removePayee() {
