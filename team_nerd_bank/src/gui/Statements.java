@@ -7,7 +7,6 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
 import java.util.Locale;
 
 import javax.swing.JComboBox;
