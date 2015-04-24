@@ -134,7 +134,7 @@ public class Query {
 	}
 
 	/**
-	 * Method to query the database to return the auto generated pin
+	 * Method to query the database to check that the auto generated pin is correct
 	 * 
 	 * @param number
 	 * @return boolean
@@ -497,7 +497,7 @@ public class Query {
 		
 		try {
 
-			sql = "UPDATE the_bank.Account as acc SET balance = ? "
+			sql = "UPDATE the_bank.Account as acc SET balance = balance - ? "
 					+ "WHERE account_num = ?";
 			statement = Connect_DB.pStatement(sql);
 			
@@ -517,5 +517,64 @@ public class Query {
 		}
 		
 		return jobDone;
+	}
+	
+	/**
+	 * Method to add transaction to the table if the user makes a transfer
+	 * @param name
+	 * @param account
+	 * @param amount
+	 * @param pin
+	 */
+	public static void insertTransaction(String name, int account, double amount, int pin) {
+		
+		int id = getUserID(pin);
+		
+		try {
+
+			sql = "INSERT INTO the_bank.Transaction (type, account_num, amount, customer_ID) VALUES (?, ?, ?, ?)";
+			statement = Connect_DB.pStatement(sql);
+			
+			statement.setString(1, name);
+			statement.setInt(2, account);
+			statement.setDouble(3, amount);
+			statement.setInt(4, id);
+			
+			statement.executeUpdate();
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Method to get the user ID based on auto-generated pin
+	 * @param pin
+	 * @return int num
+	 */
+	public static int getUserID(int pin) {
+		
+		int num = 0;
+		
+		try {
+			
+			sql = "SELECT customer_ID FROM the_bank.Member WHERE Member.auto_ID = ?";
+			statement = Connect_DB.pStatement(sql);
+			
+			statement.setInt(1, pin);
+			result = statement.executeQuery();
+			
+			while (result.next()) {
+				
+				num = result.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return num;
 	}
 }

@@ -170,7 +170,10 @@ public class Transfers extends JPanel {
 		
 		btnOK.addActionListener(arg0 -> {
 			
-			
+			getDetails();
+			checkUserInput();
+			sortFunds();
+			updateTransaction();
 		});
 	}
 	
@@ -217,6 +220,9 @@ public class Transfers extends JPanel {
 		}
 	}
 	
+	/**
+	 * Method to ensure user input is correct
+	 */
 	public void checkUserInput() {
 		
 		if (name == null) {
@@ -229,7 +235,10 @@ public class Transfers extends JPanel {
 		}
 	}
 	
-	public void checkFunds() {
+	/**
+	 * Method to Ensure user has enough funds and if so proceeded to subtract transfer amount
+	 */
+	public void sortFunds() {
 		
 		boolean goodToGo = Query.checkBalance(amount, accountNum, pin);
 		
@@ -242,5 +251,13 @@ public class Transfers extends JPanel {
 				JOptionPane.showMessageDialog(null, "Transfer has been complete");
 			}
 		}
+	}
+	
+	/**
+	 * Method to update Transaction table
+	 */
+	public void updateTransaction() {
+		
+		Query.insertTransaction(name, accountNum, -amount, pin);
 	}
 }
