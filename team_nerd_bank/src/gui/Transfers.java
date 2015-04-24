@@ -8,10 +8,14 @@ package gui;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
@@ -22,9 +26,6 @@ import javax.swing.border.TitledBorder;
 import com.toedter.calendar.JDateChooser;
 
 import connect.Query;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class Transfers extends JPanel {
@@ -50,6 +51,10 @@ public class Transfers extends JPanel {
 	private JDateChooser dateChooser;
 	private ArrayList<String> accounts;
 	private ArrayList<String> payeeName;
+	private int accountNum;
+	private String name;
+	private double amount;
+	private String date;
 	
 	public Transfers(String autoNumber) {
 		
@@ -191,5 +196,41 @@ public class Transfers extends JPanel {
 			
 			cobkNames.addItem(payeeName.get(i));
 		}
+	}
+	
+	/**
+	 * Method to get User inputs
+	 */
+	public void getDetails() {
+		
+		try {
+			
+			accountNum = Integer.parseInt(cbxAccounts.getSelectedItem().toString());
+			name = cobkNames.getSelectedItem().toString();
+			amount = Integer.parseInt(sprMoney.getValue().toString());
+			date = dateChooser.getDateFormatString();
+			
+		} catch (NumberFormatException e) {
+			
+			JOptionPane.showMessageDialog(null, "Sorry please check that you have filled all fields correctly");
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkUserInput() {
+		
+		if (name == null) {
+			
+			JOptionPane.showMessageDialog(null, "Sorry please check that you have filled all fields correctly");
+		}
+		if (date == null) {
+			
+			date = Calendar.getInstance(Locale.UK).toString();
+		}
+	}
+	
+	public void checkFunds() {
+		
+		boolean goodToGo = Query.checkBalance(amount, accountNum, pin);
 	}
 }

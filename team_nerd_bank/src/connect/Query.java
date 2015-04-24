@@ -348,7 +348,7 @@ public class Query {
 	 * Method to get names of all Payees associated with account
 	 * 
 	 * @param pin
-	 * @return String[] names
+	 * @return ArrayList<String> names
 	 */
 	public static ArrayList<String> getPayeesNames(int pin) {
 
@@ -410,7 +410,7 @@ public class Query {
 	 * Method to return any account numbers associated with the user
 	 * 
 	 * @param pin
-	 * @return int[] list
+	 * @return ArrayList<String> list
 	 */
 	public static ArrayList<String> getAccountNumbers(int pin) {
 
@@ -440,5 +440,48 @@ public class Query {
 		}
 		
 		return list;
+	}
+	
+	/**
+	 * Method to check that the user has sufficient funds before transfer
+	 * @param amount
+	 * @param accout
+	 * @param pin
+	 * @return boolean allGood
+	 */
+	public static boolean checkBalance(double amount, int accout, int pin) {
+		
+		boolean allGood = false;
+		double balance = 0;
+		
+		try {
+
+			sql = "SELECT balance FROM the_bank.Account "
+					+ "INNER JOIN the_bank.Member ON Account.customer_ID = Member.customer_ID "
+					+ "WHERE Member.auto_ID = ? AND account_num = ?";
+			statement = Connect_DB.pStatement(sql);
+			
+			statement.setInt(1, pin);
+			statement.setInt(2, accout);
+
+			result = statement.executeQuery();
+
+			while (result.next()) {
+
+				balance = result.getDouble(1);
+			}
+			
+			// check that there is sufficient funds
+			if (balance > amount) {
+				
+				allGood = true;
+			}
+
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		}
+		
+		return allGood;
 	}
 }
