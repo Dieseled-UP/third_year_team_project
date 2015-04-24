@@ -212,6 +212,13 @@ public class MainFrame extends JFrame implements Runnable {
 
 		btnSummary.addActionListener(arg0 -> {
 
+			try {
+
+				Summary.populateTableSummary();
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
 			cardLayout.show(mainView, "summary");
 			btnAccounts.setBackground(new Color(201, 216, 239));
 			btnTransfers.setBackground(new Color(201, 216, 239));
@@ -267,6 +274,13 @@ public class MainFrame extends JFrame implements Runnable {
 
 		btnPayees.addActionListener(arg0 -> {
 
+			try {
+				Payees.populateTablePayees();
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
 			cardLayout.show(mainView, "payee");
 			btnPayees.setBackground(new Color(166, 166, 166));
 			btnAccounts.setBackground(new Color(201, 216, 239));
@@ -287,9 +301,9 @@ public class MainFrame extends JFrame implements Runnable {
 			btnPayees.setBackground(new Color(201, 216, 239));
 		});
 	}
-	
+
 	public static void displayPayee() {
-		
+
 		cardLayout.show(mainView, "payee");
 		btnPayees.setBackground(new Color(166, 166, 166));
 		btnAccounts.setBackground(new Color(201, 216, 239));

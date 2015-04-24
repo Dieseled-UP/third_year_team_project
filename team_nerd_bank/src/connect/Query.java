@@ -550,6 +550,7 @@ public class Query {
 	
 	/**
 	 * Method to get the user ID based on auto-generated pin
+	 * 
 	 * @param pin
 	 * @return int num
 	 */

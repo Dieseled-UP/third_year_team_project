@@ -159,19 +159,19 @@ public class Summary extends JPanel {
 		table.setSelectionModel(new ForcedListSelectionModel());
 		table.setBorder(new MatteBorder(0, 1, 0, 1, (Color) new Color(255, 165, 0)));
 		table.setTableHeader(null);
-		
+
 		scrollPane.setViewportView(table);
-		
+
 		try {
-			populateTable();
-			
+			populateTableSummary();
+
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
 
-	public static void populateTable() throws SQLException {
+	public static void populateTableSummary() throws SQLException {
 
 		ResultSet result = Query.getSummary(pin);
 

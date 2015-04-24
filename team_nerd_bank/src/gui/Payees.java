@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-
 import net.proteanit.sql.DbUtils;
 import people.Payee;
 import table.ForcedListSelectionModel;
@@ -55,7 +54,7 @@ public class Payees extends JPanel {
 	private JPanel pnlTitles;
 	private JLabel lblAssignToAccount;
 	private JComboBox comboBox = new JComboBox();
-	
+
 	public Payees(String autoNumber) {
 
 		setBorder(new LineBorder(new Color(255, 165, 0)));
@@ -195,16 +194,14 @@ public class Payees extends JPanel {
 		table.setTableHeader(null);
 
 		scrollPane.setViewportView(table);
-		
-		
+
 		comboBox.setBounds(421, 391, 71, 26);
 		ArrayList<String> numbersArrayList = Query.getAccountNumbers(pin);
-		for(int i=0; i<numbersArrayList.size(); i++)
-		{
+		for (int i = 0; i < numbersArrayList.size(); i++) {
 			comboBox.addItem(numbersArrayList.get(i));
 		}
 		add(comboBox);
-		
+
 		lblAssignToAccount = new JLabel("Assign to account:");
 		lblAssignToAccount.setForeground(Color.BLUE);
 		lblAssignToAccount.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -213,7 +210,7 @@ public class Payees extends JPanel {
 
 		// JScrollPane scrollPane = new JScrollPane(table);
 		try {
-			populateTable();
+			populateTablePayees();
 		} catch (SQLException e1) {
 
 			e1.printStackTrace();
@@ -230,11 +227,10 @@ public class Payees extends JPanel {
 				new_payee = new Payee(txtReference.getText(), full_name, accNo, txtSortCode.getText());
 
 				// get assigned account id to be fixed
-				int assignTo = Integer.parseInt((String)comboBox.getSelectedItem());
-				Query.setPayee(new_payee.getReference(), new_payee.getName(), new_payee.getPayeeAccNo(),
-						new_payee.getPayeeCode(), assignTo);
+				int assignTo = Integer.parseInt((String) comboBox.getSelectedItem());
+				Query.setPayee(new_payee.getReference(), new_payee.getName(), new_payee.getPayeeAccNo(), new_payee.getPayeeCode(), assignTo);
 
-				populateTable();
+				populateTablePayees();
 			} catch (Exception e) {
 
 				System.out.println("No input");
@@ -251,17 +247,17 @@ public class Payees extends JPanel {
 				e.printStackTrace();
 			}
 		});
-		
+
 		comboBox.addActionListener(arg0 -> {
 			try {
-				
+
 			} catch (Exception e) {
 
 				System.out.println("No input");
 				e.printStackTrace();
 			}
 		});
-		
+
 	}
 
 	public static void removePayee() {
@@ -282,14 +278,14 @@ public class Payees extends JPanel {
 		// to identify payee in database and remove it
 		Query.removePayeeDatabase(accountNo, selectedSortCode.toString());
 		try {
-			populateTable();
+			populateTablePayees();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	public static void populateTable() throws SQLException {
+	public static void populateTablePayees() throws SQLException {
 
 		ResultSet result = Query.getPayeeDetails(pin);
 
