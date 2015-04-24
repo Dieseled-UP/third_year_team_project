@@ -344,7 +344,60 @@ public class Query {
 	}
 
 	/**
+	 * Method to get total number of records associated with account then get
+	 * name of all Payees accounts
+	 * 
+	 * @param pin
+	 * @return String[] names
+	 */
+	public static String[] getPayeesNames(int pin) {
+
+		int total = 0;
+		int i = 0;
+		try {
+
+			sql = "SELECT COUNT(Name) FROM the_bank.Payee INNER JOIN the_bank.Account ON "
+					+ "Payee.assigned_account = Account.account_num "
+					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " + "WHERE Member.auto_ID = ?";
+			statement = Connect_DB.pStatement(sql);
+
+			statement.setInt(1, pin);
+			result = statement.executeQuery();
+
+			while (result.next()) {
+
+				total = result.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		String[] names = new String[total];
+
+		try {
+
+			sql = "SELECT Name FROM the_bank.Payee INNER JOIN the_bank.Account ON " + "Payee.assigned_account = Account.account_num "
+					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " + "WHERE Member.auto_ID = ?";
+			statement = Connect_DB.pStatement(sql);
+
+			statement.setInt(1, pin);
+			result = statement.executeQuery();
+
+			while (result.next()) {
+
+				names[i] = result.getString(1);
+				i++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return names;
+	}
+
+	/**
 	 * Method to get the last seven days transactions associated with the user
+	 * 
 	 * @param pin
 	 * @return ResultSet result
 	 */
@@ -355,16 +408,16 @@ public class Query {
 		past.add(Calendar.DATE, -7);
 
 		try {
-			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Account.balance, Transaction.amount " +
-					"FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num " +
-					"INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID " +
-					"WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ?";
+			sql = "SELECT Transaction.type, Transaction.account_num, Account.sort_code, Account.balance, Transaction.amount "
+					+ "FROM the_bank.Transaction INNER JOIN the_bank.Account ON Transaction.account_num = Account.account_num "
+					+ "INNER JOIN the_bank.Member ON Member.customer_ID = Account.customer_ID "
+					+ "WHERE Transaction.date BETWEEN ? AND ? AND Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 
 			statement.setDate(1, new java.sql.Date(past.getTimeInMillis()));
 			statement.setDate(2, new java.sql.Date(date.getTimeInMillis()));
 			statement.setInt(3, pin);
-			
+
 			result = statement.executeQuery();
 
 		} catch (SQLException e) {
@@ -373,27 +426,30 @@ public class Query {
 		}
 		return result;
 	}
-	
-	@SuppressWarnings("null")
+
+	/**
+	 * Method to return any account numbers associated with the user
+	 * 
+	 * @param pin
+	 * @return int[] list
+	 */
 	public static int[] getAccountNumbers(int pin) {
-		
-		int[] list = null;
+
+		int[] list = new int[5];
 		int i = 0;
-		int num = 1;
-		
+
 		try {
 			sql = "SELECT Account.account_num FROM the_bank.Account INNER JOIN the_bank.Member ON Account.customer_ID "
 					+ "= Member.customer_ID WHERE Member.auto_ID = ?";
 			statement = Connect_DB.pStatement(sql);
 
 			statement.setInt(1, pin);
-			
+
 			result = statement.executeQuery();
 			while (result.next()) {
 
-				list[i] = result.getInt(num);
+				list[i] = result.getInt(1);
 				i++;
-				num++;
 			}
 
 		} catch (SQLException e) {

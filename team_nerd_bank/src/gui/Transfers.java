@@ -17,6 +17,12 @@ import javax.swing.JSpinner;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import com.toedter.calendar.JDateChooser;
+
+import connect.Query;
+
+import java.util.Locale;
+
 
 public class Transfers extends JPanel {
 	
@@ -27,24 +33,26 @@ public class Transfers extends JPanel {
 	private JSpinner sprMoney;
 	private JLabel lblValue;
 	private JLabel lblTo;
-	private JComboBox<String> comboBox;
+	private JComboBox<String> cobkNames;
 	private JLabel lblOr;
 	private JPanel pnlDate;
-	private JSpinner spinner;
-	private JSpinner spinner_1;
-	private JSpinner spinner_2;
-	private JLabel lblDay;
-	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 	private JLabel lblTranInfo;
 	private JLabel lblTran;
 	private JButton btnOK;
 	private JButton btnAddPayee;
 	private int pin;
+	private JPanel panel;
+	private JDateChooser dateChooser;
+	private int[] accounts;
+	private String[] payeeName;
 	
 	public Transfers(String autoNumber) {
 		
 		pin = Integer.parseInt(autoNumber);
+		
+		accounts = Query.getAccountNumbers(pin);
+		payeeName = Query.getPayeesNames(pin);
 		
 		setBorder(new LineBorder(new Color(255, 165, 0)));
 		
@@ -57,6 +65,7 @@ public class Transfers extends JPanel {
 		add(lblFrom);
 		
 		cbxAccounts = new JComboBox<Integer>();
+		fillAccountCombo();
 		cbxAccounts.setBounds(239, 90, 101, 26);
 		add(cbxAccounts);
 		
@@ -72,9 +81,10 @@ public class Transfers extends JPanel {
 		lblTo.setBounds(10, 24, 46, 14);
 		pnlPayee.add(lblTo);
 		
-		comboBox = new JComboBox<String>();
-		comboBox.setBounds(20, 47, 246, 26);
-		pnlPayee.add(comboBox);
+		cobkNames = new JComboBox<String>();
+		fillNameSCombo();
+		cobkNames.setBounds(20, 47, 246, 26);
+		pnlPayee.add(cobkNames);
 		
 		lblOr = new JLabel("Or");
 		lblOr.setForeground(Color.BLUE);
@@ -105,35 +115,19 @@ public class Transfers extends JPanel {
 		pnlDate.setBounds(24, 294, 615, 87);
 		add(pnlDate);
 		
-		spinner = new JSpinner();
-		spinner.setBounds(21, 44, 52, 26);
-		pnlDate.add(spinner);
-		
-		spinner_1 = new JSpinner();
-		spinner_1.setBounds(120, 44, 67, 26);
-		pnlDate.add(spinner_1);
-		
-		spinner_2 = new JSpinner();
-		spinner_2.setBounds(228, 44, 89, 26);
-		pnlDate.add(spinner_2);
-		
-		lblDay = new JLabel("Day");
-		lblDay.setForeground(Color.BLUE);
-		lblDay.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDay.setBounds(29, 18, 35, 20);
-		pnlDate.add(lblDay);
-		
-		lblNewLabel_1 = new JLabel("Month");
-		lblNewLabel_1.setForeground(Color.BLUE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_1.setBounds(128, 18, 46, 20);
-		pnlDate.add(lblNewLabel_1);
-		
-		lblNewLabel_2 = new JLabel("Year");
+		lblNewLabel_2 = new JLabel("<html> choose the date you wish to send the transfer on </html>");
 		lblNewLabel_2.setForeground(Color.BLUE);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_2.setBounds(252, 18, 35, 20);
+		lblNewLabel_2.setBounds(288, 27, 219, 37);
 		pnlDate.add(lblNewLabel_2);
+		
+		panel = new JPanel();
+		panel.setBounds(86, 27, 158, 34);
+		pnlDate.add(panel);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.setLocale(Locale.UK);
+		panel.add(dateChooser);
 		
 		lblTranInfo = new JLabel("<html>Please choose an account and an amount you wish to transfer.  Then select who you want to transfer too, and finally choose the date on which you wish the transfer to go through on.</html>");
 		lblTranInfo.setForeground(Color.BLUE);
@@ -159,5 +153,21 @@ public class Transfers extends JPanel {
 			
 			MainFrame.displayPayee();
 		});
+	}
+	
+	public void fillAccountCombo() {
+		
+		for (int i = 0; i < accounts.length -1; i++) {
+			
+			cbxAccounts.addItem(accounts[i]);
+		}
+	}
+	
+	public void fillNameSCombo() {
+		
+		for (int i = 0; i < payeeName.length -1; i++) {
+			
+			cobkNames.addItem(payeeName[i]);
+		}
 	}
 }
