@@ -53,9 +53,6 @@ public class Register extends JFrame implements Runnable {
 	private JLabel lblMobile;
 	private JTextField txtMobile;
 	private JTextField txtFind;
-	private JTextField txtAccNum;
-	private JLabel lblSortCode;
-	private JTextField txtSortCode;
 	private JLabel lblConfirm;
 	private JButton btnOK;
 	private JButton btnCancel;
@@ -67,11 +64,10 @@ public class Register extends JFrame implements Runnable {
 	private JTextField txtEmail;
 	private JButton btnGO;
 	private JLabel lblFind;
-	private JLabel lblAccNum;
-	private JPanel pnlBankDetails;
 	private JLabel lblDob;
 	private JTextField txtDob;
 	private static StringBuilder code;
+	private String mobile;
 	
 	// Create a customer object and an array to hold data
 	Customer temp;
@@ -96,23 +92,56 @@ public class Register extends JFrame implements Runnable {
 
 		pnlForm = new JPanel();
 		pnlForm.setBorder(new LineBorder(new Color(255, 165, 0), 1, true));
-		pnlForm.setBounds(60, 124, 430, 408);
+		pnlForm.setBounds(60, 124, 430, 504);
 		getContentPane().add(pnlForm);
-		pnlForm.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(52dlu;default)"), FormFactory.RELATED_GAP_COLSPEC,
-				FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(19dlu;default)"),
-				FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(127dlu;default):grow"), FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("default:grow"), }, new RowSpec[] { FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(1dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC,
-				FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC,
-				FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, RowSpec.decode("max(2dlu;default)"),
-				FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("max(2dlu;default)"), FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
+		pnlForm.setLayout(new FormLayout(new ColumnSpec[] {
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(52dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				FormFactory.DEFAULT_COLSPEC,
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(19dlu;default)"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("max(127dlu;default):grow"),
+				FormFactory.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("default:grow"),},
+			new RowSpec[] {
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(1dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("max(2dlu;default)"),
+				FormFactory.RELATED_GAP_ROWSPEC,
+				FormFactory.DEFAULT_ROWSPEC,
+				FormFactory.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("default:grow"),}));
 
 		pnlHeader = new JPanel();
 		pnlHeader.setBackground(new Color(0, 0, 139));
@@ -203,6 +232,11 @@ public class Register extends JFrame implements Runnable {
 		lblMobile.setForeground(Color.BLUE);
 		lblMobile.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		pnlForm.add(lblMobile, "4, 28");
+		
+		JLabel label = new JLabel("*");
+		label.setForeground(Color.RED);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		pnlForm.add(label, "8, 28, right, default");
 
 		txtMobile = new JTextField();
 		txtMobile.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -219,6 +253,17 @@ public class Register extends JFrame implements Runnable {
 		txtEmail.setText("");
 		pnlForm.add(txtEmail, "10, 32, fill, default");
 		txtEmail.setColumns(10);
+		
+		JPanel panel = new JPanel();
+		pnlForm.add(panel, "2, 34, 11, 1, fill, fill");
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Please enter a Mobile number to recieve your pin");
+		lblNewLabel.setForeground(Color.RED);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(31, 11, 360, 24);
+		panel.add(lblNewLabel);
 
 		lblFind = new JLabel("Find by account number:");
 		lblFind.setForeground(Color.BLUE);
@@ -231,37 +276,6 @@ public class Register extends JFrame implements Runnable {
 		txtFind.setBounds(229, 91, 159, 24);
 		getContentPane().add(txtFind);
 		txtFind.setColumns(10);
-
-		pnlBankDetails = new JPanel();
-		pnlBankDetails.setBorder(new LineBorder(new Color(255, 165, 0)));
-		pnlBankDetails.setBounds(60, 543, 430, 85);
-		getContentPane().add(pnlBankDetails);
-		pnlBankDetails.setLayout(new FormLayout(new ColumnSpec[] { FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("max(12dlu;default)"), FormFactory.RELATED_GAP_COLSPEC, ColumnSpec.decode("max(140dlu;default)"),
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC,
-				FormFactory.RELATED_GAP_COLSPEC, FormFactory.DEFAULT_COLSPEC, }, new RowSpec[] { RowSpec.decode("max(29dlu;default)"),
-				FormFactory.DEFAULT_ROWSPEC, FormFactory.RELATED_GAP_ROWSPEC, FormFactory.DEFAULT_ROWSPEC, }));
-
-		lblAccNum = new JLabel("Account Number:");
-		lblAccNum.setForeground(Color.BLUE);
-		lblAccNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pnlBankDetails.add(lblAccNum, "4, 1");
-
-		txtAccNum = new JTextField();
-		txtAccNum.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pnlBankDetails.add(txtAccNum, "8, 1, fill, default");
-		txtAccNum.setColumns(10);
-
-		lblSortCode = new JLabel("Sort Code:");
-		lblSortCode.setForeground(Color.BLUE);
-		lblSortCode.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pnlBankDetails.add(lblSortCode, "4, 2");
-
-		txtSortCode = new JTextField();
-		txtSortCode.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		pnlBankDetails.add(txtSortCode, "8, 2, fill, default");
-		txtSortCode.setColumns(10);
 
 		lblConfirm = new JLabel("If these details are correct  press OK to continue else press CANCEL");
 		lblConfirm.setHorizontalAlignment(SwingConstants.CENTER);
@@ -349,20 +363,6 @@ public class Register extends JFrame implements Runnable {
 			// Replace the end of tel with asterix
 			String stringTel = tel.replace(splitTel, starsTel);
 
-			// Mobile number
-			String mobile = temp.getMobile();
-			// Get substring from mobile
-			String splitMob = mobile.substring(3, 8);
-			// StringBuilders to store right number of stars
-			StringBuilder starsMob = new StringBuilder();
-			// Add correct number of stars
-			for (int i = 0; i < splitMob.length() - 1; i++) {
-
-				starsMob.append('*');
-			}
-			// Replace the end of tel with asterix
-			String stringMob = mobile.replace(splitMob, starsMob);
-
 			// Email
 			String email = temp.getEmail();
 			// Get substring from mobile
@@ -385,16 +385,15 @@ public class Register extends JFrame implements Runnable {
 			txtTown.setText(add[add.length - 2]);
 			txtCounty.setText(add[add.length - 1]);
 			txtTelPhone.setText(stringTel);
-			txtMobile.setText(stringMob);
 			txtEmail.setText(stringEmail);
-
-			txtAccNum.setText(acc[0]);
-			txtSortCode.setText(acc[1]);
 		});
 
 		// Action to generate code and move customer to next stage
 		btnOK.addActionListener(arg0 -> {
 
+			mobile  = txtMobile.getText().toString();
+			
+			System.out.println(mobile);
 			// Create new random
 			Random rand = new Random();
 			// Create temporary 
@@ -423,25 +422,33 @@ public class Register extends JFrame implements Runnable {
 			// Pass id number and code to UserPinPass
 			UserPinPass.getID(temp.getId(), code.toString());
 
-			try {
+			// Check that the user has entered an actual number
+			if (NumberTest(mobile)) {
 				
-				SendSMS.sendVerification();
-			} catch (Exception e) {
-				
-				e.printStackTrace();
+				try {
+					
+					SendSMS.sendVerification(mobile);
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(null, "You will be forwarded on a auto-generated pin by SMS. "
+						+ ".\nThis will also be posted to your home address "
+						+ ".\nPlease take note of this code and keep in a safe place.");
+
+				java.awt.EventQueue.invokeLater(() -> {
+
+					UserPinPass frame = new UserPinPass();
+					SwingUtilities.invokeLater(frame);
+
+				});
+
+				this.dispose();
+			} else {
+
+				JOptionPane.showMessageDialog(null, "Sorry there seems to be a problem with the nuber you entered");
 			}
-			JOptionPane.showMessageDialog(null, "You will be forwarded on a auto-generated pin by SMS. "
-					+ ".\nThis will also be posted to your home address "
-					+ ".\nPlease take note of this code and keep in a safe place.");
-
-			java.awt.EventQueue.invokeLater(() -> {
-
-				UserPinPass frame = new UserPinPass();
-				SwingUtilities.invokeLater(frame);
-
-			});
-
-			this.dispose();
+			
 		});
 
 		btnCancel.addActionListener(arg0 -> {
@@ -463,6 +470,23 @@ public class Register extends JFrame implements Runnable {
 	public static String getAutoPin() {
 		
 		return code.toString();
+	}
+	
+	/**
+	 * Method to ensure user enters numbers only
+	 * 
+	 * @param num
+	 * @return boolean
+	 */
+	public boolean NumberTest(String num) {
+
+		try {
+
+			Integer.parseInt(num);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	@Override
