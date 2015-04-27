@@ -422,8 +422,19 @@ public class Register extends JFrame implements Runnable {
 			// Pass id number and code to UserPinPass
 			UserPinPass.getID(temp.getId(), code.toString());
 
-			// Check that the user has entered an actual number
-			if (NumberTest(mobile)) {
+			if (mobile == null) {
+				
+				JOptionPane.showMessageDialog(null, "You will be forwarded on a auto-generated pin "
+						+ ".\nThis will be posted to your home address "
+						+ ".\nPlease take note of this code and keep in a safe place.");
+
+				java.awt.EventQueue.invokeLater(() -> {
+
+					UserPinPass frame = new UserPinPass();
+					SwingUtilities.invokeLater(frame);
+
+				});
+			} else if (NumberTest(mobile)) {
 				
 				try {
 					
